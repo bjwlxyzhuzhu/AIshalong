@@ -1,0 +1,8 @@
+.finesse/
+node_modules/
+.sites-runtime/
+.sites-checkout/
+.sites-checkout-*/
+sites-deployment.tar.gz
+.github-askpass.cmd
+.github-push-once.ps1
