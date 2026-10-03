@@ -1,4 +1,4 @@
-# NexAI 创新工坊线下沙龙（江苏大学站）
+# NexAI 创新工坊线下沙龙
 
 面向线下沙龙的课程网站，使用 React + Vite 构建，中英双语，包含概念图谱（Three.js 实时渲染）与工具实操图解。
 
@@ -12,13 +12,13 @@
 | `downloads.html` | 软件下载 / Downloads | 课堂所需软件与获取方式 |
 | `speaker.html` | 讲师介绍 / Speaker | 讲师背景与研究方向 |
 | `concepts.html` | 概念图谱 / Concept Maps | Three.js 实时渲染的专业名词关系图 |
-| `workflows.html` | 工作流 / Workflows | 论文、PPT、视频、办公、比赛五套图解 |
+| `workflows.html` | 工作流 / Workflows | 论文、PPT、视频、办公与比赛四套图解 |
 | `tools.html` | 工具实操 / Hands-on Tools | 软件截图演示，点击可放大 |
 
 ## 技术栈
 
 - React + Vite（多页面构建，`base: './'` 相对路径）
-- Three.js：概念图谱与调用图实时渲染，进入该页面时异步加载
+- Three.js：在首页与概念图谱页面异步加载，支持拖拽旋转、节点点选及关联动画
 - 纯静态输出，无后端依赖，所有图片资源随构建产物一并打包
 
 ## 本地开发
@@ -26,7 +26,7 @@
 ```bash
 npm install      # 安装依赖
 npm run dev      # 本地开发预览
-npm run build# 构建，产物输出到 dist/
+npm run build    # 构建，产物输出到 dist/
 npm run preview  # 预览构建结果
 ```
 
@@ -38,15 +38,12 @@ npm run preview  # 预览构建结果
 
 **方式二：GitHub Pages**
 
-1. 在仓库 Settings → Pages 中选择 `main` 分支、`/ (root)` 目录。
-2. 由于根目录 `index.html` 是 Vite 入口模板而非成品，需先执行 `npm run build`，再将 `dist` 内容部署到 Pages，或改用 Pages 的 Actions 流程发布 `dist`。
-
-更稳妥的做法是配置 GitHub Actions 自动构建并发布 `dist`，避免手动同步。
+根目录 `index.html` 是 Vite 入口模板，不能直接将源码根目录作为静态网站发布。使用 GitHub Pages 时，应配置构建流程发布完整的 `dist` 内容。本仓库上传包含源码及构建产物，未自动启用 Pages。
 
 ## 课堂使用建议
 
 - 报告厅建议使用最新版 Chrome 或 Edge，浏览器缩放保持 100%
-- 「概念图谱」页面可用鼠标旋转 3D 视角并聚焦节点
+- 「概念图谱」页面可拖拽旋转 3D 视角；点击专业名词或图内节点，会高亮相关连线、播放光点动画并显示双语解释
 - 「工作流」页面可切换不同场景的图解
 - 「工具实操」页面点击截图放大，按 Esc 关闭
 - 已适配平板与手机，并支持系统「减少动态效果」设置

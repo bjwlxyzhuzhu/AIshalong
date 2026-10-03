@@ -6,3 +6,6 @@ node_modules/
 sites-deployment.tar.gz
 .github-askpass.cmd
 .github-push-once.ps1
+.local-backup/
+.qa-runtime/
+qa/
