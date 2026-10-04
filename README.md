@@ -60,3 +60,33 @@ npm run preview  # 预览构建结果
 ```
 
 详细部署说明见 `WORKBUDDY部署说明.md`。
+
+## Docker / Portainer 部署
+
+推送到 `main` 分支后，GitHub Actions 会自动构建并发布：
+
+```text
+ghcr.io/bjwlxyzhuzhu/aishalong:latest
+```
+
+在 Portainer 中新建 Stack，打开 **Web editor**，粘贴
+`docker-compose.portainer.yml` 的完整内容并部署。部署后访问：
+
+```text
+http://<服务器IP>:8080
+```
+
+Stack 会将宿主机 `/opt/salon` 挂载到容器 `/data`，用于持久化后续接入的
+上传文件、配置或运行数据。部署前请确保 Portainer 所在 Docker 主机已创建
+目录：
+
+```bash
+sudo mkdir -p /opt/salon
+```
+
+当前项目是纯静态前端，暂时没有服务端数据库或写入接口；浏览器端
+`localStorage` 数据不会自动同步到 `/opt/salon`。
+
+如果 GHCR 镜像是私有的，请先在 Portainer 的 Registry 中添加
+`ghcr.io` 凭据，用户名使用 GitHub 用户名，密码使用具备
+`read:packages` 权限的 Personal Access Token。
