@@ -1,6 +1,4 @@
-.git
-.github
-node_modules
-dist
-design-concepts
-*.log
+**
+!dist/
+!dist/**
+!nginx.conf

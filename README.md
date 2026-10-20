@@ -1,92 +1,53 @@
-# NexAI 创新工坊线下沙龙
+# NexAI 三版本统一入口
 
-面向线下沙龙的课程网站，使用 React + Vite 构建，中英双语，包含概念图谱（Three.js 实时渲染）与工具实操图解。
+## 目录
 
-## 页面结构
+- `dist/index.html`：暖橙秋日、视频与 Three.js 小狐狸统一入口。
+- `dist/education/index.html`：用户指定的《SI时代下教师教研思维与应用》原始部署包，内容未改动。
+- `dist/enterprise/`：原 AIshalong 站点的完整构建文件，内容未改动。
+- `dist/portal-assets/`：入口的本地视频、静态回退图、GLB 模型、Three.js r160 与相关加载器。
 
-站点由六个独立页面组成，通过普通链接跳转：
+政务版仅为禁用状态，无链接、无占位课程。未来开发完成后，可添加 `dist/government/index.html` 并更改入口。
 
-| 文件 | 页面 | 说明 |
-| --- | --- | --- |
-| `index.html` | 首页 / Home | 沙龙主视觉与整体介绍 |
-| `downloads.html` | 软件下载 / Downloads | 课堂所需软件与获取方式 |
-| `speaker.html` | 讲师介绍 / Speaker | 讲师背景与研究方向 |
-| `concepts.html` | 概念图谱 / Concept Maps | Three.js 实时渲染的专业名词关系图 |
-| `workflows.html` | 工作流 / Workflows | 论文、PPT、视频、办公与比赛四套图解 |
-| `tools.html` | 工具实操 / Hands-on Tools | 软件截图演示，点击可放大 |
+## 部署
 
-## 技术栈
+将 **dist 内全部内容** 上传到网站根目录，保留 `education`、`enterprise`、`portal-assets` 的相对目录结构。无需 Node.js 构建、无需数据库、无需填写 API 密钥。也适合部署在 GitHub Pages 的仓库子路径下。
 
-- React + Vite（多页面构建，`base: './'` 相对路径）
-- Three.js：在首页与概念图谱页面异步加载，支持拖拽旋转、节点点选及关联动画
-- 纯静态输出，无后端依赖，所有图片资源随构建产物一并打包
+请使用 HTTP 静态服务器预览，直接双击 `index.html` 时浏览器可能阻止 ES Module 和 GLB 加载；两个版本链接仍保留。可以在本目录运行 `python -m http.server 8789 --directory dist`，然后访问 `http://127.0.0.1:8789/`。
 
-## 本地开发
+本次新建独立入口项目，未覆盖本地原 AIshalong 源码与原部署包。按用户后续授权同步至 `bjwlxyzhuzhu/AIshalong`；该仓库原 React 源码保留，当前站点以本部署包 `dist` 为准，不需要运行旧 React 项目的构建命令。`enterprise` 是此次制作时原站 `dist` 的本地快照，后续更新原站后需重新同步。
 
-```bash
-npm install      # 安装依赖
-npm run dev      # 本地开发预览
-npm run build    # 构建，产物输出到 dist/
-npm run preview  # 预览构建结果
+## Docker 镜像与 GitHub Actions
+
+仓库 `main` 分支推送后，原有 `.github/workflows/docker-image.yml` 自动构建并发布 Nginx 静态网站镜像，工作流不做修改。Docker 构建会检查首页、两个版本和二维码文件存在，并执行 `nginx -t` 校验配置，然后发布至 GHCR：
+
+`ghcr.io/bjwlxyzhuzhu/aishalong:latest`
+
+同时沿用 `sha-<短提交SHA>` 与版本标签规则。Actions 使用自动提供的 `GITHUB_TOKEN`，不需要将个人访问令牌保存为仓库 Secret。工作流也支持在 Actions 页面手动运行。
+
+```sh
+docker pull ghcr.io/bjwlxyzhuzhu/aishalong:latest
+docker run -d --name nexai-salon --restart unless-stopped -p 8080:80 ghcr.io/bjwlxyzhuzhu/aishalong:latest
 ```
 
-## 部署方式
+访问服务器的 8080 端口即可看到统一入口。正式域名 `salon.tokenone.work` 的 DNS、HTTPS 证书及反向代理由部署方配置，本工作流不会修改 DNS 或自动部署到服务器。新建 GHCR 包默认可能为私有；如拉取时提示无权限，需使用有 `read:packages` 权限的账号登录 GHCR，或由仓库管理员按实际共享需求调整包的可见性。
 
-**方式一：直接使用构建产物**
+远程仓库原有 `docker-compose.portainer.yml`、`docker/nginx.conf` 和 React 源码保持保留。Portainer 仍可沿用原 Stack：服务 `aishalong`、`8080:80`、宿主机 `/opt/salon` 挂载到容器 `/data`。本项目是纯静态网站，不会向该目录写入数据。新镜像直接打包已验证的 `dist`，不会执行旧 React 源码的构建命令而覆盖统一入口。
 
-将 `dist` 目录整体上传为网站根目录。注意不能只上传 `index.html`，六个页面相互引用，需保持目录结构完整。
+## 交互与适配
 
-**方式二：GitHub Pages**
+- 教育版、企业版支持快捷导航、底部入口和展开菜单三种进入方式。
+- 政务版为原生 disabled 按钮，不可点击或通过键盘访问。
+- 展开菜单支持遮罩关闭、Escape 关闭及键盘焦点循环。
+- 首页提供 `https://salon.tokenone.work` 的真实二维码，已做解码核验；域名解析与正式服务器绑定仍需由部署方完成。本次不会改变 DNS。
+- 暂停按钮同时控制视频与 3D 浮动；尊重系统减少动态效果设置，页面隐藏时暂停。
+- 视频未就绪时显示静态回退图；WebGL 不可用或模型失败不影响课程入口。
+- 首屏采用单个 HTML 内联 CSS/JS，重型媒体和 Three.js 随包本地化，避免依赖第三方 CDN。
 
-根目录 `index.html` 是 Vite 入口模板，不能直接将源码根目录作为静态网站发布。使用 GitHub Pages 时，应配置构建流程发布完整的 `dist` 内容。本仓库上传包含源码及构建产物，未自动启用 Pages。
+## 素材来源
 
-## 课堂使用建议
+背景视频、静态图与小狐狸模型取自用户提供的设计提示词中三个 CloudFront URL；本项目未自行验证其商业再分发授权，公开商业使用前应确认素材权利。
 
-- 报告厅建议使用最新版 Chrome 或 Edge，浏览器缩放保持 100%
-- 「概念图谱」页面可拖拽旋转 3D 视角；点击专业名词或图内节点，会高亮相关连线、播放光点动画并显示双语解释
-- 「工作流」页面可切换不同场景的图解
-- 「工具实操」页面点击截图放大，按 Esc 关闭
-- 已适配平板与手机，并支持系统「减少动态效果」设置
+Three.js 来自 jsDelivr 官方 npm `three@0.160.0` 分发，许可证随 `dist/portal-assets/vendor/LICENSE` 提供。两套课程内原有第三方链接、素材和网络服务依赖保持不变。
 
-## 目录结构
-
-```
-├── index.html / *.html      # Vite 多页面入口模板
-├── src/                     # React 源代码
-├── public/                  # 静态资源（图片等）
-├── assets/                  # 素材源文件
-├── dist/                    # 构建产物（部署用）
-└── design-concepts/         # 设计稿
-```
-
-详细部署说明见 `WORKBUDDY部署说明.md`。
-
-## Docker / Portainer 部署
-
-推送到 `main` 分支后，GitHub Actions 会自动构建并发布：
-
-```text
-ghcr.io/bjwlxyzhuzhu/aishalong:latest
-```
-
-在 Portainer 中新建 Stack，打开 **Web editor**，粘贴
-`docker-compose.portainer.yml` 的完整内容并部署。部署后访问：
-
-```text
-http://<服务器IP>:8080
-```
-
-Stack 会将宿主机 `/opt/salon` 挂载到容器 `/data`，用于持久化后续接入的
-上传文件、配置或运行数据。部署前请确保 Portainer 所在 Docker 主机已创建
-目录：
-
-```bash
-sudo mkdir -p /opt/salon
-```
-
-当前项目是纯静态前端，暂时没有服务端数据库或写入接口；浏览器端
-`localStorage` 数据不会自动同步到 `/opt/salon`。
-
-如果 GHCR 镜像是私有的，请先在 Portainer 的 Registry 中添加
-`ghcr.io` 凭据，用户名使用 GitHub 用户名，密码使用具备
-`read:packages` 权限的 Personal Access Token。
+Questrial 与 Urbanist 字体来自 Google Fonts，字体及 OFL 许可证已随包本地化。
