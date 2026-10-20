@@ -4,7 +4,7 @@
 
 - `dist/index.html`：暖橙秋日、视频与 Three.js 小狐狸统一入口。
 - `dist/education/index.html`：《SI时代下教师教研思维与应用》，保留课程内容、首页结构与交互动效，统一采用暖白学术编辑风。
-- `dist/education/reading-theme.css`：教育版首页与内页共用的暖白、深墨与朱砂配色。
+- `dist/education/reading-theme.css`：教育版暖白、深墨与朱砂配色；首页以深色动效舞台与暖白阅读区域交错。
 - `dist/enterprise/`：原 AIshalong 站点的完整构建文件，内容未改动。
 - `dist/portal-assets/`：入口的本地视频、静态回退图、GLB 模型、Three.js r160 与相关加载器。
 

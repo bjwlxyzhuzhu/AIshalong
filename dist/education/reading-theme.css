@@ -10,9 +10,10 @@ html .site .red{background:#a83335;color:#fff;box-shadow:none}
 html .site .menu-toggle{border-color:#cec8ba;color:#35392e}
 html .site .title{color:#24251f;text-shadow:0 1px 0 #fff}
 html .site .title .first{color:#796c57}
-html .site .slab{background:#faf8f3ed;border-color:#ddd5c5;box-shadow:0 8px 24px #6351340c;backdrop-filter:blur(10px)}
-html .site .slab small{color:#71644f}
-html .site .flow-card{border-color:#cfc8b9;background-color:#eee9de;box-shadow:0 5px 22px #59482822}
+html .site .stage::before{content:"";position:absolute;left:0;right:0;top:31%;height:34%;background:radial-gradient(ellipse at 50% 55%,#252831 0,#111319 52%,#090b10 100%);clip-path:polygon(0 8%,100% 0,100% 92%,0 100%);pointer-events:none}
+html .site .slab{background:#181b22ef;border-color:#dcd2c02e;box-shadow:0 12px 38px #0005;backdrop-filter:blur(10px)}
+html .site .slab small{color:#c9c0b0}
+html .site .flow-card{border-color:#b9ad9740;background-color:#17191f;box-shadow:0 5px 22px #17191f30}
 html .site .flow-card span{color:white}
 html .site .flow-card:hover{border-color:#a83335}
 html .site .prompt{background:#e9dfce;color:#42392a;border:1px solid #d6c9b4;box-shadow:0 8px 30px #67503512;transition:box-shadow .25s,border-color .25s}
@@ -24,6 +25,7 @@ html .site .motion-toggle{background:#faf8f3;color:#66695f}
 html .site .motion-toggle:hover{color:#a83335}
 html .site :is(button,a):focus-visible{outline:2px solid #a83335;outline-offset:5px}
 @media(max-width:1241px){html .site .navlinks{background:#faf8f3f7;border-color:#d8d1c3;box-shadow:0 15px 30px #59482818}}
+@media(max-width:543px),(max-aspect-ratio:1/1),(max-height:565px){html .site .stage::before{top:0;height:100%}}
 html dialog {
   --ink:#292923;--head:#24251f;--lede:#4f5149;--muted:#62645c;
   --sand:#715f46;--sand-ink:#30291f;--red:#a83335;
