@@ -30,6 +30,11 @@
     @media(max-width:720px){.learn-qr{top:auto;bottom:264px;right:24px;width:96px;padding:5px 5px 8px;border-radius:11px}.learn-qr strong{font-size:10px}.learn-qr span{font-size:9px}.headline p{max-width:225px}.headline{max-width:calc(100% - 48px)}}
     @media(max-width:350px){.learn-qr{width:82px;right:20px;bottom:270px}.headline p{max-width:175px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.nav,.headline h1 span,.headline p,.editions{opacity:1;transform:none}}
+    .brand{order:-1}.nav__links{margin-left:auto}.menu{left:var(--gutter);right:auto;clip-path:inset(0 calc(100% - var(--pill-w)) calc(100% - 48px) 0 round 24px)}
+    .software-trigger{border:0;border-radius:99px;background:#fff;color:#261c16;padding:14px 22px;font-size:14px;white-space:nowrap;box-shadow:0 6px 24px #501e001f;transition:transform .2s}.software-trigger:hover{transform:translateY(-2px)}
+    .software-dialog{margin:auto;padding:0;width:min(800px,calc(100vw - 32px));max-height:calc(100svh - 40px);background:#fcfaf7;color:#261c16;border:1px solid #e2d9cf;border-radius:20px;box-shadow:0 30px 100px #29160666;overflow:auto}.software-dialog::backdrop{background:#29160666;backdrop-filter:blur(12px)}
+    .software-head{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:24px 30px;background:#fcfaf7;z-index:1;border-bottom:1px solid #e5dcd1}.software-head h2{font-size:24px;font-weight:500}.software-head small{display:block;font-size:13px;color:#76685a;margin-top:5px}.software-close{width:40px;height:40px;border:1px solid #d8cabc;border-radius:50%;background:none;font-size:24px}.software-body{padding:22px 30px 30px}.software-note{font-size:13px;line-height:1.8;color:#6c5d50;margin-bottom:18px}.software-row{display:grid;grid-template-columns:130px 1fr 32px;gap:22px;align-items:center;padding:19px 0;border-top:1px solid #e5dcd1;transition:color .2s}.software-row:hover{color:#a84016}.software-row strong{font-size:17px;font-weight:500}.software-row p{font-size:13px;line-height:1.7}.software-row small{display:block;font-size:11px;color:#776b60;line-height:1.7}.software-row>span{font-size:21px}.software-dialog :focus-visible{outline:2px solid #a84016;outline-offset:4px}
+    @media(max-width:720px){.menu{left:20px;right:auto;clip-path:inset(0 calc(100% - var(--pill-w)) calc(100% - 40px) 0 round 20px)}.nav__links>a,.nav__links>.divider{display:none}.nav__links{gap:10px}.software-trigger{font-size:12px;padding:12px 15px}.software-head{padding:20px}.software-body{padding:16px 20px 24px}.software-row{grid-template-columns:95px 1fr 18px;gap:10px}.software-row strong{font-size:15px}.software-row p{font-size:12px}}
   </style>
   <script type="importmap">{"imports":{"three":"./portal-assets/vendor/three.module.js","three/addons/":"./portal-assets/vendor/addons/"}}</script>
 </head>
@@ -49,6 +54,7 @@
         <span class="brand__name">NEXAI</span>
         <button class="brand__menu" id="menu-toggle" type="button" aria-label="打开菜单 / Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
       </div>
+      <button class="software-trigger" id="software-open" type="button" aria-haspopup="dialog">软件链接 <span lang="en">↗</span></button>
     </header>
     <div class="headline"><h1><span>让 AI，</span><span>成为你的</span><span>行动伙伴。</span></h1><p lang="en">From conversation to creation.</p></div>
     <a class="learn-qr" href="https://salon.tokenone.work" target="_blank" rel="noopener noreferrer" aria-label="扫码进入学习 / Scan to learn: https://salon.tokenone.work"><img src="./portal-assets/salon-qr.png" width="600" height="600" alt="https://salon.tokenone.work 的学习入口二维码"><strong>扫码进入学习</strong><span lang="en">Scan to learn</span></a>
@@ -67,6 +73,23 @@
       <p class="menu__foot">从对话，到创造。<br><span lang="en">One idea. More possibilities.</span></p>
     </nav>
   </main>
+  <dialog class="software-dialog" id="software-dialog" aria-labelledby="software-title">
+    <header class="software-head"><h2 id="software-title">软件链接<small lang="en">Software &amp; workshop access</small></h2><button class="software-close" type="button" aria-label="关闭软件链接 / Close">×</button></header>
+    <div class="software-body"><p class="software-note">建议安装顺序：千问 → WorkBuddy → Codex / Claude → CC Switch。<br>优先使用官方渠道；TokenOne 是第三方 API 服务，请自行评估费用、隐私与合规。不要分享完整 API 密钥。<br><span lang="en">Use official channels. Evaluate third-party costs and privacy. Keep your API keys private.</span></p>
+      <a class="software-row" href="https://www.qianwen.com/" target="_blank" rel="noopener noreferrer"><strong>千问<small>Qwen</small></strong><p>手机录音纪要、电脑端语音输入与办公功能。<small>Mobile meeting notes, desktop voice input, and office tools.</small></p><span aria-hidden="true">↗</span></a>
+      <a class="software-row" href="https://www.workbuddy.cn/" target="_blank" rel="noopener noreferrer"><strong>WorkBuddy</strong><p>桌面办公智能体、技能扩展与微信远程控制。<small>Desktop agent, reusable skills, and WeChat remote control.</small></p><span aria-hidden="true">↗</span></a>
+      <a class="software-row" href="https://openai.com/codex/" target="_blank" rel="noopener noreferrer"><strong>Codex<small>OpenAI Codex</small></strong><p>用于课件、网站、代码、数据和文件型任务。<small>For slides, websites, code, data, and file-based tasks.</small></p><span aria-hidden="true">↗</span></a>
+      <a class="software-row" href="https://claude.com/download" target="_blank" rel="noopener noreferrer"><strong>Claude<small>Desktop / Claude Code</small></strong><p>适合代码项目、长上下文分析与代码动画。<small>For coding projects, long-context analysis, and code-based animation.</small></p><span aria-hidden="true">↗</span></a>
+      <a class="software-row" href="https://ccswitch.io/zh/" target="_blank" rel="noopener noreferrer"><strong>CC Switch</strong><p>管理并切换 Codex、Claude Code 等工具的模型配置。<small>Manage and switch model configurations.</small></p><span aria-hidden="true">↗</span></a>
+      <a class="software-row" href="http://gts.tokenone.work" target="_blank" rel="noopener noreferrer"><strong>TokenOne<small>Unified API Gateway</small></strong><p>创建模型分组、生成 API 密钥并按实际用量付费。<small>Create model groups, issue API keys, and pay by usage.</small></p><span aria-hidden="true">↗</span></a>
+    </div>
+  </dialog>
+  <script>
+    const softwareDialog=document.querySelector('#software-dialog');
+    document.querySelector('#software-open').addEventListener('click',()=>softwareDialog.showModal());
+    softwareDialog.querySelector('.software-close').addEventListener('click',()=>softwareDialog.close());
+    softwareDialog.addEventListener('click',event=>{if(event.target===softwareDialog){const r=softwareDialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)softwareDialog.close();}});
+  </script>
   <script>
     (()=>{
       const hero=document.querySelector('#hero'),menu=document.querySelector('#menu'),toggle=document.querySelector('#menu-toggle'),video=document.querySelector('#background'),motion=document.querySelector('#motion');

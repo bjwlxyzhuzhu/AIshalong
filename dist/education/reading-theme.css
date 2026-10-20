@@ -1,0 +1,32 @@
+/* Scoped reading surfaces only: the original landing page is unchanged. */
+html dialog {
+  --ink:#292923;--head:#24251f;--lede:#4f5149;--muted:#62645c;
+  --sand:#715f46;--sand-ink:#30291f;--red:#a83335;
+  color:var(--ink);background:#faf8f3;border:1px solid #ded9cd;
+  box-shadow:0 30px 100px #312b2338;
+}
+html dialog::backdrop{background:#55504466;backdrop-filter:blur(14px)}
+html dialog .panel-header{background:#faf8f3;border-color:#ded9cd}
+html dialog .panel-header small{color:#65675e}
+html dialog .panel-content{
+  background:radial-gradient(ellipse at 100% 0,#eee7d94d,transparent 48%),#faf8f3;
+  scrollbar-color:#b9b2a3 #faf8f3;
+}
+html dialog .section-title{font-size:clamp(28px,3vw,40px);letter-spacing:.015em}
+html dialog :is(.section-lede,.editorial p,.editorial li,.timeline-row p,td,.cycle-detail p,.field,.check-item,.project-card p){color:#51554c}
+html dialog :is(.section-lede strong,td:first-child){color:#292923}
+html dialog :is(.label,.small-note,.project-meta,.contact-line small){color:#66695f}
+html dialog :is(.editorial,.timeline-row,th,td,.panel-bottom,.contact-line,.check-item,.cycle-tabs,.cycle-tabs button){border-color:#dad8ce}
+html dialog th{background:#efede5;color:#63573f}
+html dialog :is(.number,.timeline-row span,.domain,.source-link,.evidence,.project-meta .guided){color:#79603d!important}
+html dialog .ribbon{background:#ece7da;color:#504735;border-color:#9b8054}
+html dialog :is(.close,.ghost,.filter){color:#4d5146;border-color:#cecdbf;background:transparent}
+html dialog .close:hover,html dialog .ghost:hover{background:#eeece3}
+html dialog .red{background:#a83335;color:#fff;box-shadow:none}
+html dialog .white{background:#fff;color:#34362e;border-color:#d7d5c8}
+html dialog :is(.filter[aria-pressed=true],.cycle-tabs button[aria-selected=true]){background:#e4dcc8;color:#3a3528;border-color:#bcb19a}
+html dialog :is(input,select,textarea,.output){background:#fffefb;color:#30362c;border-color:#c9ccbf}
+html dialog .project-large{background-color:#eeece5;border-color:#d5d5ca}
+html dialog .project-shot{border-color:#d3d0c5}
+html dialog :is(button,a,input,select,textarea):focus-visible{outline:2px solid #8b3034;outline-offset:4px}
+@media(max-width:543px){html dialog .section-title{font-size:28px}html dialog .panel-content{padding:26px 21px 32px}}
