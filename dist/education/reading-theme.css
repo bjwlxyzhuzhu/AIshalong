@@ -1,4 +1,29 @@
-/* Scoped reading surfaces only: the original landing page is unchanged. */
+/* Academic editorial theme: shared paper, ink and cinnabar palette. */
+html:root{--bg:#faf8f3;--nav:rgba(250,248,243,.96);--ink:#292923;--head:#24251f;--lede:#45483f;--muted:#66695f;--logo:#45483f;--red:#a83335;--sand:#e9dfce;--sand-ink:#42392a}
+html .site{background-color:#faf8f3;background-image:radial-gradient(ellipse at 100% 20%,#e9dfce55,transparent 50%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Cpath fill='%23776c5b' fill-opacity='.055' d='M8 8h1v1H8z'/%3E%3C/svg%3E")}
+html .topbar{border:1px solid #ded9cd;border-top:2px solid #a83335;box-shadow:0 8px 32px #4f402407}
+html .brand .mark{color:#a83335}
+html .navlinks button{color:#53564c}
+html .navlinks button:hover{color:#a83335}
+html .site .white{border-color:#d5cfc1;background:#fffefa;color:#383a31}
+html .site .red{background:#a83335;color:#fff;box-shadow:none}
+html .site .menu-toggle{border-color:#cec8ba;color:#35392e}
+html .site .title{color:#24251f;text-shadow:0 1px 0 #fff}
+html .site .title .first{color:#796c57}
+html .site .slab{background:#faf8f3ed;border-color:#ddd5c5;box-shadow:0 8px 24px #6351340c;backdrop-filter:blur(10px)}
+html .site .slab small{color:#71644f}
+html .site .flow-card{border-color:#cfc8b9;background-color:#eee9de;box-shadow:0 5px 22px #59482822}
+html .site .flow-card span{color:white}
+html .site .flow-card:hover{border-color:#a83335}
+html .site .prompt{background:#e9dfce;color:#42392a;border:1px solid #d6c9b4;box-shadow:0 8px 30px #67503512;transition:box-shadow .25s,border-color .25s}
+html .site .prompt:hover{border-color:#b49b78;box-shadow:0 10px 30px #67503522}
+html .site .prompt-go{background:#a83335;color:white}
+html .site .bottom-label{color:#66695f}
+html .site .rule{height:2px;background:#d9d1c1}
+html .site .motion-toggle{background:#faf8f3;color:#66695f}
+html .site .motion-toggle:hover{color:#a83335}
+html .site :is(button,a):focus-visible{outline:2px solid #a83335;outline-offset:5px}
+@media(max-width:1241px){html .site .navlinks{background:#faf8f3f7;border-color:#d8d1c3;box-shadow:0 15px 30px #59482818}}
 html dialog {
   --ink:#292923;--head:#24251f;--lede:#4f5149;--muted:#62645c;
   --sand:#715f46;--sand-ink:#30291f;--red:#a83335;
@@ -18,13 +43,14 @@ html dialog :is(.section-lede strong,td:first-child){color:#292923}
 html dialog :is(.label,.small-note,.project-meta,.contact-line small){color:#66695f}
 html dialog :is(.editorial,.timeline-row,th,td,.panel-bottom,.contact-line,.check-item,.cycle-tabs,.cycle-tabs button){border-color:#dad8ce}
 html dialog th{background:#efede5;color:#63573f}
-html dialog :is(.number,.timeline-row span,.domain,.source-link,.evidence,.project-meta .guided){color:#79603d!important}
-html dialog .ribbon{background:#ece7da;color:#504735;border-color:#9b8054}
+html dialog :is(.number,.timeline-row span,.domain,.source-link,.evidence,.project-meta .guided){color:#973b38!important}
+html dialog .ribbon{background:#f3e9e3;color:#653d32;border-color:#a83335}
+html dialog .editorial h3{font-family:var(--serif)}
 html dialog :is(.close,.ghost,.filter){color:#4d5146;border-color:#cecdbf;background:transparent}
 html dialog .close:hover,html dialog .ghost:hover{background:#eeece3}
 html dialog .red{background:#a83335;color:#fff;box-shadow:none}
 html dialog .white{background:#fff;color:#34362e;border-color:#d7d5c8}
-html dialog :is(.filter[aria-pressed=true],.cycle-tabs button[aria-selected=true]){background:#e4dcc8;color:#3a3528;border-color:#bcb19a}
+html dialog :is(.filter[aria-pressed=true],.cycle-tabs button[aria-selected=true]){background:#f0dfd9;color:#823431;border-color:#c99e91}
 html dialog :is(input,select,textarea,.output){background:#fffefb;color:#30362c;border-color:#c9ccbf}
 html dialog .project-large{background-color:#eeece5;border-color:#d5d5ca}
 html dialog .project-shot{border-color:#d3d0c5}

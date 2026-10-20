@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0B0C0E">
+<meta name="theme-color" content="#faf8f3">
 <meta name="description" content="面向宝鸡文理学院新进教师的60分钟讲座：人机协同、智能体与短视频实践，以及教、学、研、赛、用、评贯通培养。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%230b0c0e'/%3E%3Cpath d='M8 12h24M8 21q12-10 24 0M8 28h24' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
 <title>SI时代下教师教研思维与应用</title>
@@ -116,7 +116,7 @@ $('#motionToggle').addEventListener('click',()=>{userPaused=!userPaused;$('#moti
 function reducedChanged(){reduced=media.matches;if(reduced){wordTime=0;typeTime=0;$('#promptText').textContent='从一个教学问题开始';$('#promptText').style.opacity='1';marqueeX=0;$('#marqueeTrack').style.transform='translateX(0)';walls.forEach((c,i)=>{c.distance=i%11;placeCard(c);});drawWord('人机协同',1);}}
 media.addEventListener('change',reducedChanged);
 const wordCanvas=$('#wordCanvas'),wc=wordCanvas.getContext('2d'),off=document.createElement('canvas');off.width=740;off.height=106;const oc=off.getContext('2d');const mosaic=document.createElement('canvas'),mc=mosaic.getContext('2d');
-function drawWord(word,block){oc.clearRect(0,0,740,106);oc.fillStyle='#fbfbf9';oc.textAlign='center';oc.textBaseline='middle';oc.font='400 65px "Times New Roman","SimSun",serif';oc.fillText(word,370,57);wc.clearRect(0,0,740,106);if(block<=1){wc.drawImage(off,0,0);return;}mosaic.width=Math.max(1,Math.round(740/(block*2)));mosaic.height=Math.max(1,Math.round(106/(block*2)));mc.clearRect(0,0,mosaic.width,mosaic.height);mc.drawImage(off,0,0,mosaic.width,mosaic.height);wc.imageSmoothingEnabled=false;wc.drawImage(mosaic,0,0,740,106);}
+function drawWord(word,block){oc.clearRect(0,0,740,106);oc.fillStyle='#a83335';oc.textAlign='center';oc.textBaseline='middle';oc.font='400 65px "Times New Roman","SimSun",serif';oc.fillText(word,370,57);wc.clearRect(0,0,740,106);if(block<=1){wc.drawImage(off,0,0);return;}mosaic.width=Math.max(1,Math.round(740/(block*2)));mosaic.height=Math.max(1,Math.round(106/(block*2)));mc.clearRect(0,0,mosaic.width,mosaic.height);mc.drawImage(off,0,0,mosaic.width,mosaic.height);wc.imageSmoothingEnabled=false;wc.drawImage(mosaic,0,0,740,106);}
 drawWord('人机协同',1);
 const words=['人机协同','智能体实践','贯通培养','教研创新'];const prompts=['为我的课程，设计一个有边界的助教智能体…','把一个教学难点，讲成60秒知识短视频…','围绕一个真实问题，连接教、学、研、赛、用、评…','从一轮学生反馈，找到下一步教研问题…'];
 let previous=0,wordTime=0,typeTime=0,marqueeX=0,lastWord='',lastBlock=-1,lastPrompt='',lastOpacity='';
