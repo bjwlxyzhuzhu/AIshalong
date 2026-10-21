@@ -8,19 +8,19 @@
 - `dist/enterprise/`：原 AIshalong 站点的完整构建文件，内容未改动。
 - `dist/portal-assets/`：入口的本地视频、静态回退图、GLB 模型、Three.js r160 与相关加载器。
 
-政务版仅为禁用状态，无链接、无占位课程。未来开发完成后，可添加 `dist/government/index.html` 并更改入口。
+`dist/government/`：用户提供的2026-10-21政务版部署包，包含独立页面、内容大纲、资料与图片来源及部署说明。首页版本入口与展开菜单均已接通。
 
 ## 部署
 
 将 **dist 内全部内容** 上传到网站根目录，保留 `education`、`enterprise`、`portal-assets` 的相对目录结构。无需 Node.js 构建、无需数据库、无需填写 API 密钥。也适合部署在 GitHub Pages 的仓库子路径下。
 
-请使用 HTTP 静态服务器预览，直接双击 `index.html` 时浏览器可能阻止 ES Module 和 GLB 加载；两个版本链接仍保留。可以在本目录运行 `python -m http.server 8789 --directory dist`，然后访问 `http://127.0.0.1:8789/`。
+请使用 HTTP 静态服务器预览，直接双击 `index.html` 时浏览器可能阻止 ES Module 和 GLB 加载；三个版本链接仍保留。可以在本目录运行 `python -m http.server 8789 --directory dist`，然后访问 `http://127.0.0.1:8789/`。
 
 本次新建独立入口项目，未覆盖本地原 AIshalong 源码与原部署包。按用户后续授权同步至 `bjwlxyzhuzhu/AIshalong`；该仓库原 React 源码保留，当前站点以本部署包 `dist` 为准，不需要运行旧 React 项目的构建命令。`enterprise` 是此次制作时原站 `dist` 的本地快照，后续更新原站后需重新同步。
 
 ## Docker 镜像与 GitHub Actions
 
-仓库 `main` 分支推送后，原有 `.github/workflows/docker-image.yml` 自动构建并发布 Nginx 静态网站镜像，工作流不做修改。Docker 构建会检查首页、两个版本和二维码文件存在，并执行 `nginx -t` 校验配置，然后发布至 GHCR：
+仓库 `main` 分支推送后，原有 `.github/workflows/docker-image.yml` 自动构建并发布 Nginx 静态网站镜像，工作流不做修改。Docker 构建会检查首页、教育版、企业版、政务版和二维码文件存在，并执行 `nginx -t` 校验配置，然后发布至 GHCR：
 
 `ghcr.io/bjwlxyzhuzhu/aishalong:latest`
 
@@ -38,7 +38,7 @@ docker run -d --name nexai-salon --restart unless-stopped -p 8080:80 ghcr.io/bjw
 ## 交互与适配
 
 - 教育版、企业版支持快捷导航、底部入口和展开菜单三种进入方式。
-- 政务版为原生 disabled 按钮，不可点击或通过键盘访问。
+- 政务版可从首页底部入口和展开菜单进入，支持键盘访问。
 - 展开菜单支持遮罩关闭、Escape 关闭及键盘焦点循环。
 - 首页提供 `https://salon.tokenone.work` 的真实二维码，已做解码核验；域名解析与正式服务器绑定仍需由部署方完成。本次不会改变 DNS。
 - 暂停按钮同时控制视频与 3D 浮动；尊重系统减少动态效果设置，页面隐藏时暂停。
