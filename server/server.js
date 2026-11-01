@@ -20,7 +20,6 @@ const KB_DIR = path.join(DATA_DIR, "kb");
 const KB_FILES = path.join(KB_DIR, "files");
 const CONFIG_FILE = path.join(DATA_DIR, "config.json");
 const KB_INDEX = path.join(KB_DIR, "index.json");
-const SKILLS_SEED = path.join(PUBLIC_DIR, "portal-assets", "skills.json");
 fs.mkdirSync(KB_FILES, { recursive: true });
 
 /* ---------------- 工具 ---------------- */
@@ -68,9 +67,8 @@ async function loadConfig() {
   if (!old.profiles && old.apiKey) profiles.deepseek = { apiKey: old.apiKey, baseUrl: old.baseUrl, model: old.model };
   for (const k of Object.keys(PROVIDERS)) profiles[k] = Object.assign({ apiKey: "", baseUrl: PROVIDERS[k].baseUrl, model: PROVIDERS[k].model }, profiles[k] || {});
   config.deepseek = { provider: PROVIDERS[old.provider] ? old.provider : "deepseek", profiles };
-  config.asr = Object.assign({ baseUrl: "", apiKey: "", model: "" }, config.asr || {});
+  delete config.asr; delete config.skills;   // 已移除：语音转写、后台 Skill 管理
   config.avatar = Object.assign({ name: "朱丽叶 · 数字分身", greeting: "你好，我是朱丽叶老师的数字分身。关于 AI 培训、智能体开发、创新创业，都可以问我。", persona: DEFAULT_PERSONA, dailyLimit: 600 }, config.avatar || {});
-  if (!Array.isArray(config.skills)) config.skills = await readJSON(SKILLS_SEED, []);
   if (!config.admin || !config.admin.hash) {
     let pw = process.env.ADMIN_PASSWORD;
     if (!pw) {
@@ -91,7 +89,6 @@ const saveConfig = () => writeJSON(CONFIG_FILE, config);
 let kb = [];
 let chunks = [];
 const CATS = ["课堂实录", "讲座培训", "企业沟通", "其他"];
-const AUDIO_EXT = /\.(mp3|m4a|wav|aac|amr|ogg|opus|flac|webm|mp4|mpeg|mpga|wma)$/i;
 const TEXT_EXT = /\.(txt|md|srt|vtt|csv|json)$/i;
 async function loadKB() { kb = await readJSON(KB_INDEX, []); rebuildIndex(); }
 const saveKB = async () => { await writeJSON(KB_INDEX, kb); rebuildIndex(); };
@@ -133,30 +130,7 @@ function retrieve(q, k = 5) {
     .filter(x => x.s > 0.8).sort((a, b) => b.s - a.s).slice(0, k).map(x => x.c);
 }
 
-/* ---------------- 语音转写（OpenAI 兼容 /audio/transcriptions） ---------------- */
-async function transcribe(doc) {
-  const a = config.asr;
-  if (!a.baseUrl || !a.apiKey || !a.model) throw new Error("尚未配置语音转写服务。可以在“模型与转写”中配置，或在知识库条目里直接粘贴转写文本。");
-  const file = path.join(KB_FILES, doc.file);
-  const buf = await fsp.readFile(file);
-  const fd = new FormData();
-  fd.append("file", new Blob([buf], { type: doc.mime || "application/octet-stream" }), doc.original || doc.file);
-  fd.append("model", a.model);
-  const url = a.baseUrl.replace(/\/+$/, "") + "/audio/transcriptions";
-  const r = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + a.apiKey }, body: fd, signal: AbortSignal.timeout(15 * 60 * 1000) });
-  const body = await r.text();
-  if (!r.ok) throw new Error(`转写服务返回 ${r.status}：${body.slice(0, 200)}`);
-  let text; try { text = JSON.parse(body).text; } catch { text = body; }
-  if (!text) throw new Error("转写结果为空");
-  return cleanTranscript(text);
-}
-async function runTranscribe(id) {
-  const d = kb.find(x => x.id === id); if (!d || !d.file) return;
-  d.status = "transcribing"; d.error = ""; await saveKB();
-  try { d.text = await transcribe(d); d.status = "ready"; d.chars = d.text.length; }
-  catch (e) { d.status = "error"; d.error = String(e.message || e); }
-  d.updatedAt = now(); await saveKB();
-}
+
 
 /* ---------------- 会话 ---------------- */
 const sessions = new Map();
@@ -183,7 +157,6 @@ const json = express.json({ limit: "2mb" });
 
 /* 公开接口 */
 app.get("/api/avatar", (req, res) => res.json({ name: config.avatar.name, greeting: config.avatar.greeting, ready: !!llm().apiKey, docs: kb.filter(d => d.status === "ready").length }));
-app.get("/api/skills", (req, res) => res.json(config.skills || []));
 
 app.post("/api/chat", json, async (req, res) => {
   const ip = clientIp(req);
@@ -248,7 +221,6 @@ app.post("/api/admin/password", requireAdmin, json, async (req, res) => {
 /* 模型与转写配置 */
 app.get("/api/admin/config", requireAdmin, (req, res) => res.json({
   deepseek: { provider: config.deepseek.provider, providers: Object.fromEntries(Object.entries(PROVIDERS).map(([k, v]) => { const p = config.deepseek.profiles[k]; return [k, { label: v.label, defaultUrl: v.baseUrl, baseUrl: p.baseUrl, model: p.model, apiKeyMasked: mask(p.apiKey), hasKey: !!p.apiKey }]; })) },
-  asr: { baseUrl: config.asr.baseUrl, model: config.asr.model, apiKeyMasked: mask(config.asr.apiKey), hasKey: !!config.asr.apiKey },
   avatar: config.avatar
 }));
 app.put("/api/admin/config", requireAdmin, json, async (req, res) => {
@@ -264,7 +236,6 @@ app.put("/api/admin/config", requireAdmin, json, async (req, res) => {
     if (typeof d.model === "string" && d.model.trim()) p.model = d.model.trim().slice(0, 120);
     if (d.activate !== false) config.deepseek.provider = prov;
   }
-  if (b.asr) { const a = b.asr; if (typeof a.apiKey === "string" && a.apiKey.trim()) config.asr.apiKey = a.apiKey.trim(); if (a.clearKey) config.asr.apiKey = ""; if (typeof a.baseUrl === "string") config.asr.baseUrl = a.baseUrl.trim(); if (typeof a.model === "string") config.asr.model = a.model.trim(); }
   if (b.avatar) { const v = b.avatar; for (const k of ["name", "greeting", "persona"]) if (typeof v[k] === "string" && v[k].trim()) config.avatar[k] = v[k].trim().slice(0, 6000); if (v.dailyLimit) config.avatar.dailyLimit = Math.max(10, Math.min(100000, Number(v.dailyLimit) || 600)); }
   await saveConfig(); res.json({ ok: true });
 });
@@ -290,25 +261,29 @@ app.get("/api/admin/models", requireAdmin, async (req, res) => {
 });
 
 /* 知识库 */
+// Windows 记事本导出的中文 txt 常是 GBK，先按 UTF-8 严格解码，失败再按 GB18030
+function decodeText(buf) {
+  try { return new TextDecoder("utf-8", { fatal: true }).decode(buf).replace(/^\uFEFF/, ""); }
+  catch { try { return new TextDecoder("gb18030").decode(buf); } catch { return buf.toString("utf8"); } }
+}
 const upload = multer({
   storage: multer.diskStorage({ destination: KB_FILES, filename: (req, f, cb) => cb(null, uid() + (path.extname(f.originalname).toLowerCase().replace(/[^.a-z0-9]/g, "") || "")) }),
-  limits: { fileSize: 500 * 1024 * 1024, files: 20 },
-  fileFilter: (req, f, cb) => { f.originalname = Buffer.from(f.originalname, "latin1").toString("utf8"); cb(null, AUDIO_EXT.test(f.originalname) || TEXT_EXT.test(f.originalname)); }
+  limits: { fileSize: 20 * 1024 * 1024, files: 20 },
+  fileFilter: (req, f, cb) => { f.originalname = Buffer.from(f.originalname, "latin1").toString("utf8"); cb(null, TEXT_EXT.test(f.originalname)); }
 });
 const pub = d => { const { text, ...rest } = d; return Object.assign(rest, { preview: (text || "").slice(0, 120) }); };
-app.get("/api/admin/kb", requireAdmin, (req, res) => res.json({ docs: kb.map(pub), chunks: chunks.length, asrReady: !!(config.asr.baseUrl && config.asr.apiKey && config.asr.model) }));
+app.get("/api/admin/kb", requireAdmin, (req, res) => res.json({ docs: kb.map(pub), chunks: chunks.length }));
 app.get("/api/admin/kb/:id", requireAdmin, (req, res) => { const d = kb.find(x => x.id === req.params.id); d ? res.json(d) : res.status(404).json({ error: "不存在" }); });
 app.post("/api/admin/kb/upload", requireAdmin, upload.array("files", 20), async (req, res) => {
   const cat = CATS.includes(req.body.category) ? req.body.category : "其他";
   const added = [];
   for (const f of req.files || []) {
-    const isAudio = AUDIO_EXT.test(f.originalname);
-    const d = { id: uid(), title: (req.body.title && req.files.length === 1 ? req.body.title : f.originalname.replace(/\.[^.]+$/, "")).slice(0, 120), category: cat, kind: isAudio ? "audio" : "text", original: f.originalname, file: f.filename, mime: f.mimetype, size: f.size, createdAt: now(), updatedAt: now(), status: "uploaded", text: "", error: "" };
-    if (!isAudio) { d.text = cleanTranscript(await fsp.readFile(f.path, "utf8")); d.status = d.text ? "ready" : "error"; d.chars = d.text.length; }
+    const text = cleanTranscript(decodeText(await fsp.readFile(f.path)));
+    await fsp.rm(f.path, { force: true });   // 文字已入库，原文件不保留
+    const d = { id: uid(), title: (req.body.title && req.files.length === 1 ? req.body.title : f.originalname.replace(/\.[^.]+$/, "")).slice(0, 120), category: cat, kind: "text", original: f.originalname, size: f.size, createdAt: now(), updatedAt: now(), status: text ? "ready" : "error", text, chars: text.length, error: text ? "" : "文件里没有读到文字" };
     kb.unshift(d); added.push(d.id);
   }
   await saveKB();
-  for (const id of added) { const d = kb.find(x => x.id === id); if (d.kind === "audio" && config.asr.apiKey) runTranscribe(id); }
   res.json({ ok: true, added: added.length });
 });
 app.post("/api/admin/kb/text", requireAdmin, json, async (req, res) => {
@@ -322,13 +297,8 @@ app.put("/api/admin/kb/:id", requireAdmin, json, async (req, res) => {
   const b = req.body || {};
   if (typeof b.title === "string" && b.title.trim()) d.title = b.title.trim().slice(0, 120);
   if (CATS.includes(b.category)) d.category = b.category;
-  if (typeof b.text === "string") { d.text = cleanTranscript(b.text); d.status = d.text ? "ready" : (d.kind === "audio" ? "uploaded" : "error"); d.chars = d.text.length; d.error = ""; }
+  if (typeof b.text === "string") { d.text = cleanTranscript(b.text); d.status = d.text ? "ready" : "error"; d.chars = d.text.length; d.error = ""; }
   d.updatedAt = now(); await saveKB(); res.json({ ok: true });
-});
-app.post("/api/admin/kb/:id/transcribe", requireAdmin, async (req, res) => {
-  const d = kb.find(x => x.id === req.params.id); if (!d || !d.file || d.kind !== "audio") return res.status(400).json({ error: "只有音频条目可以转写" });
-  if (!(config.asr.baseUrl && config.asr.apiKey && config.asr.model)) return res.status(400).json({ error: "请先在“模型与转写”中配置语音转写服务" });
-  runTranscribe(d.id); res.json({ ok: true });
 });
 app.get("/api/admin/kb/:id/file", requireAdmin, (req, res) => { const d = kb.find(x => x.id === req.params.id); if (!d || !d.file) return res.status(404).end(); res.sendFile(path.join(KB_FILES, d.file), { headers: { "Content-Type": d.mime || "application/octet-stream" } }); });
 app.delete("/api/admin/kb/:id", requireAdmin, async (req, res) => {
@@ -337,17 +307,8 @@ app.delete("/api/admin/kb/:id", requireAdmin, async (req, res) => {
   await saveKB(); res.json({ ok: true });
 });
 
-/* Skill 商店 */
-app.get("/api/admin/skills", requireAdmin, (req, res) => res.json(config.skills || []));
-app.put("/api/admin/skills", requireAdmin, json, async (req, res) => {
-  const list = Array.isArray(req.body) ? req.body : null; if (!list) return res.status(400).json({ error: "格式错误" });
-  const S = v => (typeof v === "string" ? v.trim().slice(0, 4000) : "");
-  config.skills = list.slice(0, 200).map(s => ({ name: S(s.name), slug: S(s.slug), category: S(s.category), summary: S(s.summary), features: Array.isArray(s.features) ? s.features.map(S).filter(Boolean).slice(0, 12) : [], url: S(s.url), download: S(s.download), install: S(s.install), version: S(s.version) })).filter(s => s.name);
-  await saveConfig(); res.json({ ok: true, count: config.skills.length });
-});
-
 app.use("/api", (req, res) => res.status(404).json({ error: "接口不存在" }));
-app.use((err, req, res, next) => { console.error(err); res.status(err.code === "LIMIT_FILE_SIZE" ? 413 : 500).json({ error: err.code === "LIMIT_FILE_SIZE" ? "文件过大（单个文件不超过 500MB）" : "服务器错误" }); });
+app.use((err, req, res, next) => { console.error(err); res.status(err.code === "LIMIT_FILE_SIZE" ? 413 : 500).json({ error: err.code === "LIMIT_FILE_SIZE" ? "文件过大（单个文件不超过 20MB）" : "服务器错误" }); });
 
 /* 静态站点 */
 app.use(express.static(PUBLIC_DIR, {
@@ -362,6 +323,5 @@ app.use((req, res) => res.status(404).type("html").send("<!doctype html><meta ch
 
 (async () => {
   await loadConfig(); await loadKB();
-  for (const d of kb) if (d.status === "transcribing") { d.status = "uploaded"; d.error = "服务重启，转写中断，请重新转写"; }
   app.listen(PORT, () => console.log(`NexAI salon server on :${PORT}  public=${PUBLIC_DIR}  data=${DATA_DIR}`));
 })();

@@ -68,7 +68,7 @@ dialog::backdrop{background:rgba(40,20,5,.35);backdrop-filter:blur(6px)}
   <form id="loginForm">
     <div class="k">NEXAI · ADMIN</div>
     <h1>管理员登录</h1>
-    <p>管理数字人记忆知识库、DeepSeek API Key 与 Skill 商店。</p>
+    <p>管理数字人记忆知识库与 DeepSeek API Key。</p>
     <label for="pw">管理员密码</label>
     <input type="password" id="pw" autocomplete="current-password" required>
     <div style="margin-top:18px" class="row"><button class="btn" type="submit">登录</button><a href="/" style="font-size:13px">返回首页</a></div>
@@ -80,13 +80,13 @@ dialog::backdrop{background:rgba(40,20,5,.35);backdrop-filter:blur(6px)}
 <main class="app" id="app">
   <div class="top"><div><div class="k">NEXAI · ADMIN</div><h1>管理后台</h1></div><div class="sp"></div><a class="btn ghost sm" href="/" target="_blank">查看首页 ↗</a><button class="btn ghost sm" id="logout">退出登录</button></div>
   <nav class="tabs" id="tabs">
-    <button data-t="kb" class="on">记忆知识库</button><button data-t="model">模型与转写</button><button data-t="avatar">数字人设定</button><button data-t="skills">Skill 商店</button><button data-t="account">账号安全</button>
+    <button data-t="kb" class="on">记忆知识库</button><button data-t="model">模型接入</button><button data-t="avatar">数字人设定</button><button data-t="account">账号安全</button>
   </nav>
 
   <!-- 知识库 -->
   <section class="panel on" id="p-kb">
     <h2>记忆知识库</h2>
-    <p class="lead">上传朱老师的语音实录（课堂实录、讲座培训、企业沟通）。音频会通过“模型与转写”里配置的语音转写服务转成文字，数字人回答时会检索这些文字。也可以直接上传转写好的文本（.txt / .md / .srt / .vtt），或把千问录音纪要导出的文字粘贴进来。</p>
+    <p class="lead">把朱老师的课堂实录、讲座培训、企业沟通的<b>文字稿</b>放进来（比如千问“录音纪要”导出的文字），数字人回答时会检索这些内容。支持上传 .txt / .md / .srt / .vtt 文件，也可以直接粘贴。</p>
     <div class="grid2">
       <div class="box">
         <h3>上传文件</h3>
@@ -94,15 +94,15 @@ dialog::backdrop{background:rgba(40,20,5,.35);backdrop-filter:blur(6px)}
         <select id="upCat"><option>课堂实录</option><option>讲座培训</option><option>企业沟通</option><option>其他</option></select>
         <label>标题（只上传 1 个文件时生效，可不填）</label>
         <input type="text" id="upTitle" placeholder="如：2026-10 虢镇戒毒所《与AI共事》讲座">
-        <div class="drop" id="drop" style="margin-top:14px"><b>点击或拖入文件</b><small>音频：mp3 / m4a / wav / aac / amr / ogg / flac / webm / mp4　文本：txt / md / srt / vtt<br>单个不超过 500MB，一次最多 20 个</small><input type="file" id="file" multiple hidden accept=".mp3,.m4a,.wav,.aac,.amr,.ogg,.opus,.flac,.webm,.mp4,.mpeg,.mpga,.wma,.txt,.md,.srt,.vtt,.csv,.json"></div>
+        <div class="drop" id="drop" style="margin-top:14px"><b>点击或拖入文件</b><small>txt / md / srt / vtt（UTF-8 或 GBK 编码均可）<br>单个不超过 20MB，一次最多 20 个</small><input type="file" id="file" multiple hidden accept=".txt,.md,.srt,.vtt,.csv,.json"></div>
         <div class="msg" id="upMsg"></div>
       </div>
       <div class="box">
-        <h3>粘贴转写文本</h3>
+        <h3>粘贴文字稿</h3>
         <label>类别</label>
         <select id="txCat"><option>课堂实录</option><option>讲座培训</option><option>企业沟通</option><option>其他</option></select>
         <label>标题</label><input type="text" id="txTitle" placeholder="如：华夏银行宝鸡分行培训现场答疑">
-        <label>文本内容</label><textarea id="txText" placeholder="把录音转写文字粘贴到这里"></textarea>
+        <label>文本内容</label><textarea id="txText" placeholder="把千问录音纪要等文字稿粘贴到这里"></textarea>
         <div style="margin-top:10px"><button class="btn sm" id="txSave">加入知识库</button></div>
         <div class="msg" id="txMsg"></div>
       </div>
@@ -111,11 +111,11 @@ dialog::backdrop{background:rgba(40,20,5,.35);backdrop-filter:blur(6px)}
     <div style="overflow:auto"><table><thead><tr><th>标题</th><th>类别</th><th>类型</th><th>状态</th><th>内容预览</th><th>操作</th></tr></thead><tbody id="kbList"></tbody></table></div>
   </section>
 
-  <!-- 模型与转写 -->
+  <!-- 模型接入 -->
   <section class="panel" id="p-model">
-    <h2>模型与转写</h2>
+    <h2>模型接入</h2>
     <p class="lead">API Key 只保存在服务器上，前台页面和浏览器都拿不到；保存后这里只显示首尾几位。</p>
-    <div class="grid2">
+    <div class="grid2" style="grid-template-columns:minmax(0,640px)">
       <div class="box">
         <h3>DeepSeek（数字人对话）</h3>
         <label>接入方式 <span class="code" id="dsActive"></span></label>
@@ -133,16 +133,6 @@ dialog::backdrop{background:rgba(40,20,5,.35);backdrop-filter:blur(6px)}
         <p class="hint" id="dsHint"></p>
         <div class="row" style="margin-top:12px"><button class="btn sm" id="dsSave">保存并启用</button><button class="btn ghost sm" id="dsTest">测试连接</button><button class="btn danger sm" id="dsClear">清除 Key</button></div>
         <div class="msg" id="dsMsg"></div>
-      </div>
-      <div class="box">
-        <h3>语音转写（音频 → 文字）</h3>
-        <label>API Key <span id="asrMask" class="code"></span></label>
-        <input type="password" id="asrKey" placeholder="留空表示不修改" autocomplete="off">
-        <label>接口地址</label><input type="text" id="asrUrl" placeholder="如：https://api.siliconflow.cn/v1">
-        <label>转写模型</label><input type="text" id="asrModel" placeholder="如：FunAudioLLM/SenseVoiceSmall">
-        <p class="hint">DeepSeek 本身不提供语音转写。这里填写任意兼容 OpenAI <span class="code">/audio/transcriptions</span> 接口的服务即可。不配置也能用：先用千问“录音纪要”转写，再把文字粘贴进知识库。</p>
-        <div class="row" style="margin-top:12px"><button class="btn sm" id="asrSave">保存</button><button class="btn danger sm" id="asrClear">清除 Key</button></div>
-        <div class="msg" id="asrMsg"></div>
       </div>
     </div>
   </section>
@@ -166,15 +156,6 @@ dialog::backdrop{background:rgba(40,20,5,.35);backdrop-filter:blur(6px)}
     </div>
   </section>
 
-  <!-- Skill 商店 -->
-  <section class="panel" id="p-skills">
-    <h2>Skill 商店</h2>
-    <p class="lead">首页右上角“Skill 商店”展示的技能列表。每个技能可以填写 SkillHub 详情页、下载地址和安装命令，访客可一键下载或复制安装命令。</p>
-    <div id="skList"></div>
-    <div class="row"><button class="btn ghost sm" id="skAdd">＋ 添加技能</button><button class="btn sm" id="skSave">保存全部</button></div>
-    <div class="msg" id="skMsg"></div>
-  </section>
-
   <!-- 账号安全 -->
   <section class="panel" id="p-account">
     <h2>账号安全</h2>
@@ -189,8 +170,7 @@ dialog::backdrop{background:rgba(40,20,5,.35);backdrop-filter:blur(6px)}
 
 <dialog id="edit"><div class="dh"><b>编辑知识条目</b><button class="btn ghost sm" data-close>关闭</button></div>
   <div class="db"><label>标题</label><input type="text" id="edTitle"><label>类别</label><select id="edCat"><option>课堂实录</option><option>讲座培训</option><option>企业沟通</option><option>其他</option></select>
-  <div id="edAudio" style="margin-top:12px"></div>
-  <label>转写文本（数字人检索的就是这里的文字，可手动校对）</label><textarea id="edText" style="min-height:300px"></textarea><div class="msg" id="edMsg"></div></div>
+  <label>文字稿（数字人检索的就是这里的文字，可手动校对）</label><textarea id="edText" style="min-height:300px"></textarea><div class="msg" id="edMsg"></div></div>
   <div class="df"><button class="btn ghost sm" data-close>取消</button><button class="btn sm" id="edSave">保存</button></div></dialog>
 
 <script>
@@ -200,20 +180,18 @@ const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 async function api(url,opt={}){const r=await fetch(url,Object.assign({credentials:"same-origin"},opt,{headers:Object.assign(opt.body&&!(opt.body instanceof FormData)?{"Content-Type":"application/json"}:{},opt.headers||{})}));let j={};try{j=await r.json()}catch{}if(r.status===401&&!url.endsWith("/login")){showLogin();throw new Error("请先登录")}if(!r.ok)throw new Error(j.error||("请求失败 "+r.status));return j}
 const say=(el,t,ok)=>{el.textContent=t;el.className="msg "+(ok?"ok":"err")};
 function showLogin(){$("#login").style.display="grid";$("#app").style.display="none"}
-function showApp(){$("#login").style.display="none";$("#app").style.display="block";loadKB();loadCfg();loadSkills()}
+function showApp(){$("#login").style.display="none";$("#app").style.display="block";loadKB();loadCfg()}
 $("#loginForm").onsubmit=async e=>{e.preventDefault();try{await api("/api/admin/login",{method:"POST",body:JSON.stringify({password:$("#pw").value})});$("#pw").value="";showApp()}catch(err){say($("#loginMsg"),err.message.includes("Failed")?"无法连接后台服务（当前部署可能只是静态网站）":err.message)}};
 $("#logout").onclick=async()=>{await api("/api/admin/logout",{method:"POST"}).catch(()=>{});showLogin()};
 $("#tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;$$("#tabs button").forEach(x=>x.classList.toggle("on",x===b));$$(".panel").forEach(p=>p.classList.toggle("on",p.id==="p-"+b.dataset.t))};
 api("/api/admin/me").then(showApp).catch(()=>showLogin());
 
 /* 知识库 */
-const ST={ready:"已就绪",error:"出错",transcribing:"转写中…",uploaded:"待转写"};
-let poll=0;
+const ST={ready:"已就绪",error:"出错"};
 async function loadKB(){const j=await api("/api/admin/kb");const d=j.docs;
   const by=c=>d.filter(x=>x.category===c).length;
-  $("#kbStats").innerHTML=`<span class="stat"><b>${d.length}</b>条实录</span><span class="stat"><b>${d.filter(x=>x.status==="ready").length}</b>条可检索</span><span class="stat"><b>${j.chunks}</b>个知识片段</span><span class="stat">课堂实录 ${by("课堂实录")} · 讲座培训 ${by("讲座培训")} · 企业沟通 ${by("企业沟通")}</span>${j.asrReady?"":'<span class="stat" style="background:#fff3cd">未配置语音转写：音频需手动粘贴文字</span>'}`;
-  $("#kbList").innerHTML=d.length?d.map(x=>`<tr><td><b>${esc(x.title)}</b><br><small style="color:#8a7a6d">${esc((x.updatedAt||"").slice(0,16).replace("T"," "))}${x.size?" · "+(x.size/1048576).toFixed(1)+"MB":""}</small></td><td><span class="tag">${esc(x.category)}</span></td><td>${x.kind==="audio"?"🎙 音频":"📄 文本"}</td><td><span class="tag st-${x.status}">${ST[x.status]||x.status}</span>${x.error?`<div class="hint" style="color:#c0392b;max-width:220px">${esc(x.error)}</div>`:""}</td><td><div class="pv">${esc(x.preview)||"—"}</div>${x.chars?`<small style="color:#8a7a6d">${x.chars} 字</small>`:""}</td><td><div class="ops"><button class="btn ghost sm" data-ed="${x.id}">查看/校对</button>${x.kind==="audio"?`<button class="btn ghost sm" data-tr="${x.id}">${x.status==="ready"?"重新转写":"转写"}</button>`:""}<button class="btn danger sm" data-del="${x.id}">删除</button></div></td></tr>`).join(""):`<tr><td colspan="6" style="color:#8a7a6d;padding:24px">还没有内容。先上传一段课堂实录或讲座录音吧。</td></tr>`;
-  clearTimeout(poll);if(d.some(x=>x.status==="transcribing"))poll=setTimeout(loadKB,5000)}
+  $("#kbStats").innerHTML=`<span class="stat"><b>${d.length}</b>条实录</span><span class="stat"><b>${d.filter(x=>x.status==="ready").length}</b>条可检索</span><span class="stat"><b>${j.chunks}</b>个知识片段</span><span class="stat">课堂实录 ${by("课堂实录")} · 讲座培训 ${by("讲座培训")} · 企业沟通 ${by("企业沟通")}</span>`;
+  $("#kbList").innerHTML=d.length?d.map(x=>`<tr><td><b>${esc(x.title)}</b><br><small style="color:#8a7a6d">${esc((x.updatedAt||"").slice(0,16).replace("T"," "))}${x.size?" · "+(x.size/1048576).toFixed(1)+"MB":""}</small></td><td><span class="tag">${esc(x.category)}</span></td><td>📄 文字稿</td><td><span class="tag st-${x.status}">${ST[x.status]||x.status}</span>${x.error?`<div class="hint" style="color:#c0392b;max-width:220px">${esc(x.error)}</div>`:""}</td><td><div class="pv">${esc(x.preview)||"—"}</div>${x.chars?`<small style="color:#8a7a6d">${x.chars} 字</small>`:""}</td><td><div class="ops"><button class="btn ghost sm" data-ed="${x.id}">查看/校对</button><button class="btn danger sm" data-del="${x.id}">删除</button></div></td></tr>`).join(""):`<tr><td colspan="6" style="color:#8a7a6d;padding:24px">还没有内容。先放一段课堂实录或讲座的文字稿吧。</td></tr>`;}
 const drop=$("#drop"),file=$("#file");
 drop.onclick=()=>file.click();
 ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
@@ -226,10 +204,8 @@ function up(files){if(!files.length)return;const fd=new FormData();[...files].fo
 $("#txSave").onclick=async()=>{try{await api("/api/admin/kb/text",{method:"POST",body:JSON.stringify({title:$("#txTitle").value,category:$("#txCat").value,text:$("#txText").value})});$("#txTitle").value=$("#txText").value="";say($("#txMsg"),"已加入知识库",true);loadKB()}catch(e){say($("#txMsg"),e.message)}};
 let cur="";
 $("#kbList").onclick=async e=>{const b=e.target.closest("button");if(!b)return;
-  if(b.dataset.del){if(!confirm("确定删除这条实录？音频文件也会一并删除。"))return;await api("/api/admin/kb/"+b.dataset.del,{method:"DELETE"});loadKB()}
-  if(b.dataset.tr){try{await api(`/api/admin/kb/${b.dataset.tr}/transcribe`,{method:"POST"});loadKB()}catch(err){alert(err.message)}}
-  if(b.dataset.ed){const d=await api("/api/admin/kb/"+b.dataset.ed);cur=d.id;$("#edTitle").value=d.title;$("#edCat").value=d.category;$("#edText").value=d.text||"";$("#edMsg").textContent="";
-    $("#edAudio").innerHTML=d.kind==="audio"?`<audio controls preload="none" src="/api/admin/kb/${d.id}/file" style="width:100%"></audio>`:"";$("#edit").showModal()}};
+  if(b.dataset.del){if(!confirm("确定删除这条实录？"))return;await api("/api/admin/kb/"+b.dataset.del,{method:"DELETE"});loadKB()}
+  if(b.dataset.ed){const d=await api("/api/admin/kb/"+b.dataset.ed);cur=d.id;$("#edTitle").value=d.title;$("#edCat").value=d.category;$("#edText").value=d.text||"";$("#edMsg").textContent="";$("#edit").showModal()}};
 $$("[data-close]").forEach(b=>b.onclick=()=>$("#edit").close());
 $("#edSave").onclick=async()=>{try{await api("/api/admin/kb/"+cur,{method:"PUT",body:JSON.stringify({title:$("#edTitle").value,category:$("#edCat").value,text:$("#edText").value})});$("#edit").close();loadKB()}catch(e){say($("#edMsg"),e.message)}};
 
@@ -249,14 +225,11 @@ $("#dsConn").oninput=()=>{try{const j=JSON.parse($("#dsConn").value.trim());if(j
 $("#dsModels").onclick=async()=>{say($("#dsMsg"),"读取中…",true);try{const j=await api("/api/admin/models?provider="+dsSel);$("#dsModelList").innerHTML=j.models.map(m=>`<option value="${m.replace(/"/g,"&quot;")}">`).join("");say($("#dsMsg"),`共 ${j.models.length} 个模型，点击模型框即可选择：`+j.models.filter(m=>/deepseek/i.test(m)).slice(0,6).join("、"),true)}catch(e){say($("#dsMsg"),e.message)}};
 async function loadCfg(){const c=await api("/api/admin/config");
   DS=c.deepseek;if(!dsSel)dsSel=DS.provider;showProv();
-  $("#asrMask").textContent=c.asr.hasKey?c.asr.apiKeyMasked:"未设置";$("#asrUrl").value=c.asr.baseUrl;$("#asrModel").value=c.asr.model;
   $("#avName").value=c.avatar.name;$("#avGreet").value=c.avatar.greeting;$("#avPersona").value=c.avatar.persona;$("#avLimit").value=c.avatar.dailyLimit}
 const put=b=>api("/api/admin/config",{method:"PUT",body:JSON.stringify(b)});
 $("#dsSave").onclick=async()=>{try{await put({deepseek:{provider:dsSel,apiKey:$("#dsKey").value,baseUrl:$("#dsUrl").value,model:$("#dsModel").value}});await loadCfg();say($("#dsMsg"),"已保存，数字人现在使用："+DS.providers[dsSel].label,true)}catch(e){say($("#dsMsg"),e.message)}};
 $("#dsClear").onclick=async()=>{if(!confirm("清除这个通道的 Key？如果它正在启用，数字人将无法回答。"))return;await put({deepseek:{provider:dsSel,clearKey:true,activate:false}});await loadCfg();say($("#dsMsg"),"已清除该通道的 Key",true)};
 $("#dsTest").onclick=async()=>{say($("#dsMsg"),"测试中…",true);try{const j=await api("/api/admin/test-key?provider="+dsSel,{method:"POST"});say($("#dsMsg"),`连接成功（${j.provider}）：`+(j.reply||"").slice(0,60),true)}catch(e){say($("#dsMsg"),e.message)}};
-$("#asrSave").onclick=async()=>{try{await put({asr:{apiKey:$("#asrKey").value,baseUrl:$("#asrUrl").value,model:$("#asrModel").value}});$("#asrKey").value="";say($("#asrMsg"),"已保存",true);loadCfg()}catch(e){say($("#asrMsg"),e.message)}};
-$("#asrClear").onclick=async()=>{await put({asr:{clearKey:true}});say($("#asrMsg"),"已清除",true);loadCfg()};
 $("#avSave").onclick=async()=>{try{await put({avatar:{name:$("#avName").value,greeting:$("#avGreet").value,persona:$("#avPersona").value,dailyLimit:$("#avLimit").value}});say($("#avMsg"),"已保存",true)}catch(e){say($("#avMsg"),e.message)}};
 $("#tcGo").onclick=async()=>{const q=$("#tcQ").value.trim();if(!q)return;const out=$("#tcOut");out.textContent="思考中…";
   try{const r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:[{role:"user",content:q}]})});
@@ -265,18 +238,6 @@ $("#tcGo").onclick=async()=>{const q=$("#tcQ").value.trim();if(!q)return;const o
     while(true){const {value,done}=await rd.read();if(done)break;buf+=dec.decode(value,{stream:true});let i;while((i=buf.indexOf("\n\n"))>=0){const l=buf.slice(0,i);buf=buf.slice(i+2);if(!l.startsWith("data:"))continue;const j=JSON.parse(l.slice(5));if(j.sources)src=j.sources;if(j.t){txt+=j.t;out.textContent=txt}if(j.error)out.textContent=j.error}}
     if(src.length)out.textContent=txt+"\n\n—— 参考实录："+src.map(s=>"《"+s.title+"》").join("、")}catch(e){out.textContent="连接失败："+e.message}};
 
-/* Skills */
-let skills=[];
-async function loadSkills(){skills=await api("/api/admin/skills");renderSk()}
-function renderSk(){$("#skList").innerHTML=skills.map((s,i)=>`<div class="sk" data-i="${i}"><div class="row" style="justify-content:space-between"><b>#${i+1} ${esc(s.name)||"新技能"}</b><div class="ops"><button class="btn ghost sm" data-up="${i}">上移</button><button class="btn danger sm" data-rm="${i}">删除</button></div></div>
-  <div class="grid2"><div><label>名称</label><input type="text" data-k="name" value="${esc(s.name)}"></div><div><label>分类</label><input type="text" data-k="category" value="${esc(s.category)}" placeholder="如：办公 / 教学 / 开发"></div>
-  <div><label>SkillHub 详情页</label><input type="text" data-k="url" value="${esc(s.url)}" placeholder="https://skillhub.cn/…"></div><div><label>下载地址（.zip 等）</label><input type="text" data-k="download" value="${esc(s.download)}"></div>
-  <div><label>安装命令</label><input type="text" data-k="install" value="${esc(s.install)}" placeholder="如：skillhub install xxx"></div><div><label>版本</label><input type="text" data-k="version" value="${esc(s.version)}"></div></div>
-  <label>一句话说明</label><input type="text" data-k="summary" value="${esc(s.summary)}"><label>功能要点（每行一条）</label><textarea data-k="features" style="min-height:80px">${esc((s.features||[]).join("\n"))}</textarea></div>`).join("")||'<p class="hint" style="margin-bottom:12px">还没有技能。</p>'}
-$("#skList").addEventListener("input",e=>{const el=e.target;const box=el.closest(".sk");if(!box||!el.dataset.k)return;const s=skills[+box.dataset.i];s[el.dataset.k]=el.dataset.k==="features"?el.value.split("\n").map(x=>x.trim()).filter(Boolean):el.value});
-$("#skList").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.rm){skills.splice(+b.dataset.rm,1);renderSk()}if(b.dataset.up&&+b.dataset.up>0){const i=+b.dataset.up;[skills[i-1],skills[i]]=[skills[i],skills[i-1]];renderSk()}});
-$("#skAdd").onclick=()=>{skills.push({name:"",category:"",summary:"",features:[],url:"",download:"",install:"",version:""});renderSk()};
-$("#skSave").onclick=async()=>{try{const j=await api("/api/admin/skills",{method:"PUT",body:JSON.stringify(skills)});say($("#skMsg"),`已保存 ${j.count} 个技能`,true);loadSkills()}catch(e){say($("#skMsg"),e.message)}};
 
 $("#pwSave").onclick=async()=>{try{await api("/api/admin/password",{method:"POST",body:JSON.stringify({current:$("#pwCur").value,next:$("#pwNew").value})});$("#pwCur").value=$("#pwNew").value="";say($("#pwMsg"),"密码已修改",true)}catch(e){say($("#pwMsg"),e.message)}};
 })();

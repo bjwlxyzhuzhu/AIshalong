@@ -35,21 +35,20 @@ docker run -d --name nexai-salon --restart unless-stopped -p 8080:80 -v /opt/sal
 
 访问服务器的 8080 端口即可看到统一入口。正式域名 `salon.tokenone.work` 的 DNS、HTTPS 证书及反向代理由部署方配置，本工作流不会修改 DNS 或自动部署到服务器。新建 GHCR 包默认可能为私有；如拉取时提示无权限，需使用有 `read:packages` 权限的账号登录 GHCR，或由仓库管理员按实际共享需求调整包的可见性。
 
-远程仓库原有 `docker-compose.portainer.yml`、`docker/nginx.conf` 和 React 源码保持保留。Portainer 仍可沿用原 Stack：服务 `aishalong`、`8080:80`、宿主机 `/opt/salon` 挂载到容器 `/data`。数字人后台会把配置（DeepSeek Key、语音转写服务、管理员密码哈希）写入 `/data/config.json`，知识库写入 `/data/kb/`，请保留该挂载，否则重建容器会丢失数据。新镜像直接打包已验证的 `dist`，不会执行旧 React 源码的构建命令而覆盖统一入口。
+远程仓库原有 `docker-compose.portainer.yml`、`docker/nginx.conf` 和 React 源码保持保留。Portainer 仍可沿用原 Stack：服务 `aishalong`、`8080:80`、宿主机 `/opt/salon` 挂载到容器 `/data`。数字人后台会把配置（DeepSeek Key、管理员密码哈希）写入 `/data/config.json`，知识库写入 `/data/kb/`，请保留该挂载，否则重建容器会丢失数据。新镜像直接打包已验证的 `dist`，不会执行旧 React 源码的构建命令而覆盖统一入口。
 
 ## 数字人与管理后台
 
 - 首页右下角为“朱丽叶老师数字分身”，头像在两张形象照中随机出现，对话通过 `/api/chat` 以流式方式调用 DeepSeek（OpenAI 兼容接口），回答前先检索记忆知识库。
-- 页面最下方“管理员登录”进入 `/admin/`：上传语音实录（课堂实录、讲座培训、企业沟通）或文字稿、校对转写、配置 DeepSeek API Key 与模型、设置数字人人设与每日对话上限、维护 Skill 商店、修改密码。
+- 页面最下方“管理员登录”进入 `/admin/`：上传或粘贴课堂实录、讲座培训、企业沟通的文字稿（如千问录音纪要导出的文字，txt/md/srt/vtt），配置 DeepSeek 接入、数字人人设与每日对话上限、修改密码。
 - 管理员初始密码：在 Portainer 环境变量里设置 `ADMIN_PASSWORD`；不设置则首次启动随机生成，打印在容器日志，并写入 `/opt/salon/admin-initial-password.txt`，首次登录后请修改。
-- DeepSeek 没有语音转写接口。音频要自动转文字，需要在“模型与转写”里另配一个 OpenAI 兼容的 `/audio/transcriptions` 服务（如硅基流动 SenseVoice）；也可以用千问录音导出文字稿后直接粘贴。
 - 对话模型支持三种接入：DeepSeek 官方（https://api.deepseek.com）、TokenOne 中转站（NewAPI，https://token.agentone.work，自动补 /v1，可直接粘贴 `newapi_channel_conn` 连接串）、自定义 OpenAI 兼容接口；每种各存一套 Key，点“保存并启用”切换，“获取模型列表”可读取可用模型。
 - API Key 只保存在服务器 `/data/config.json`，界面只显示脱敏后的值，前端接口不返回 Key。
 - 本地运行：`cd server && npm ci && PUBLIC_DIR=../dist DATA_DIR=./data PORT=8080 node server.js`。
 
 ## Skill 商店
 
-右上角“Skill 商店”列出朱丽叶老师在 SkillHub 上架的技能，每个技能都有功能说明、“下载 Zip”和“复制安装提示词”（粘贴给 WorkBuddy、Claude、Codex 等 AI 助手即可自动安装）。默认数据在 `dist/portal-assets/skills.json`，后台“Skill 商店”页改动后以后台数据为准。
+右上角“Skill 商店”列出朱丽叶老师在 SkillHub 上架的技能，每个技能都有功能说明、“下载 Zip”和“复制安装提示词”（粘贴给 WorkBuddy、Claude、Codex 等 AI 助手即可自动安装）。技能数据是静态文件 `dist/portal-assets/skills.json`，不经过后台；新增技能时改这个文件并推送即可。
 
 ## 交互与适配
 
