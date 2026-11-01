@@ -79,6 +79,11 @@
     .menu{max-height:calc(100svh - 48px);overflow:auto}
     @media(max-width:720px){.headline{top:30%}.learn-qr{bottom:338px}.edition--group:last-child .edition__sub{left:0}}
     @media(max-width:720px) and (max-height:800px){.headline{top:24%}.learn-qr{width:84px;bottom:330px}}
+    /* 二级菜单：磨砂玻璃 */
+    .editions{animation-fill-mode:backwards}
+    .edition__sub{background:rgba(255,255,255,.6);backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);border:1px solid rgba(255,255,255,.65);box-shadow:0 24px 60px -18px rgba(60,22,0,.45),inset 0 1px 0 rgba(255,255,255,.7)}
+    .sub-item:hover,.sub-item:focus-visible{background:rgba(255,255,255,.6)}
+    .menu{background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.6)}
   </style>
   <script type="importmap">{"imports":{"three":"./portal-assets/vendor/three.module.js","three/addons/":"./portal-assets/vendor/addons/"}}</script>
 </head>
