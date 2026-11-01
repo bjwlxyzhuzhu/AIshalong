@@ -10,6 +10,8 @@
 
 `dist/government/`：用户提供的2026-10-21政务版部署包，包含独立页面、内容大纲、资料与图片来源及部署说明。首页版本入口与展开菜单均已接通。
 
+`dist/justice/`：政法版《与AI共事——监所工作的人工智能新实践》游戏化园区课件（three.js），首页“04 政法版”入口与展开菜单均已接通，页面二维码指向 https://salon.tokenone.work/justice/ 。
+
 ## 部署
 
 将 **dist 内全部内容** 上传到网站根目录，保留 `education`、`enterprise`、`portal-assets` 的相对目录结构。无需 Node.js 构建、无需数据库、无需填写 API 密钥。也适合部署在 GitHub Pages 的仓库子路径下。
@@ -20,7 +22,7 @@
 
 ## Docker 镜像与 GitHub Actions
 
-仓库 `main` 分支推送后，原有 `.github/workflows/docker-image.yml` 自动构建并发布 Nginx 静态网站镜像，工作流不做修改。Docker 构建会检查首页、教育版、企业版、政务版和二维码文件存在，并执行 `nginx -t` 校验配置，然后发布至 GHCR：
+仓库 `main` 分支推送后，原有 `.github/workflows/docker-image.yml` 自动构建并发布 Nginx 静态网站镜像，工作流不做修改。Docker 构建会检查首页、教育版、企业版、政务版、政法版和二维码文件存在，并执行 `nginx -t` 校验配置，然后发布至 GHCR：
 
 `ghcr.io/bjwlxyzhuzhu/aishalong:latest`
 
@@ -39,6 +41,7 @@ docker run -d --name nexai-salon --restart unless-stopped -p 8080:80 ghcr.io/bjw
 
 - 教育版、企业版支持快捷导航、底部入口和展开菜单三种进入方式。
 - 政务版可从首页底部入口和展开菜单进入，支持键盘访问。
+- 政法版位于政务版下方（首页第 04 个入口、菜单第 4 项），链接 `./justice/index.html`。
 - 展开菜单支持遮罩关闭、Escape 关闭及键盘焦点循环。
 - 首页提供 `https://salon.tokenone.work` 的真实二维码，已做解码核验；域名解析与正式服务器绑定仍需由部署方完成。本次不会改变 DNS。
 - 暂停按钮同时控制视频与 3D 浮动；尊重系统减少动态效果设置，页面隐藏时暂停。

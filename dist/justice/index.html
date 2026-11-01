@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06101f">
+<meta name="description" content="NexAI 政法版：与AI共事——监所工作的人工智能新实践。面向新录用监狱警察的图文实操课件。">
+<title>智慧监所训练园区 · 与AI共事</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ 图标库 ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 2.5 4 5.5v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10v-6z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+    <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="13" cy="4" r="2" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m9 21 2-6 3 3v3M7 12l3-4 4 1 3 3M11 15l1-6"/></symbol>
+    <symbol id="i-talk" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M17 9h3a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-4-3h-3"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M4 20h4L19 9l-4-4L4 16z"/><path stroke="currentColor" stroke-width="1.8" d="m13.5 6.5 4 4"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="9" r="2.4" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 5.5 2 5.5 5"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v16H5.5A1.5 1.5 0 0 0 4 20.5zM4 20.5A1.5 1.5 0 0 0 5.5 22H20"/><path stroke="currentColor" stroke-width="1.8" d="M8 7h8M8 11h6"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/><rect x="9.5" y="9.5" width="5" height="5" rx="1" fill="currentColor"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-img" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="10" r="2" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="m3 17 5-4 4 3 3-2 6 5"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 2.5l1.6 2.2 2.7-.6.6 2.7 2.4 1.3-1 2.5 1 2.5-2.4 1.3-.6 2.7-2.7-.6L12 21.5l-1.6-2.2-2.7.6-.6-2.7-2.4-1.3 1-2.5-1-2.5 2.4-1.3.6-2.7 2.7.6z"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol>
+    <symbol id="i-cut" viewBox="0 0 24 24"><circle cx="6" cy="7" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="17" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M8.5 8.5 20 19M8.5 15.5 20 5"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3 11 21 3l-6 18-3-8z"/><path stroke="currentColor" stroke-width="1.8" d="m12 13 9-10"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 20s-7.5-4.6-9-9.5C2 7 4.5 4 7.5 4c2 0 3.5 1.2 4.5 2.6C13 5.2 14.5 4 16.5 4 19.5 4 22 7 21 10.5 19.5 15.4 12 20 12 20z"/></symbol>
+    <symbol id="i-graduate" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="m2 9 10-5 10 5-10 5z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="M6 11v5c2 2 10 2 12 0v-5M22 9v6"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M7 21h10M4 7h16M4 7l-3 7a3.5 3.5 0 0 0 6 0zM20 7l-3 7a3.5 3.5 0 0 0 6 0z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M10.5 18.5h3"/></symbol>
+  </defs>
+</svg>
+
+<!-- ================= 游戏化园区 ================= -->
+<div id="park">
+  <canvas id="parkCanvas"></canvas>
+  <div id="tags"></div>
+</div>
+
+<!-- 顶栏 -->
+<header class="hud-top">
+  <div class="hud-brand"><div class="hb-1">AI PARK <b>智慧监所训练园区</b></div><div class="hb-2">与AI共事 · 新录用监狱人民警察专题培训 · <span class="hud-dim">虚构训练园区</span></div></div>
+  <div class="hud-cur"><span class="hc-no" id="curNo">00</span><span id="curName">园区总览</span><span class="hc-st" id="curSt">待命</span></div>
+  <div class="hud-clock" id="hudClock">08:30:00</div>
+  <div class="hud-btns">
+    <button data-view="top" class="on">俯视</button><button data-view="patrol" id="btnPatrol">巡视</button><button id="btnNight">夜间</button><button id="btnQR">扫码</button><button id="btnFull">全屏</button>
+  </div>
+</header>
+
+<!-- 左：训练任务 -->
+<aside class="hud-left hud-panel">
+  <div class="hp-h"><span>01</span> 训练任务 <em>MISSIONS</em><i id="missionCount">0/8</i></div>
+  <ol id="missions"></ol>
+  <div class="hp-h" style="margin-top:12px"><span>02</span> 园区智能体 <em>AGENTS</em></div>
+  <div id="agentRows"></div>
+</aside>
+
+<!-- 右：数据 -->
+<aside class="hud-right hud-panel">
+  <div class="hp-h"><span>03</span> 实时数据 <em>METRICS</em></div>
+  <div class="kpis">
+    <div><small>训练车间</small><b>8</b><i>个</i></div>
+    <div><small>已完成模块</small><b id="kDone">0</b><i>/ 8</i></div>
+    <div><small>红线自测</small><b id="kQuiz">--</b><i>分</i></div>
+    <div><small>AI 协同指数</small><b id="kIdx">96.4</b><i>%</i></div>
+  </div>
+  <div class="eq" id="eq"></div>
+  <div class="hp-h"><span>04</span> 园区 Agent 日志 <em>TERMINAL</em></div>
+  <div class="term" id="term"></div>
+</aside>
+
+<!-- 底部：时间线 + 事件 -->
+<footer class="hud-bottom hud-panel">
+  <div class="tlbar" id="tlbar"></div>
+  <div class="ticker"><span class="tk-dot"></span><div id="ticker"></div></div>
+</footer>
+
+<!-- 选中车间的浮窗 -->
+<div class="pop" id="pop" hidden>
+  <div class="pop-h"><span class="pop-no" id="popNo">01</span><b id="popName">AI 认知馆</b><span class="pop-st">运行中</span></div>
+  <div class="pop-t" id="popTime"></div>
+  <p id="popDesc"></p>
+  <div class="pop-tasks" id="popTasks"></div>
+  <div class="pop-b"><button class="pbtn" id="popOpen">进入课件 ▶</button><button class="pbtn ghost" id="popClose">返回园区</button></div>
+</div>
+
+<!-- 课件抽屉 -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="dw-h">
+    <span class="dw-no" id="dwNo">01</span><b id="dwName"></b><span class="dw-time" id="dwTime"></span>
+    <div class="dw-btns"><button id="dwPrev">◀ 上一站</button><button id="dwNext">下一站 ▶</button><button id="dwClose" class="x">✕ 回园区</button></div>
+  </div>
+  <div class="dw-body" id="dwBody"></div>
+</div>
+
+<!-- 开始界面 -->
+<div class="start" id="start">
+  <div class="st-inner">
+    <div class="st-k">MISSION BRIEFING · 新警 AI 训练营</div>
+    <h1 class="st-title">与AI共事</h1>
+    <p class="st-sub">监所工作的人工智能新实践 · 新录用监狱人民警察专题培训</p>
+    <div class="st-cards">
+      <figure style="--r:-8deg"><img src="assets/cartoon/cover1.webp" alt=""><figcaption>认识 AI</figcaption></figure>
+      <figure style="--r:-3deg"><img src="assets/cartoon/cover2.webp" alt=""><figcaption>红线在前</figcaption></figure>
+      <figure style="--r:3deg"><img src="assets/cartoon/cover3.webp" alt=""><figcaption>开发智能体</figcaption></figure>
+      <figure style="--r:8deg"><img src="assets/cartoon/cover4.webp" alt=""><figcaption>短视频</figcaption></figure>
+    </div>
+    <div class="st-b"><button class="pbtn big" id="startBtn">进入园区 ▶</button><div class="st-qr"><img src="assets/qr.png" alt="扫码"><span>手机扫码<br>跟着练</span></div></div>
+    <p class="st-tip">点击园区里的车间 → 屋顶掀开看内部 → 进入课件　|　键盘 ← → 切换车间，Esc 返回</p>
+  </div>
+</div>
+<div class="qr-pop2" id="qrPop2" hidden><img src="assets/qr.png" alt="课件二维码"><div>手机扫码 · 跟着练</div></div>
+<div class="toast" id="toast"></div>
+
+<div id="library" hidden>
+<!-- ============ 开篇 ============ -->
+<section id="open">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">开篇 · OPENING</span><span class="time-tag">15′</span>
+      <h2 class="rv d1">一名新警的一天，<br>AI 能帮你分担什么？</h2>
+      <p class="rv d2">点击时间线上的每个节点，看看 AI <b class="gold">能帮什么</b>，又有哪些<b style="color:#ff9d96">不能碰</b>。</p>
+    </div>
+
+    <div class="day rv" id="day"></div>
+    <div class="day-detail" id="dayDetail">
+      <div class="dd can"><h4><span class="pill g">AI 能帮</span><span id="ddT1"></span></h4><p id="ddCan"></p></div>
+      <div class="dd cant"><h4><span class="pill r">不能碰</span></h4><p id="ddCant"></p></div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">✦</span>现场投票：你最希望 AI 帮你分担哪件事？</div>
+    <div class="grid g2">
+      <div class="poll rv" id="poll1"></div>
+      <div class="card rv d1"><div class="ico"><svg><use href="#i-bulb"/></svg></div><h3>今天的核心观点</h3>
+        <p style="font-size:20px;line-height:1.8;color:var(--ink)">AI 是<b class="gold">助手</b>，不是警察。<br>它可以起草、归纳、陪练；<br><b class="gold">判断权、决定权、责任</b>永远在人。</p>
+        <p class="muted" style="margin-top:12px;font-size:13.5px">投票结果保存在你自己的手机上。现场汇总请以主讲人大屏为准。</p>
+      </div>
+    </div>
+
+    <!-- 两件工具 -->
+    <div class="sub-title rv"><span class="no">✦</span>先认识两件趁手工具：千问录音 · WorkBuddy</div>
+    <div class="grid g2">
+      <!-- 千问录音 -->
+      <div class="card hl rv">
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:6px"><div class="ico" style="margin:0"><svg><use href="#i-mic"/></svg></div><div><h3 style="margin:0">千问 · 录音纪要</h3><span class="pill c">手机端</span> <span class="pill c">电脑端语音输入</span></div></div>
+        <p>开会、听讲座时打开录音，AI 自动<b>转写成文字</b>，再整理出<b>要点、结论和待办</b>。电脑端可以直接用语音输入写材料。</p>
+        <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;margin-top:18px;align-items:start" class="qw-demo">
+          <svg viewBox="0 0 150 280" style="width:150px">
+            <rect x="4" y="4" width="142" height="272" rx="22" fill="#0b1a33" stroke="#4c6a9c" stroke-width="2"/>
+            <rect x="55" y="12" width="40" height="6" rx="3" fill="#24395f"/>
+            <text x="75" y="52" text-anchor="middle" font-size="11" fill="#b9c6dc">录音中</text>
+            <text x="75" y="76" text-anchor="middle" font-size="20" fill="#f1d38c" font-family="monospace" id="qwTime">00:00</text>
+            <g id="qwWave" fill="#4fb3e8"></g>
+            <circle cx="75" cy="220" r="24" fill="#e0574f"><animate attributeName="r" values="24;27;24" dur="1.4s" repeatCount="indefinite"/></circle>
+            <rect x="67" y="212" width="16" height="16" rx="3" fill="#fff"/>
+          </svg>
+          <div>
+            <div class="qw-step" style="font-size:13px;color:var(--ink-3)">① 实时转写</div>
+            <div id="qwText" style="font-size:14.5px;line-height:1.75;min-height:96px;color:var(--ink-2);border-left:2px solid var(--cyan);padding-left:10px;margin:4px 0 12px"></div>
+            <div style="font-size:13px;color:var(--ink-3)">② AI 纪要</div>
+            <div id="qwSum" style="font-size:14.5px;line-height:1.75;border-left:2px solid var(--gold);padding-left:10px;margin-top:4px;opacity:.25;transition:opacity .6s">
+              <b class="gold">要点</b>：AI 是助手不是警察；先学纪律再学用法。<br><b class="gold">待办</b>：课后完成红线自测；收藏提示词模板。
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:12px 14px;border-radius:10px;background:var(--gold-dim);font-size:15px">🎙️ <b>现场彩蛋</b>：本场报告开场就打开千问录音，结尾当场展示 AI 生成的纪要。</div>
+        <p style="margin-top:10px;font-size:14px"><span class="pill r">注意</span> 只用于非涉密场合。涉密会议、监区内<b>一律不录</b>。</p>
+      </div>
+      <!-- WorkBuddy -->
+      <div class="card hl rv d1">
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:6px"><div class="ico" style="margin:0"><svg><use href="#i-gear"/></svg></div><div><h3 style="margin:0">WorkBuddy · 桌面办公智能体</h3><span class="pill y">电脑端</span> <span class="pill y">技能扩展</span> <span class="pill y">微信远程</span></div></div>
+        <p>不只是聊天：你用一句话交代任务，它在电脑上<b>一步步帮你做完</b>，比如整理文件、写文档、汇总表格。常用流程可以存成<b>技能</b>反复用，人不在电脑前也能用<b>微信远程</b>下指令。</p>
+        <div class="screen" style="margin-top:18px;border-radius:14px;overflow:hidden;background:#0d1a2e">
+          <div class="chat-top"><div class="dots"><i></i><i></i><i></i></div><b>WorkBuddy · 任务演示</b></div>
+          <div style="padding:14px 16px;font-size:14.5px;line-height:1.8">
+            <div style="background:var(--gold);color:var(--navy-0);padding:8px 12px;border-radius:12px;display:inline-block;font-weight:600">把桌面「岗前培训资料」文件夹按讲次整理，生成一份学习目录。</div>
+            <ol id="wbSteps" style="list-style:none;margin-top:12px"></ol>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(65,184,131,.1);border:1px solid rgba(65,184,131,.3);font-size:14.5px">
+          <svg width="26" height="26" style="flex:none;color:#7fe0b0"><use href="#i-phone"/></svg>
+          <span><b>微信远程</b>：下班路上发一句"把今天的学习笔记汇总成一页"，回到电脑前文件已经生成。</span>
+        </div>
+        <p style="margin-top:10px;font-size:14px"><span class="pill r">注意</span> 只在<b>个人办公电脑、非涉密文件</b>上使用。单位内网和涉密计算机严禁安装。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第一讲 ============ -->
+<section id="s1" class="paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">第一讲 · LECTURE 01</span><span class="time-tag">25′</span>
+      <h2 class="rv d1">认识你的 AI 同事</h2>
+      <p class="rv d2">它是怎么"想"的？现在能做到什么？哪些事它一定会出错？</p>
+    </div>
+
+    <div class="stage3d rv" data-scene="brain" style="height:420px"><span class="cap3d">大模型内部示意：海量参数构成的神经网络，信号在其中逐层传递（拖动可旋转）</span></div>
+
+    <div class="sub-title rv"><span class="no">1</span>一个动画看懂大模型：它在"猜下一个词"</div>
+    <div class="nt-box rv">
+      <div>
+        <div class="nt-sent" id="ntSent"></div>
+        <div class="nt-ctl">
+          <button class="btn sm" id="ntNext">生成下一个词 ▶</button>
+          <button class="btn sm ghost" id="ntRand" style="color:var(--paper-ink);border-color:#cfc6b2">随机采样（提高"温度"）</button>
+          <button class="btn sm ghost" id="ntReset" style="color:var(--paper-ink);border-color:#cfc6b2">重来</button>
+        </div>
+      </div>
+      <div class="nt-probs">
+        <div style="font-size:14px;color:var(--ink-3);margin-bottom:6px">模型对"下一个词"的概率估计（示意）</div>
+        <div id="ntProbs"></div>
+        <p style="font-size:13.5px;color:var(--ink-3);margin-top:12px">它读过海量文本，学会了"什么词后面最可能接什么词"。<b style="color:var(--gold-2)">它预测的是"像不像"，不是"对不对"</b>，所以会一本正经地胡说。</p>
+      </div>
+    </div>
+
+    <div class="grid g3" style="margin-top:22px">
+      <div class="card rv"><div class="ico"><svg><use href="#i-book"/></svg></div><h4>① 训练：读万卷书</h4><p>用海量文本学习语言规律，相当于"上学"，花费巨大，几个月才完成一次。</p></div>
+      <div class="card rv d1"><div class="ico"><svg><use href="#i-talk"/></svg></div><h4>② 推理：你问它答</h4><p>你每次提问，它根据学到的规律，一个词一个词地"接龙"出回答。</p></div>
+      <div class="card rv d2"><div class="ico"><svg><use href="#i-eye"/></svg></div><h4>③ 幻觉：自信地编</h4><p>遇到不知道的，它不会说"不知道"，而是编一个"看起来很像"的答案。</p></div>
+    </div>
+
+    <!-- 幻觉现场 -->
+    <div class="sub-title rv"><span class="no">2</span>现场揭穿"AI 幻觉"</div>
+    <div class="vs rv">
+      <div class="card">
+        <h4><span class="pill r">AI 一本正经地胡说</span></h4>
+        <div class="bubble u">《监狱法》第一百零八条规定了什么？</div>
+        <div class="bubble a">《监狱法》第一百零八条规定：监狱应当建立罪犯心理健康档案，定期开展心理评估，对有心理问题的罪犯及时进行干预……</div>
+      </div>
+      <div class="card">
+        <h4><span class="pill g">事实核查</span></h4>
+        <p style="font-size:17px;line-height:1.9;color:var(--paper-ink)">现行《中华人民共和国监狱法》<b>共七章七十八条</b>，根本<b>没有</b>第一百零八条。</p>
+        <p style="margin-top:10px">上面的"条文"是编出来的。内容听起来合理，所以更危险。</p>
+        <div style="margin-top:14px;padding:12px 14px;border-radius:10px;background:#f8efd6;font-weight:700">结论：凡是法条、数字、人名、日期，一律查原文核实。</div>
+        <p class="muted" style="margin-top:8px;font-size:13.5px">现场演示：主讲人用自己的 AI 工具联网提问，看它是否会核实，或者也会编造。</p>
+      </div>
+    </div>
+
+    <!-- 时间轴 -->
+    <div class="sub-title rv"><span class="no">3</span>七十年，AI 走到了哪一步</div>
+    <div class="tl rv" id="tl">
+      <div class="tl-i"><span class="y">1956</span><h4>"人工智能"诞生</h4><p>达特茅斯会议首次提出"人工智能"一词。</p></div>
+      <div class="tl-i"><span class="y">1997</span><h4>深蓝胜卡斯帕罗夫</h4><p>计算机在国际象棋上战胜世界冠军，靠的是规则与算力。</p></div>
+      <div class="tl-i"><span class="y">2012</span><h4>深度学习爆发</h4><p>神经网络在图像识别上大幅领先，人脸识别、语音识别开始实用。</p></div>
+      <div class="tl-i"><span class="y">2016</span><h4>AlphaGo 胜李世石</h4><p>AI 在围棋上战胜人类顶尖棋手。</p></div>
+      <div class="tl-i"><span class="y">2017</span><h4>Transformer 架构</h4><p>今天几乎所有大模型的共同"地基"。</p></div>
+      <div class="tl-i"><span class="y">2022</span><h4>ChatGPT 问世</h4><p>大模型走进普通人的生活，"对话式 AI"成为现实。</p></div>
+      <div class="tl-i"><span class="y">2023</span><h4>国产大模型百花齐放</h4><p>通义千问、文心一言、豆包、Kimi 等相继面向公众开放。</p></div>
+      <div class="tl-i"><span class="y">2025</span><h4>推理模型与智能体</h4><p>DeepSeek-R1 等推理模型出现，AI 开始"先思考再回答"，并能调用工具办事。</p></div>
+      <div class="tl-i now"><span class="y">2026</span><h4>AI 成为同事</h4><p>智能体进入办公、多模态与视频生成普及。<b>从"会对话"走向"能干活"。</b></p></div>
+    </div>
+    <p class="tl-hint">← 左右滑动查看 →</p>
+
+    <!-- 能力全景 -->
+    <div class="sub-title rv"><span class="no">4</span>2026 年，AI 的能力全景</div>
+    <div class="grid g4">
+      <div class="card cap rv"><div class="ico"><svg><use href="#i-pen"/></svg></div><h4>文字与推理</h4><ul><li>起草、改写、归纳</li><li>读长文档、提要点</li><li>多步推理、做计划</li></ul><div class="lv" data-lv="5"><i></i><i></i><i></i><i></i><i></i></div><small class="muted">成熟度</small></div>
+      <div class="card cap rv d1"><div class="ico"><svg><use href="#i-eye"/></svg></div><h4>看、听、说</h4><ul><li>看图、识表、读截图</li><li>语音转写、实时对话</li><li>多语言翻译</li></ul><div class="lv" data-lv="4"><i></i><i></i><i></i><i></i><i></i></div><small class="muted">成熟度</small></div>
+      <div class="card cap rv d2"><div class="ico"><svg><use href="#i-film"/></svg></div><h4>生成图像与视频</h4><ul><li>文字生成图片</li><li>图片生成视频片段</li><li>AI 配音、数字人</li></ul><div class="lv" data-lv="4"><i></i><i></i><i></i><i></i><i></i></div><small class="muted">成熟度</small></div>
+      <div class="card cap rv d3"><div class="ico"><svg><use href="#i-gear"/></svg></div><h4>智能体办事</h4><ul><li>调用工具、操作电脑</li><li>多步骤自动完成</li><li>写代码、搭应用</li></ul><div class="lv" data-lv="3"><i></i><i></i><i></i><i></i><i></i></div><small class="muted">成熟度</small></div>
+    </div>
+    <p class="muted" style="font-size:13.5px;margin-top:10px">成熟度为主讲人评估的示意，用于说明"哪些能放心用、哪些还要多看一眼"。</p>
+
+    <!-- 工具地图 -->
+    <div class="sub-title rv"><span class="no">5</span>工具地图：按用途找工具</div>
+    <div class="grid g3" id="tools"></div>
+    <p class="muted" style="font-size:13.5px;margin-top:10px">工作用途优先选用<b>国产、正规渠道</b>的工具；任何工具都适用第二讲的纪律。</p>
+
+    <!-- 提示词公式 -->
+    <div class="sub-title rv"><span class="no">6</span>好提问 = 角色 + 任务 + 背景 + 要求 + 格式</div>
+    <div class="formula rv" id="formula">
+      <span class="f" data-k="1">角色</span><span class="plus">+</span><span class="f" data-k="2">任务</span><span class="plus">+</span><span class="f" data-k="3">背景</span><span class="plus">+</span><span class="f" data-k="4">要求</span><span class="plus">+</span><span class="f" data-k="5">格式</span>
+    </div>
+    <div class="pb rv">
+      <div id="pbFields"></div>
+      <div style="position:relative">
+        <div class="prompt-out" id="pbOut" style="background:#1b2335;color:#e8edf6"></div>
+        <button class="copy" data-copy="pbOut">复制</button>
+      </div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">7</span>同一个问题，两种问法</div>
+    <div class="vs rv">
+      <div class="card">
+        <h4><span class="pill r">差的问法</span></h4>
+        <div class="bubble u">帮我写个总结。</div>
+        <div class="bubble a">好的，以下是一份工作总结：本人在过去一段时间里，认真学习，努力工作，取得了一定成绩，也存在一些不足……</div>
+        <p style="margin-top:10px">空话套话，换谁都能用，等于没写。</p>
+      </div>
+      <div class="card">
+        <h4><span class="pill g">好的问法</span></h4>
+        <div class="bubble u">你是一名有经验的监狱政工干部。请帮我写一份<b>新警岗前培训个人总结</b>（800字）。我参加了为期两周的培训，内容有监狱法规、队列训练、应急处置演练和 AI 专题报告；收获最大的是应急演练，不足是对法规条文还不熟。要求：语言朴实、少用套话，分"收获—不足—打算"三部分。</div>
+        <div class="bubble a">一、主要收获……（围绕应急演练写出具体体会）<br>二、存在不足……（指向法规条文不熟，提出背诵计划）<br>三、下一步打算……</div>
+      </div>
+    </div>
+  
+    <div class="sub-title rv"><span class="no">8</span>真实案例：AI 已经走进政法系统</div>
+    <p class="rv" style="color:var(--ink-2);margin:-8px 0 22px">以下均为公开报道的真实案例，数据为相关单位或媒体公布，点击“来源”可查看原报道及配图。</p>
+    <div class="cases">
+      <article class="case rv d1">
+        <figure class="case-img"><img class="toon" src="assets/cartoon/case1.webp" alt="案例示意插画"><img class="real" data-file="assets/cases/case1.jpg" alt="司法部召开“智慧监狱”建设工作推进会 报道配图" hidden>
+          <span class="case-tag">智慧监狱</span><figcaption class="case-credit">示意插画 · 原报道配图见来源</figcaption></figure>
+        <div class="case-body">
+          <div class="case-meta">2019 年 1 月 · 浙江杭州</div>
+          <h4>司法部召开“智慧监狱”建设工作推进会</h4>
+          <p>全国各省（区、市）监狱管理局负责人和试点监狱监狱长齐聚杭州，实地察看浙江省乔司监狱的监控平台和夜间执勤点，并观看五个试点单位的智慧监狱业务应用展示。会议把智慧监狱定位为“数字法治、智慧司法”体系的组成部分。</p>
+          <div class="case-learn"><b>启示</b>技术进监所早已是方向，新警要做懂技术的使用者。</div>
+          <div class="case-foot"><a class="case-link" href="#end">对应：结语 · 人机边界</a><a class="case-src" href="https://cn.chinadaily.com.cn/a/201901/14/WS5c3c3d4ea31010568bdc3514.html" target="_blank" rel="noopener" data-credit="中国政府网">来源：中国日报网（转载中国政府网） ↗</a></div>
+        </div>
+      </article>
+      <article class="case rv d2">
+        <figure class="case-img"><img class="toon" src="assets/cartoon/case2.webp" alt="案例示意插画"><img class="real" data-file="assets/cases/case2.jpg" alt="上海青东强制隔离戒毒所：VR 毒瘾评估 报道配图" hidden>
+          <span class="case-tag">智慧戒毒</span><figcaption class="case-credit">示意插画 · 原报道配图见来源</figcaption></figure>
+        <div class="case-body">
+          <div class="case-meta">2018 年 · 上海青浦</div>
+          <h4>上海青东强制隔离戒毒所：VR 毒瘾评估</h4>
+          <p>戒毒人员戴上 VR 头盔观看模拟场景，系统同步记录眼动、皮肤电和脉搏，生成个性化的成瘾评估报告；智能心理云平台为每人建档，数据异常时发出预警。上海方面公布，戒毒人员出所后三年戒断率超过 27%。</p>
+          <div class="case-learn"><b>启示</b>AI 负责测量和提醒，矫治方案仍由专业民警和医生决定。</div>
+          <div class="case-foot"><a class="case-link" href="#s3">对应：第三讲 · 教育矫治</a><a class="case-src" href="https://www.xinhuanet.com/politics/2018-06/22/c_1123021110.htm" target="_blank" rel="noopener" data-credit="新华网">来源：新华网 ↗</a></div>
+        </div>
+      </article>
+      <article class="case rv d3">
+        <figure class="case-img"><img class="toon" src="assets/cartoon/case3.webp" alt="案例示意插画"><img class="real" data-file="assets/cases/case3.jpg" alt="浙江省戒毒管理局：VR 戒毒千人测试 报道配图" hidden>
+          <span class="case-tag">智慧戒毒</span><figcaption class="case-credit">示意插画 · 原报道配图见来源</figcaption></figure>
+        <div class="case-body">
+          <div class="case-meta">2017 年 · 浙江</div>
+          <h4>浙江省戒毒管理局：VR 戒毒千人测试</h4>
+          <p>浙江四个强制隔离戒毒所设立 VR 室，与科技企业联合研发虚拟现实戒毒系统。据报道，测试有效样本 1008 例，人均接受 6 次治疗；单位公布的对甲基苯丙胺成瘾治疗有效率为 73.6%。</p>
+          <div class="case-learn"><b>启示</b>新技术先小范围测试、用数据说话，再决定是否推广。</div>
+          <div class="case-foot"><a class="case-link" href="#s1">对应：第一讲 · 能力边界</a><a class="case-src" href="https://www.thepaper.cn/newsDetail_forward_1756098" target="_blank" rel="noopener" data-credit="澎湃新闻">来源：澎湃新闻 ↗</a></div>
+        </div>
+      </article>
+      <article class="case rv d1">
+        <figure class="case-img"><img class="toon" src="assets/cartoon/case4.webp" alt="案例示意插画"><img class="real" data-file="assets/cases/case4.jpg" alt="湛江、沾化司法局：用 DeepSeek 辅助办案 报道配图" hidden>
+          <span class="case-tag">司法行政 · 大模型</span><figcaption class="case-credit">示意插画 · 原报道配图见来源</figcaption></figure>
+        <div class="case-body">
+          <div class="case-meta">2025 年 2 月 · 广东湛江 / 山东滨州</div>
+          <h4>湛江、沾化司法局：用 DeepSeek 辅助办案</h4>
+          <p>湛江市司法局把 DeepSeek 接入本局大模型体系，用于行政复议申请分类、法规判例检索和文书草拟。滨州市沾化区司法局的做法更值得新警学习：先隐去隐私信息，再把决定书草稿交给 AI 审查，最后与人工结果比对、修改。</p>
+          <div class="case-learn"><b>启示</b>先脱敏、再提问、人工比对——正是今天讲的用法。</div>
+          <div class="case-foot"><a class="case-link" href="#s2">对应：第二讲 · 脱敏</a><a class="case-src" href="https://news.ifeng.com/c/8h7Lw9YsarC" target="_blank" rel="noopener" data-credit="澎湃新闻">来源：澎湃新闻（凤凰网转载） ↗</a></div>
+        </div>
+      </article>
+      <article class="case rv d2">
+        <figure class="case-img"><img class="toon" src="assets/cartoon/case5.webp" alt="案例示意插画"><img class="real" data-file="assets/cases/case5.jpg" alt="天津静海检察院：大模型本地部署 报道配图" hidden>
+          <span class="case-tag">政法系统 · 本地部署</span><figcaption class="case-credit">示意插画 · 原报道配图见来源</figcaption></figure>
+        <div class="case-body">
+          <div class="case-meta">2025 年 2 月 · 天津</div>
+          <h4>天津静海检察院：大模型本地部署</h4>
+          <p>静海区人民检察院在本院服务器上本地部署 DeepSeek-R1-70B 模型，结合本院办案数据训练，在危险驾驶等案件中生成参考区间，供检察官研判，并建立了公文写作等数据库。</p>
+          <div class="case-learn"><b>启示</b>涉及业务数据的 AI，必须由单位在内网统一部署。</div>
+          <div class="case-foot"><a class="case-link" href="#s4">对应：第四讲 · 部署边界</a><a class="case-src" href="https://news.ifeng.com/c/8h7Lw9YsarC" target="_blank" rel="noopener" data-credit="澎湃新闻">来源：澎湃新闻（凤凰网转载） ↗</a></div>
+        </div>
+      </article>
+      <article class="case rv d3">
+        <figure class="case-img"><img class="toon" src="assets/cartoon/case6.webp" alt="案例示意插画"><img class="real" data-file="assets/cases/case6.jpg" alt="英国司法部：AI 预测监狱暴力风险 报道配图" hidden>
+          <span class="case-tag">国际案例</span><figcaption class="case-credit">示意插画 · 原报道配图见来源</figcaption></figure>
+        <div class="case-body">
+          <div class="case-meta">2025 年 8 月 · 英国</div>
+          <h4>英国司法部：AI 预测监狱暴力风险</h4>
+          <p>英国司法部宣布在监狱中使用 AI 工具：根据年龄、在押期间的暴力记录等因素评估风险，帮助工作人员提前干预；另一工具分析从在押人员处缴获的手机，已扫描约 860 万条信息，标记可能涉及犯罪的内容。</p>
+          <div class="case-learn"><b>启示</b>风险评分只是线索，不能替代人的判断和法定程序。</div>
+          <div class="case-foot"><a class="case-link" href="#end">对应：结语 · 算法偏见</a><a class="case-src" href="https://governmenttechnology.co.uk/node/8893" target="_blank" rel="noopener" data-credit="原报道">来源：Government Technology ↗</a></div>
+        </div>
+      </article>
+    </div>
+</div>
+</section>
+
+<!-- ============ 第二讲 ============ -->
+<section id="s2">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">第二讲 · LECTURE 02</span><span class="time-tag">15′</span>
+      <h2 class="rv d1">红线在前：监所 AI 使用纪律</h2>
+      <p class="rv d2">先学规矩，再学用法。下面每一条，都比任何技巧重要。</p>
+    </div>
+
+    <div class="no3">
+      <div class="card rv"><div class="stamp"><div class="ring"></div><div class="x">禁</div></div><h3>人员信息不传</h3><p>服刑人员、戒毒人员、家属、同事的姓名、编号、身份证号、照片、案情、档案，<b>一个字都不发给 AI</b>。</p></div>
+      <div class="card rv d1"><div class="stamp"><div class="ring"></div><div class="x">禁</div></div><h3>监管安全信息不传</h3><p>警力部署、值班安排、监控点位、监区布局、狱情动态、应急预案，<b>一律不上网</b>。</p></div>
+      <div class="card rv d2"><div class="stamp"><div class="ring"></div><div class="x">禁</div></div><h3>内部文件不传</h3><p>涉密文件、内部通知、工作秘密，<b>不拍照、不上传、不让 AI 总结</b>。</p></div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">✦</span>内网与外网，界线要清楚</div>
+    <div class="card rv" style="padding:16px">
+      <div class="stage3d dark" data-scene="firewall" style="height:420px;box-shadow:none"><span class="cap3d">右侧公网的信息流冲向隔离墙，被拦截在外</span></div>
+      <div class="grid g3" style="margin-top:8px">
+        <p>📵 <b>手机不进监区</b>：按规定存放，不在监管区域使用任何 AI。</p>
+        <p>🔌 <b>不交叉连接</b>：内网设备不接公网，U 盘不在内外网之间混用。</p>
+        <p>🏢 <b>内网 AI 由单位统一部署</b>：个人不得私自安装、接入。</p>
+      </div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">✦</span>脱敏演示：把一段材料改成"可以问 AI 的版本"</div>
+    <div class="desens rv" style="color:var(--paper-ink)">
+      <div class="ds-pane raw" id="dsRaw">
+        <h4 style="color:#b8352d">✗ 原始材料（虚构示例）</h4>
+        罪犯<span class="sens" data-m="A某">王某军</span>，编号 <span class="sens" data-m="（删除）">61XX-XXXX-0387</span>，男，<span class="sens" data-m="30多岁">34岁</span>，因<span class="sens" data-m="财产类犯罪">盗窃罪</span>被判处有期徒刑<span class="sens" data-m="数年">五年</span>，现押于<span class="sens" data-m="（删除）">三监区二分监区</span>。近日其妻子<span class="sens" data-m="家属">李某</span>提出离婚，本人情绪低落，夜间多次失眠。民警<span class="sens" data-m="（删除）">张建华</span>于<span class="sens" data-m="（删除）">10月28日19时在二楼谈话室</span>与其进行了个别谈话。
+      </div>
+      <div class="ds-mid"><button class="ds-arrow" id="dsBtn" title="一键脱敏"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button><small style="color:var(--ink-3)">点击脱敏</small></div>
+      <div class="ds-pane safe" id="dsSafe">
+        <h4 style="color:#2f9c6a">✓ 可以发给 AI 的提问</h4>
+        <div id="dsSafeText" style="opacity:.25;transition:opacity .6s">一名服刑人员A某，男，30多岁，财产类犯罪，刑期数年。近期家庭关系出现变故，情绪低落、睡眠差。<br><br><b>请帮我设计一次个别谈话的提纲</b>：开场怎么建立信任、重点了解哪些情况、如何引导积极情绪、有哪些风险信号需要立即上报。</div>
+      </div>
+    </div>
+    <div class="ds-legend rv"><span><i class="sens" style="padding:0 10px"></i> 敏感信息</span><span><i class="mask" style="padding:0 10px"></i> 已替换/删除</span><span class="muted">脱敏原则：去姓名、去编号、去位置、去时间、模糊化年龄和案情，只留"解决问题所需"的最少信息。</span></div>
+
+    <div class="sub-title rv"><span class="no">✦</span>四个"必须"</div>
+    <div class="must" style="color:var(--ink)">
+      <div class="card rv"><div class="big" style="color:var(--gold-2)">核</div><h4 style="margin-top:10px">结论必须人工核实</h4><p>AI 给的是草稿，不是结论。</p></div>
+      <div class="card rv d1"><div class="big" style="color:var(--gold-2)">查</div><h4 style="margin-top:10px">法条必须查原文</h4><p>以官方发布的法规文本为准。</p></div>
+      <div class="card rv d2"><div class="big" style="color:var(--gold-2)">签</div><h4 style="margin-top:10px">文书必须本人签发</h4><p>谁署名，谁负责。</p></div>
+      <div class="card rv d3"><div class="big" style="color:var(--gold-2)">请</div><h4 style="margin-top:10px">拿不准必须请示</h4><p>能不能用，先问领导和保密部门。</p></div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">✦</span>相关法规（以官方文本和单位规定为准）</div>
+    <div class="law rv" style="color:var(--paper-ink)">
+      <span>《中华人民共和国保守国家秘密法》</span><span>《中华人民共和国网络安全法》</span><span>《中华人民共和国个人信息保护法》</span><span>《中华人民共和国监狱法》</span><span>《生成式人工智能服务管理暂行办法》</span><span>《人工智能生成合成内容标识办法》</span>
+    </div>
+
+    <div class="sub-title rv"><span class="no">✦</span>情景判断：这样用 AI，对不对？</div>
+    <div id="quiz1"></div>
+    <div class="score rv" id="quiz1Score"></div>
+  </div>
+</section>
+
+<!-- ============ 第三讲 ============ -->
+<section id="s3" class="paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">第三讲 · LECTURE 03</span><span class="time-tag">35′</span>
+      <h2 class="rv d1">实操①：文书材料与谈话陪练</h2>
+      <p class="rv d2">每个场景都按同一个结构讲：<b>痛点 → 提示词模板 → 人工把关点</b>。模板可以一键复制，课后直接用。</p>
+    </div>
+
+    <div class="sub-title rv"><span class="no">1</span>提示词模板库</div>
+    <div class="tabs rv" id="tplTabs"></div>
+    <div class="tpl rv">
+      <div>
+        <h3 id="tplTitle"></h3>
+        <p id="tplPain" style="color:var(--paper-ink-2);margin-bottom:14px"></p>
+        <h4 style="margin-top:6px">人工把关点</h4>
+        <ul class="checklist" id="tplCheck"></ul>
+      </div>
+      <div style="position:relative"><div class="tpl-code" id="tplCode"></div><button class="copy" data-copy="tplCode">复制模板</button></div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">2</span>AI 扮演服刑人员，陪你练个别谈话</div>
+    <p class="rv" style="color:var(--paper-ink-2);margin:-8px 0 18px">新警最怕"不知道怎么开口"。让 AI 扮演不同类型的谈话对象，反复练、反复改，再到真实岗位上去用。以下对话为<b>虚构演示</b>，现场主讲人会用真实 AI 工具和学员对练。</p>
+    <div class="stage3d rv" data-scene="dialogue" style="height:260px;margin-bottom:22px"><span class="cap3d">民警 ⇄ AI 陪练：一来一回，反复练习</span></div>
+    <div class="persona rv" id="persona" style="color:var(--paper-ink)"></div>
+    <div class="grid g2" style="align-items:start">
+      <div class="chat rv">
+        <div class="chat-top"><div class="dots"><i></i><i></i><i></i></div><b id="chatTitle">谈话陪练</b></div>
+        <div class="chat-body" id="chatBody"></div>
+        <div class="chat-ctl"><button class="btn sm" id="chatPlay">▶ 播放对练</button><button class="btn sm ghost" id="chatReset" style="color:var(--ink)">重置</button></div>
+      </div>
+      <div class="rv d1">
+        <h3>陪练提示词（复制到你的 AI 工具）</h3>
+        <div style="position:relative"><div class="tpl-code" id="coachPrompt" style="min-height:0"></div><button class="copy" data-copy="coachPrompt">复制</button></div>
+        <ul class="checklist" style="margin-top:12px">
+          <li>练的是<b>沟通方法</b>，AI 扮演的角色不代表任何真实个人。</li>
+          <li>真实谈话以单位制度和带教民警的指导为准。</li>
+          <li class="warn">谈话中发现自伤、自杀、脱逃等风险信号，<b>立即按程序报告</b>，不要问 AI 怎么办。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">3</span>教育微课：10 分钟出一节法治教育课</div>
+    <div class="grid g3">
+      <div class="card rv"><div class="ico"><svg><use href="#i-list"/></svg></div><h4>讲稿与提纲</h4><p>输入主题和对象，AI 生成 15 分钟讲稿、案例和互动问题。</p></div>
+      <div class="card rv d1"><div class="ico"><svg><use href="#i-img"/></svg></div><h4>配图与课件</h4><p>AI 生成插图、出 PPT 大纲；案例必须用公开的、已裁判的典型案例。</p></div>
+      <div class="card rv d2"><div class="ico"><svg><use href="#i-graduate"/></svg></div><h4>随堂小测</h4><p>一键生成选择题和判断题，附答案解析，检验教育效果。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 休息 ============ -->
+<section id="rest" class="break">
+  <div class="stage-bg" data-scene="sky"></div>
+  <div class="wrap">
+    <span class="kicker">中场休息 · BREAK</span>
+    <h2 style="font-family:var(--serif);font-size:clamp(30px,4vw,48px);margin:12px 0">休息 20 分钟</h2>
+    <div class="ring-wrap">
+      <svg viewBox="0 0 220 220"><circle cx="110" cy="110" r="96" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="12"/><circle id="ringFg" cx="110" cy="110" r="96" fill="none" stroke="#f6f03b" stroke-width="12" stroke-linecap="round" stroke-dasharray="603.2" stroke-dashoffset="0"/></svg>
+      <div class="clock" id="clock">20:00</div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn" id="clockStart">开始计时</button><button class="btn ghost" id="clockReset">重置</button></div>
+    <div class="facts" id="facts"></div>
+    <p class="muted" style="margin-top:8px">休息期间：回到<a href="#s2">第二讲</a>完成"情景判断"自测，看看你能答对几题。</p>
+  </div>
+</section>
+
+<!-- ============ 第四讲 ============ -->
+<section id="s4">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">第四讲 · LECTURE 04</span><span class="time-tag">35′</span>
+      <h2 class="rv d1">实操②：为监所场景开发智能体</h2>
+      <p class="rv d2">聊天机器人"有问必答"，智能体"有事能办"。今天演示用 <b class="gold">Claude / Codex</b> 这类 AI 编程工具，把一个监所需求变成一个能用的智能体应用。</p>
+    </div>
+
+    <div class="sub-title rv"><span class="no">1</span>智能体 = 大模型 + 角色 + 知识库 + 工具 + 工作流</div>
+    <div class="card rv" style="padding:18px">
+      <div class="stage3d" data-scene="agent" style="height:460px;box-shadow:none;border:0"><span class="cap3d">四个模块沿“工作流”轨道汇入核心，组装成智能体</span></div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">2</span>监所场景智能体矩阵（点击卡片翻面看详情）</div>
+    <div class="agents" id="agents"></div>
+
+    <div class="sub-title rv"><span class="no">3</span>现场开发：用 Claude / Codex 做一个"法规制度问答助手"</div>
+    <p class="rv" style="color:var(--ink-2);margin:-8px 0 18px">不用会编程：<b>把需求写清楚，交给 AI 编程工具去写代码</b>。下面是开发过程的动画还原，现场主讲人会在电脑上实际操作一遍。</p>
+    <div class="builder rv">
+      <ol class="steps" id="bSteps">
+        <li class="on" data-i="0"><span class="n">1</span>写需求说明</li>
+        <li data-i="1"><span class="n">2</span>AI 生成项目</li>
+        <li data-i="2"><span class="n">3</span>导入知识库</li>
+        <li data-i="3"><span class="n">4</span>测试问答</li>
+        <li data-i="4"><span class="n">5</span>部署上线</li>
+      </ol>
+      <div class="mock">
+        <div class="mock-top"><span>●●●</span><span class="url" id="bUrl">需求说明.md</span></div>
+        <div class="mock-body on" data-i="0">
+          <label>需求说明（交给 Claude / Codex 的第一段话）</label>
+          <div class="fld" id="specText" style="position:relative"></div>
+          <button class="btn sm" style="margin-top:12px;background:#1b2335;color:#f1d38c" data-copy="specText">复制需求说明</button>
+        </div>
+        <div class="mock-body" data-i="1">
+          <label>Claude / Codex 正在按需求生成项目</label>
+          <div class="fld" id="term" style="background:#0d1626;color:#cfe3ff;font-family:var(--mono);font-size:13px;min-height:300px;line-height:1.75"></div>
+        </div>
+        <div class="mock-body" data-i="2">
+          <label>上传公开法规文本到知识库（只用公开资料）</label>
+          <div id="kbFiles"></div>
+          <p style="font-size:13.5px;color:#56627a;margin-top:10px">AI 会把文档切成小段、建立索引。提问时先检索相关条文，再让大模型依据条文回答，并给出出处。</p>
+        </div>
+        <div class="mock-body" data-i="3">
+          <label>测试：看它会不会给出处、会不会说"不知道"</label>
+          <div class="chatm">
+            <div class="cm u">罪犯减刑需要满足什么条件？</div>
+            <div class="cm a">根据检索到的条文：被判处无期徒刑、有期徒刑的罪犯，在服刑期间<b>确有悔改或者立功表现</b>的，根据监狱考核结果，可以减刑；有重大立功表现的，应当减刑。减刑建议由监狱向人民法院提出。<span class="cite">📎 出处：《中华人民共和国监狱法》第二十九条、第三十条（请以官方文本为准）</span></div>
+            <div class="cm u">我们监狱下个月的值班表是怎么排的？</div>
+            <div class="cm a">这个问题不在我的知识库范围内，我无法回答。值班安排属于内部工作信息，请咨询所在部门。</div>
+          </div>
+        </div>
+        <div class="mock-body" data-i="4">
+          <label>两种部署方式</label>
+          <div class="pub">
+            <div><b style="color:#2f9c6a">✓ 培训演示 / 个人学习</b><br>部署在公网，知识库只放公开法规；用于学习和备考。</div>
+            <div><b style="color:#b8352d">⚠ 单位实际使用</b><br>须由单位信息化部门审批，在内网<b>私有化部署</b>，接入经批准的模型。</div>
+          </div>
+          <div class="fld" style="margin-top:14px;text-align:center;font-size:15px">🎉 一个下午，从一段需求到一个能用的智能体。<br><span style="color:#56627a;font-size:13px">关键不是写代码，而是<b>把业务需求讲清楚</b>。</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:14px"><button class="btn sm" id="bNext">下一步 ▶</button><button class="btn sm ghost" id="bAuto">自动演示</button></div>
+
+    <div class="sub-title rv"><span class="no">4</span>部署边界：公网学习，内网办公</div>
+    <div class="deploy">
+      <div class="card rv" style="border-color:rgba(79,179,232,.4)"><span class="pill c">公网 · 可以做</span><h3 style="margin-top:10px">学习与训练类智能体</h3><p>法规学习、考试刷题、谈话陪练、写作润色、普法脚本。知识库只用<b>公开资料</b>，输入的内容不含任何工作秘密。</p></div>
+      <div class="card rv d1" style="border-color:rgba(224,87,79,.4)"><span class="pill r">内网 · 须审批</span><h3 style="margin-top:10px">涉及业务数据的智能体</h3><p>计分考核辅助、狱情分析、档案检索等，必须由单位统一规划，在内网私有化部署，经保密审查后使用。<b>个人不得自行开发接入</b>。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第五讲 ============ -->
+<section id="s5" class="paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">第五讲 · LECTURE 05</span><span class="time-tag">25′</span>
+      <h2 class="rv d1">实操③：AI 短视频工作流</h2>
+      <p class="rv d2">普法宣传、警营文化、新警风采、教育微课都用得上。以一条 60 秒竖屏短视频为例，走完六步。</p>
+    </div>
+
+    <div class="card rv" style="background:#1b2335;color:#eef3fb;border:0;margin-bottom:24px">
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="pill y">示范选题</span><b style="font-size:22px;font-family:var(--serif)">《新警第一课：AI 用对，规矩守住》</b><span class="muted" style="color:#b9c6dc">60 秒 · 竖屏 9:16 · 警营文化 / 普法</span></div>
+    </div>
+
+    <div class="stage3d dark rv" data-scene="film" style="height:360px;margin-bottom:26px"><span class="cap3d">6 个镜头的分镜，像胶片一样串成一条片子（拖动可旋转）</span></div>
+    <div class="pipe" id="pipe" style="color:var(--paper-ink)"></div>
+    <div class="pipe-detail rv">
+      <div>
+        <h3 id="pdTitle"></h3>
+        <p id="pdDesc" style="color:var(--paper-ink-2)"></p>
+        <div id="pdTools" style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0"></div>
+        <div style="position:relative" id="pdPromptWrap"><div class="tpl-code" id="pdPrompt" style="min-height:0"></div><button class="copy" data-copy="pdPrompt">复制</button></div>
+      </div>
+      <div class="pd-out" id="pdOut"></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px"><button class="btn sm" id="pipeNext" style="background:#1b2335;color:#f1d38c">下一步 ▶</button><button class="btn sm ghost" id="pipeAuto" style="color:var(--paper-ink);border-color:#cfc6b2">自动演示</button></div>
+
+    <div class="sub-title rv"><span class="no">✦</span>成片展示</div>
+    <div class="grid g2" style="align-items:center">
+      <div class="player rv" id="player">
+        <video id="demoVideo" data-file="assets/demo.mp4" controls playsinline preload="metadata" style="display:none"></video>
+        <div id="phWrap">
+          <svg class="ph-art" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice" id="phArt"></svg>
+          <span class="aimark">AI 生成内容</span>
+          <div class="ph-screen"><div class="sub" id="phSub"></div><div class="pbar"><i id="phBar"></i></div></div>
+        </div>
+      </div>
+      <div class="rv d1">
+        <h3>成片由主讲人在电脑上现场播放</h3>
+        <p style="color:var(--paper-ink-2)">左侧是样片的分镜动画预览。把成片文件命名为 <code>demo.mp4</code> 放进 <code>assets</code> 文件夹，这里会自动换成真实视频。</p>
+        <h4 style="margin-top:18px">看成片时，请大家留意三件事</h4>
+        <ul class="checklist">
+          <li>画面里<b>有没有</b>真实的人员、监区和设施？（不能有）</li>
+          <li>片中是否<b>标注了"AI 生成"</b>？</li>
+          <li>字幕和事实<b>有没有错</b>？配音读音准不准？</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">✦</span>宣传红线</div>
+    <div class="grid g4">
+      <div class="card rv"><div class="ico" style="background:#fbe3e0;color:#b8352d"><svg><use href="#i-team"/></svg></div><h4>不出镜</h4><p>服刑人员、戒毒人员不出镜，不出现可识别特征。</p></div>
+      <div class="card rv d1"><div class="ico" style="background:#fbe3e0;color:#b8352d"><svg><use href="#i-lock"/></svg></div><h4>不入画</h4><p>监区内部、设施布局、监控设备不入画面。</p></div>
+      <div class="card rv d2"><div class="ico" style="background:#fbe3e0;color:#b8352d"><svg><use href="#i-film"/></svg></div><h4>要标识</h4><p>AI 生成的画面、声音须按规定显著标识。</p></div>
+      <div class="card rv d3"><div class="ico" style="background:#fbe3e0;color:#b8352d"><svg><use href="#i-shield"/></svg></div><h4>先审批</h4><p>以单位名义发布的内容，须经宣传部门审核。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 结语 ============ -->
+<section id="end">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">结语 · CLOSING</span><span class="time-tag">10′</span>
+      <h2 class="rv d1">智慧监所里的人机边界</h2>
+      <p class="rv d2">视频行为分析、智能点名、周界防范……AI 会越来越多地出现在监管工作中。但无论技术怎么发展，这个闭环不会变：</p>
+    </div>
+    <div class="card rv" style="padding:16px">
+      <div class="stage3d dark" data-scene="loop" style="height:440px;box-shadow:none"><span class="cap3d">光点沿闭环运行：AI 发现 → 民警判断 → 制度兜底 → 复盘改进</span></div>
+      <div class="grid g3" style="margin-top:14px">
+        <p>⚠️ <b>误报和漏报必然存在</b>：AI 提示只是线索，不是结论。</p>
+        <p>⚖️ <b>警惕算法偏见</b>：风险评分不能直接替代人的判断和法定程序。</p>
+        <p>🛡️ <b>责任不转移</b>：用了 AI，责任仍在使用它的民警和单位。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="paper" id="oathSec">
+  <div class="wrap">
+    <div class="sec-head" style="text-align:center">
+      <span class="kicker rv">新警 AI 守则</span>
+      <h2 class="rv d1">八条守则，截图保存</h2>
+    </div>
+    <ol class="oath rv">
+      <li><span><b>先学规矩，再学用法。</b>保密纪律高于一切技巧。</span></li>
+      <li><span><b>三不传。</b>人员信息、监管安全信息、内部文件不发给 AI。</span></li>
+      <li><span><b>手机不进监区。</b>监管区域不使用任何外网 AI。</span></li>
+      <li><span><b>脱敏再提问。</b>只给解决问题所需的最少信息。</span></li>
+      <li><span><b>AI 给草稿，人做决定。</b>判断权、决定权不交给机器。</span></li>
+      <li><span><b>法条查原文，数字要核实。</b>警惕一本正经的胡说。</span></li>
+      <li><span><b>谁署名，谁负责。</b>用了 AI，责任不转移。</span></li>
+      <li><span><b>拿不准就请示。</b>终身学习，做懂 AI 的新时代人民警察。</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="final" id="finalSec">
+  <div class="wrap">
+    <h2 class="rv">用 AI，<span>守规矩</span>，担责任。</h2>
+    <p class="rv d1" style="color:var(--ink-2);font-size:20px;margin:18px 0 30px">与AI共事 —— 监所工作的人工智能新实践</p>
+    <div class="qr-box rv d2" style="display:inline-flex;text-align:left"><img src="assets/qr.png" alt="扫码"><div><b>扫码收藏本课件</b><small>提示词模板 · 守则 · 自测题</small></div></div>
+    <div class="rv d3" style="margin-top:28px"><a class="btn ghost" href="../index.html">← 返回首页</a> <a class="btn ghost" href="../government/index.html">政务版</a> <a class="btn ghost" href="https://salon.tokenone.work">NexAI 创新工坊首页</a></div>
+  </div>
+</section>
+
+<footer class="lib-foot">NexAI 创新工坊 · 政法版　|　本课件中的人员、事例、对话均为虚构演示，法规内容以官方发布文本为准。</footer>
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="app.js"></script>
+<script src="scenes.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
