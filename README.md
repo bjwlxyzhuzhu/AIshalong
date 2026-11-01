@@ -46,6 +46,7 @@ docker run -d --name nexai-salon --restart unless-stopped -p 8080:80 ghcr.io/bjw
   - 02 企业系列：工具培训（原企业版）、华夏银行
   - 03 机关单位：政务版、政法版
   - 04 短视频：千阳果树、农技专班、畜牧专班（外链）
+- 首页右上角“智能体作品”按钮：教育系列作品墙的 10 个智能体（演示地址 + GitHub 源码）及“AI实验室安全仿真演练”（https://shiyanshi.app.tokenone.work/ ，附下载攻略 `dist/portal-assets/zhian-guide.pdf`）。
 - 首页右上角“讲师介绍”按钮弹出讲师简介（内容取自企业版讲师页，头像 `dist/portal-assets/lecturer-portrait.webp`）。
 - `dist/bank/`：华夏银行员工培训《让AI智能体成为工作搭子》——“AI 星环”大屏（three.js：中心总调度 + 12 个岗位智能体），8 个课程站点；二维码指向 https://salon.tokenone.work/bank/ 。
 - 展开菜单支持遮罩关闭、Escape 关闭及键盘焦点循环。
