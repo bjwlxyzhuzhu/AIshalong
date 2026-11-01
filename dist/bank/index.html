@@ -3,41 +3,651 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#b5571c">
-<title>银行版 · NexAI 创新工坊</title>
-<style>
-:root{--ink:#261c16;--orange:#f26a32;--muted:#76685a;--paper:#fcfaf7;--line:#e5dcd1}
-*{box-sizing:border-box;margin:0;padding:0}
-body{min-height:100svh;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:linear-gradient(160deg,#b5571c,#7a3410);color:#fff;display:grid;place-items:center;padding:24px}
-.card{width:min(720px,100%);background:var(--paper);color:var(--ink);border-radius:24px;padding:40px 36px;box-shadow:0 30px 80px -20px rgba(40,14,2,.6)}
-.k{font-size:12px;letter-spacing:.3em;color:var(--orange)}
-h1{font-size:clamp(30px,5vw,44px);font-weight:500;margin:10px 0 6px}
-h1 span{font-size:16px;color:var(--muted);margin-left:8px;font-weight:400}
-.lead{color:var(--muted);line-height:1.8}
-.badge{display:inline-block;margin:18px 0 22px;padding:6px 14px;border-radius:999px;background:#fbefe6;color:#a84016;font-size:13px}
-ol{list-style:none;border-top:1px solid var(--line)}
-li{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);line-height:1.6}
-li b{color:var(--orange);font-weight:500;font-size:13px;min-width:28px}
-li span{color:var(--muted);font-size:13px;display:block}
-.back{display:inline-flex;margin-top:26px;padding:12px 22px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-size:14px}
-.back:hover{background:var(--orange)}
-</style>
+<meta name="theme-color" content="#06101f">
+<meta name="description" content="NexAI 创新工坊 · 华夏银行员工AI培训：让AI智能体成为工作搭子。">
+<title>华夏银行 · 让AI智能体成为工作搭子</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="ring.css">
 </head>
 <body>
-<main class="card">
-  <div class="k">NEXAI · BANKING</div>
-  <h1>银行版<span>Banking</span></h1>
-  <p class="lead">《让AI智能体成为工作搭子》——面向银行各岗位员工的 AI 办公与智能体实战课件。</p>
-  <div class="badge">课件制作中，即将上线</div>
-  <ol>
-    <li><b>01</b><div>AI 名词科普与当前技术发展<span>大模型、幻觉、智能体与金融业应用全景</span></div></li>
-    <li><b>02</b><div>两件随身工具<span>千问手机版录音纪要 · WorkBuddy 桌面智能体</span></div></li>
-    <li><b>03</b><div>金融合规红线<span>客户信息保护、一键脱敏、四个必须</span></div></li>
-    <li><b>04</b><div>高效办公文档<span>报告、纪要、PPT、报表、制度学习</span></div></li>
-    <li><b>05</b><div>岗位智能体开发与应用<span>柜面、客户经理、信贷、风控合规、办公室、管理者</span></div></li>
-    <li><b>06</b><div>短视频创作宣传<span>金融知识普及与反诈宣传的合规工作流</span></div></li>
-  </ol>
-  <a class="back" href="../index.html">← 返回首页</a>
-</main>
+
+<!-- ============ 图标库 ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 2.5 4 5.5v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10v-6z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+    <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="13" cy="4" r="2" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m9 21 2-6 3 3v3M7 12l3-4 4 1 3 3M11 15l1-6"/></symbol>
+    <symbol id="i-talk" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M17 9h3a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-4-3h-3"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M4 20h4L19 9l-4-4L4 16z"/><path stroke="currentColor" stroke-width="1.8" d="m13.5 6.5 4 4"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="9" r="2.4" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 5.5 2 5.5 5"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v16H5.5A1.5 1.5 0 0 0 4 20.5zM4 20.5A1.5 1.5 0 0 0 5.5 22H20"/><path stroke="currentColor" stroke-width="1.8" d="M8 7h8M8 11h6"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/><rect x="9.5" y="9.5" width="5" height="5" rx="1" fill="currentColor"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-img" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="10" r="2" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="m3 17 5-4 4 3 3-2 6 5"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 2.5l1.6 2.2 2.7-.6.6 2.7 2.4 1.3-1 2.5 1 2.5-2.4 1.3-.6 2.7-2.7-.6L12 21.5l-1.6-2.2-2.7.6-.6-2.7-2.4-1.3 1-2.5-1-2.5 2.4-1.3.6-2.7 2.7.6z"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol>
+    <symbol id="i-cut" viewBox="0 0 24 24"><circle cx="6" cy="7" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="17" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M8.5 8.5 20 19M8.5 15.5 20 5"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3 11 21 3l-6 18-3-8z"/><path stroke="currentColor" stroke-width="1.8" d="m12 13 9-10"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 20s-7.5-4.6-9-9.5C2 7 4.5 4 7.5 4c2 0 3.5 1.2 4.5 2.6C13 5.2 14.5 4 16.5 4 19.5 4 22 7 21 10.5 19.5 15.4 12 20 12 20z"/></symbol>
+    <symbol id="i-graduate" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="m2 9 10-5 10 5-10 5z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="M6 11v5c2 2 10 2 12 0v-5M22 9v6"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M7 21h10M4 7h16M4 7l-3 7a3.5 3.5 0 0 0 6 0zM20 7l-3 7a3.5 3.5 0 0 0 6 0z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M10.5 18.5h3"/></symbol>
+  </defs>
+</svg>
+
+<!-- ================= 神经星环 ================= -->
+<div id="ring"><canvas id="ringCanvas"></canvas><div id="rtags"></div></div>
+
+<header class="rh-top">
+  <div class="rh-brand"><div class="rb-1">AI <b>星环</b><span>ASSISTANT RING</span></div><div class="rb-2">华夏银行 · 让AI智能体成为工作搭子 · 12 个岗位智能体 + 1 个总调度</div></div>
+  <div class="rh-mid"><span class="rm-k">CURRENT</span><b id="rCur">总调度 · 待命</b></div>
+  <div class="rh-clock" id="rClock">00:00:00</div>
+  <div class="rh-btns"><button id="rView" class="on">正视</button><button id="rPatrol">巡视</button><button id="rQR">扫码</button><button id="rFull">全屏</button></div>
+</header>
+
+<aside class="rh-left rh-panel">
+  <div class="rp-h"><span>01</span> 课程站点 <em>STATIONS</em><i id="rCount">0/8</i></div>
+  <ol id="rStations"></ol>
+  <div class="rp-h" style="margin-top:12px"><span>02</span> 岗位智能体 <em>AGENTS</em></div>
+  <div id="rAgents"></div>
+</aside>
+
+<aside class="rh-right rh-panel">
+  <div class="rp-h"><span>03</span> 协同活跃度 <em>SYNAPTIC ACTIVITY</em></div>
+  <div class="heat" id="rHeat"></div>
+  <div class="rp-h"><span>04</span> 任务信号 <em>SIGNAL FEED</em></div>
+  <div class="feed" id="rFeed"></div>
+</aside>
+
+<footer class="rh-bottom rh-panel">
+  <div class="rs"><small>今日任务</small><b id="sTask">1,286</b></div>
+  <div class="rs"><small>在线智能体</small><b>12<i>+1</i></b></div>
+  <div class="rs wave"><canvas id="rWave" width="320" height="40"></canvas></div>
+  <div class="rs"><small>合规拦截</small><b id="sBlock">37</b></div>
+  <div class="rs"><small>人工复核率</small><b id="sReview">100%</b></div>
+  <div class="rs"><small>Token / 分钟</small><b id="sTok">60.4K</b></div>
+</footer>
+
+<div class="pop" id="pop" hidden>
+  <div class="pop-h"><span class="pop-no" id="popNo">01</span><b id="popName"></b><span class="pop-st" id="popSt">在线</span></div>
+  <div class="pop-t" id="popTime"></div>
+  <p id="popDesc"></p>
+  <div class="pop-tasks" id="popTasks"></div>
+  <div class="pop-b"><button class="pbtn" id="popOpen">进入课件 ▶</button><button class="pbtn ghost" id="popClose">返回星环</button></div>
+</div>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="dw-h">
+    <span class="dw-no" id="dwNo">01</span><b id="dwName"></b><span class="dw-time" id="dwTime"></span>
+    <div class="dw-btns"><button id="dwPrev">◀ 上一站</button><button id="dwNext">下一站 ▶</button><button id="dwClose" class="x">✕ 回星环</button></div>
+  </div>
+  <div class="dw-body" id="dwBody"></div>
+</div>
+
+<div class="start" id="start">
+  <div class="st-inner">
+    <div class="st-k">HUAXIA BANK · AI WORK PARTNER</div>
+    <h1 class="st-title">让AI智能体<br>成为工作搭子</h1>
+    <p class="st-sub">华夏银行员工 AI 实战培训 · 岗位智能体 · 合规办公 · 金融宣传</p>
+    <div class="st-cards">
+      <figure style="--r:-8deg"><img src="assets/cartoon/bcover1.webp" alt=""><figcaption>认识 AI 搭子</figcaption></figure>
+      <figure style="--r:-3deg"><img src="assets/cartoon/cover2.webp" alt=""><figcaption>合规红线</figcaption></figure>
+      <figure style="--r:3deg"><img src="assets/cartoon/cover3.webp" alt=""><figcaption>岗位智能体</figcaption></figure>
+      <figure style="--r:8deg"><img src="assets/cartoon/bcover4.webp" alt=""><figcaption>短视频宣传</figcaption></figure>
+    </div>
+    <div class="st-b"><button class="pbtn big" id="startBtn">点亮星环 ▶</button><div class="st-qr"><img src="assets/qr.png" alt="扫码"><span>手机扫码<br>跟着练</span></div></div>
+    <p class="st-tip">每一团光是一个岗位智能体，中心是总调度　|　点击光团看它在做什么 → 进入课件　|　拖动旋转、滚轮缩放</p>
+  </div>
+</div>
+<div class="qr-pop2" id="qrPop2" hidden><img src="assets/qr.png" alt="课件二维码"><div>手机扫码 · 跟着练</div></div>
+<div class="toast" id="toast"></div>
+
+<div id="library" hidden>
+
+<!-- ============ 开篇 ============ -->
+<section id="open">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">开篇 · OPENING</span><span class="time-tag">5′</span>
+      <h2 class="rv d1">银行人的一天，<br>哪些活可以交给“搭子”？</h2>
+      <p class="rv d2">点击时间线上的每个节点，看看 AI 搭子<b class="gold">能帮什么</b>，又有哪些<b style="color:#e0574f">不能碰</b>。</p>
+    </div>
+    <div class="day rv" id="day"></div>
+    <div class="day-detail" id="dayDetail">
+      <div class="dd can"><h4><span class="pill g">搭子能帮</span><span id="ddT1"></span></h4><p id="ddCan"></p></div>
+      <div class="dd cant"><h4><span class="pill r">不能碰</span></h4><p id="ddCant"></p></div>
+    </div>
+    <div class="sub-title rv"><span class="no">✦</span>现场投票：你最想让 AI 搭子分担哪件事？</div>
+    <div class="grid g2">
+      <div class="poll rv" id="poll1"></div>
+      <div class="card rv d1"><div class="ico"><svg><use href="#i-bulb"/></svg></div><h3>今天的核心观点</h3>
+        <p style="font-size:20px;line-height:1.8;color:var(--ink)">智能体是<b class="gold">搭子</b>，不是替身。<br>它可以起草、核对、陪练、跑流程；<br><b class="gold">决策、审批、签字</b>永远是人的事。</p>
+        <p class="muted" style="margin-top:12px;font-size:13.5px">投票结果保存在你自己的手机上。现场汇总以主讲人大屏为准。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第一讲 ============ -->
+<section id="s1" class="paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">第一讲 · LECTURE 01</span><span class="time-tag">15′</span>
+      <h2 class="rv d1">认识 AI：名词、原理与当前技术</h2>
+      <p class="rv d2">大模型怎么“想”？现在能做到什么？在银行里已经用到了哪一步？</p>
+    </div>
+    <div class="stage3d rv" data-scene="brain" style="height:400px"><span class="cap3d">大模型内部示意：海量参数构成的神经网络（拖动可旋转）</span></div>
+
+    <div class="sub-title rv"><span class="no">1</span>十个必懂名词</div>
+    <div class="terms rv" id="terms"></div>
+
+    <div class="sub-title rv"><span class="no">2</span>一个动画看懂大模型：它在“猜下一个词”</div>
+    <div class="nt-box rv">
+      <div>
+        <div class="nt-sent" id="ntSent"></div>
+        <div class="nt-ctl">
+          <button class="btn sm" id="ntNext">生成下一个词 ▶</button>
+          <button class="btn sm ghost" id="ntRand">随机采样（提高“温度”）</button>
+          <button class="btn sm ghost" id="ntReset">重来</button>
+        </div>
+      </div>
+      <div class="nt-probs">
+        <div style="font-size:14px;color:var(--ink-3);margin-bottom:6px">模型对“下一个词”的概率估计（示意）</div>
+        <div id="ntProbs"></div>
+        <p style="font-size:13.5px;color:var(--ink-3);margin-top:12px">它预测的是<b style="color:var(--gold-2)">“像不像”，不是“对不对”</b>，所以会一本正经地胡说。</p>
+      </div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">3</span>现场揭穿“AI 幻觉”</div>
+    <div class="vs rv">
+      <div class="card">
+        <h4><span class="pill r">AI 给出过时或编造的数字</span></h4>
+        <div class="bubble u">现在一年期贷款市场报价利率（LPR）是多少？</div>
+        <div class="bubble a">目前一年期 LPR 为 3.45%，五年期以上为 3.95%……</div>
+      </div>
+      <div class="card">
+        <h4><span class="pill g">事实核查</span></h4>
+        <p style="font-size:17px;line-height:1.9;color:var(--ink)">模型的知识有<b>截止日期</b>，不联网时常给出<b>过时数字</b>，口气却很肯定。</p>
+        <p style="margin-top:10px">LPR 以全国银行间同业拆借中心每月公布的数值为准，利率、汇率、费率、监管条款一律查官方来源。</p>
+        <div style="margin-top:14px;padding:12px 14px;border-radius:10px;background:#fffde3;font-weight:700">结论：对客户说出口的每一个数字，都要查原始出处。</div>
+        <p class="muted" style="margin-top:8px;font-size:13.5px">现场演示：主讲人分别用联网和不联网的方式提问，对比结果。</p>
+      </div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">3</span>七十年，AI 走到了哪一步</div>
+    <div class="tl rv" id="tl">
+      <div class="tl-i"><span class="y">1956</span><h4>"人工智能"诞生</h4><p>达特茅斯会议首次提出"人工智能"一词。</p></div>
+      <div class="tl-i"><span class="y">1997</span><h4>深蓝胜卡斯帕罗夫</h4><p>计算机在国际象棋上战胜世界冠军，靠的是规则与算力。</p></div>
+      <div class="tl-i"><span class="y">2012</span><h4>深度学习爆发</h4><p>神经网络在图像识别上大幅领先，人脸识别、语音识别开始实用。</p></div>
+      <div class="tl-i"><span class="y">2016</span><h4>AlphaGo 胜李世石</h4><p>AI 在围棋上战胜人类顶尖棋手。</p></div>
+      <div class="tl-i"><span class="y">2017</span><h4>Transformer 架构</h4><p>今天几乎所有大模型的共同"地基"。</p></div>
+      <div class="tl-i"><span class="y">2022</span><h4>ChatGPT 问世</h4><p>大模型走进普通人的生活，"对话式 AI"成为现实。</p></div>
+      <div class="tl-i"><span class="y">2023</span><h4>国产大模型百花齐放</h4><p>通义千问、文心一言、豆包、Kimi 等相继面向公众开放。</p></div>
+      <div class="tl-i"><span class="y">2025</span><h4>推理模型与智能体</h4><p>DeepSeek-R1 等推理模型出现，AI 开始"先思考再回答"，并能调用工具办事。</p></div>
+      <div class="tl-i now"><span class="y">2026</span><h4>AI 成为同事</h4><p>智能体进入办公、多模态与视频生成普及。<b>从"会对话"走向"能干活"。</b></p></div>
+    </div>
+    <p class="tl-hint">← 左右滑动查看 →</p>
+
+    <!-- 能力全景 -->
+    <div class="sub-title rv"><span class="no">4</span>2026 年，AI 的能力全景</div>
+    <div class="grid g4">
+      <div class="card cap rv"><div class="ico"><svg><use href="#i-pen"/></svg></div><h4>文字与推理</h4><ul><li>起草、改写、归纳</li><li>读长文档、提要点</li><li>多步推理、做计划</li></ul><div class="lv" data-lv="5"><i></i><i></i><i></i><i></i><i></i></div><small class="muted">成熟度</small></div>
+      <div class="card cap rv d1"><div class="ico"><svg><use href="#i-eye"/></svg></div><h4>看、听、说</h4><ul><li>看图、识表、读截图</li><li>语音转写、实时对话</li><li>多语言翻译</li></ul><div class="lv" data-lv="4"><i></i><i></i><i></i><i></i><i></i></div><small class="muted">成熟度</small></div>
+      <div class="card cap rv d2"><div class="ico"><svg><use href="#i-film"/></svg></div><h4>生成图像与视频</h4><ul><li>文字生成图片</li><li>图片生成视频片段</li><li>AI 配音、数字人</li></ul><div class="lv" data-lv="4"><i></i><i></i><i></i><i></i><i></i></div><small class="muted">成熟度</small></div>
+      <div class="card cap rv d3"><div class="ico"><svg><use href="#i-gear"/></svg></div><h4>智能体办事</h4><ul><li>调用工具、操作电脑</li><li>多步骤自动完成</li><li>写代码、搭应用</li></ul><div class="lv" data-lv="3"><i></i><i></i><i></i><i></i><i></i></div><small class="muted">成熟度</small></div>
+    </div>
+    <p class="muted" style="font-size:13.5px;margin-top:10px">成熟度为主讲人评估的示意，用于说明"哪些能放心用、哪些还要多看一眼"。</p>
+
+    <!-- 工具地图 -->
+    <div class="sub-title rv"><span class="no">5</span>工具地图：按用途找工具</div>
+    <div class="grid g3" id="tools"></div>
+    <p class="muted" style="font-size:13.5px;margin-top:10px">工作用途优先选用<b>国产、正规渠道</b>的工具；任何工具都适用第三讲的合规红线。</p>
+
+    <!-- 提示词公式 -->
+    <div class="sub-title rv"><span class="no">6</span>好提问 = 角色 + 任务 + 背景 + 要求 + 格式</div>
+    <div class="formula rv" id="formula">
+      <span class="f" data-k="1">角色</span><span class="plus">+</span><span class="f" data-k="2">任务</span><span class="plus">+</span><span class="f" data-k="3">背景</span><span class="plus">+</span><span class="f" data-k="4">要求</span><span class="plus">+</span><span class="f" data-k="5">格式</span>
+    </div>
+    <div class="pb rv">
+      <div id="pbFields"></div>
+      <div style="position:relative">
+        <div class="prompt-out" id="pbOut" style="background:#1b2335;color:#e8edf6"></div>
+        <button class="copy" data-copy="pbOut">复制</button>
+      </div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">7</span>同一个问题，两种问法</div>
+    <div class="vs rv">
+      <div class="card">
+        <h4><span class="pill r">差的问法</span></h4>
+        <div class="bubble u">帮我写个总结。</div>
+        <div class="bubble a">好的，以下是一份工作总结：本人在过去一段时间里，认真学习，努力工作，取得了一定成绩，也存在一些不足……</div>
+        <p style="margin-top:10px">空话套话，换谁都能用，等于没写。</p>
+      </div>
+      <div class="card">
+        <h4><span class="pill g">好的问法</span></h4>
+        <div class="bubble u">你是一名资深的银行综合办公室主任。请帮我写一份<b>零售客户经理季度工作总结</b>（800字）。本季度我主要做了代发工资客户拓展和存量客户维护，亮点是新拓展了两家代发单位，不足是理财产品知识还不扎实。要求：语言朴实、少用套话，数据处用【待填】标出，分"业绩—亮点—不足—计划"四部分。</div>
+        <div class="bubble a">一、主要业绩……（新增代发单位【待填】户）<br>二、工作亮点……（围绕代发拓展写具体做法）<br>三、存在不足……四、下季度计划……</div>
+      </div>
+    </div>
+  
+
+    <div class="sub-title rv"><span class="no">8</span>真实案例：AI 已经走进银行</div>
+    <p class="rv" style="color:var(--ink-2);margin:-8px 0 22px">以下均为公开报道，数据为相关银行或媒体公布，点击“来源”查看原文。</p>
+    <div class="cases">
+      <article class="case rv d1">
+        <figure class="case-img"><img class="toon" src="assets/cartoon/bcase1.webp" alt="案例示意插画"><img class="real" data-file="assets/cases/case1.jpg" alt="华夏银行亮相服贸会：数智银行与智能体 报道配图" hidden>
+          <span class="case-tag">华夏银行</span><figcaption class="case-credit">示意插画 · 原报道见来源</figcaption></figure>
+        <div class="case-body">
+          <div class="case-meta">2026 年 9 月 · 北京</div>
+          <h4>华夏银行亮相服贸会：数智银行与智能体</h4>
+          <p>在 2026 年服贸会上，华夏银行展示了对公“信贷尽调助手”（辅助生成尽调报告）、零售 AI 大模型工具“点石”（识别商机、让客户经营从经验驱动转向数据驱动），以及审计人员“数字分身”——多个专业智能体协同，实现对公信贷审计全流程自动化。</p>
+          <div class="case-learn"><b>启示</b>自家银行已经在用：智能体先从“辅助生成、辅助识别”做起。</div>
+          <div class="case-foot"><a class="case-link" href="#s5">对应：第五讲 · 岗位智能体</a><a class="case-src" href="https://cj.sina.com.cn/articles/view/6456450127/180d59c4f02002ctvy" target="_blank" rel="noopener" data-credit="新浪财经">来源：新浪财经 ↗</a></div>
+        </div>
+      </article>
+      <article class="case rv d2">
+        <figure class="case-img"><img class="toon" src="assets/cartoon/bcase2.webp" alt="案例示意插画"><img class="real" data-file="assets/cases/case2.jpg" alt="招商银行：AI 助手覆盖全行岗位 报道配图" hidden>
+          <span class="case-tag">同业 · 员工助手</span><figcaption class="case-credit">示意插画 · 原报道见来源</figcaption></figure>
+        <div class="case-body">
+          <div class="case-meta">2025—2026 年</div>
+          <h4>招商银行：AI 助手覆盖全行岗位</h4>
+          <p>据报道，招行“AI小助”已覆盖全行所有岗位；据招行 2026 年半年报，智能化场景达 1386 个，节约等效人工 1388 万小时，“AI小招”对公智能体服务企业客户 79.99 万户。</p>
+          <div class="case-learn"><b>启示</b>员工助手是最先普及的智能体：人人都能用、天天都在用。</div>
+          <div class="case-foot"><a class="case-link" href="#s4">对应：第四讲 · 高效办公</a><a class="case-src" href="https://m.sfccn.com/2026/9-12/3NMDE0MDZfMjIzOTA3NA.html" target="_blank" rel="noopener" data-credit="新华网 / 21世纪经济报道">来源：新华网 / 21世纪经济报道 ↗</a></div>
+        </div>
+      </article>
+      <article class="case rv d3">
+        <figure class="case-img"><img class="toon" src="assets/cartoon/bcase3.webp" alt="案例示意插画"><img class="real" data-file="assets/cases/case3.jpg" alt="工商银行：AI 智审出具合规意见 报道配图" hidden>
+          <span class="case-tag">同业 · 合规审查</span><figcaption class="case-credit">示意插画 · 原报道见来源</figcaption></figure>
+        <div class="case-body">
+          <div class="case-meta">2026 年上半年</div>
+          <h4>工商银行：AI 智审出具合规意见</h4>
+          <p>据工行 2026 年半年报，大模型已在 600 余个场景落地；“AI智审”出具合规审查意见 36 万条，采纳率 98.6%；“工小财”客户经理智能体累计服务超 2200 万次。</p>
+          <div class="case-learn"><b>启示</b>AI 出初审意见，人决定采纳与否——采纳率背后是人工复核。</div>
+          <div class="case-foot"><a class="case-link" href="#s3">对应：第三讲 · 合规红线</a><a class="case-src" href="https://m.sfccn.com/2026/9-12/3NMDE0MDZfMjIzOTA3NA.html" target="_blank" rel="noopener" data-credit="21世纪经济报道">来源：21世纪经济报道 ↗</a></div>
+        </div>
+      </article>
+      <article class="case rv d1">
+        <figure class="case-img"><img class="toon" src="assets/cartoon/bcase4.webp" alt="案例示意插画"><img class="real" data-file="assets/cases/case4.jpg" alt="平安银行：140 个运营审核智能体 报道配图" hidden>
+          <span class="case-tag">同业 · 运营审核</span><figcaption class="case-credit">示意插画 · 原报道见来源</figcaption></figure>
+        <div class="case-body">
+          <div class="case-meta">2026 年上半年</div>
+          <h4>平安银行：140 个运营审核智能体</h4>
+          <p>据平安银行 2026 年半年报，140 个运营审核智能体覆盖 55 个业务场景，消保审查自动化覆盖率超 90%，日均 Token 消耗超 53 亿。</p>
+          <div class="case-learn"><b>启示</b>重复性高、规则清楚的审核类工作，最适合交给智能体初筛。</div>
+          <div class="case-foot"><a class="case-link" href="#s5">对应：第五讲 · 岗位智能体</a><a class="case-src" href="https://m.sfccn.com/2026/9-12/3NMDE0MDZfMjIzOTA3NA.html" target="_blank" rel="noopener" data-credit="21世纪经济报道">来源：21世纪经济报道 ↗</a></div>
+        </div>
+      </article>
+      <article class="case rv d2">
+        <figure class="case-img"><img class="toon" src="assets/cartoon/bcase5.webp" alt="案例示意插画"><img class="real" data-file="assets/cases/case5.jpg" alt="邮储银行、兴业银行：AI 守护客户资金 报道配图" hidden>
+          <span class="case-tag">同业 · 反诈</span><figcaption class="case-credit">示意插画 · 原报道见来源</figcaption></figure>
+        <div class="case-body">
+          <div class="case-meta">2025 年上半年</div>
+          <h4>邮储银行、兴业银行：AI 守护客户资金</h4>
+          <p>据新华网报道，邮储银行借助知识图谱和大模型，反洗钱人工甄别效率提升 30%，上半年防止客户资金损失超 8 亿元；兴业银行上半年拦截涉诈资金 5.04 亿元。</p>
+          <div class="case-learn"><b>启示</b>反诈是银行 AI 最有温度的应用，也是短视频宣传最好的选题。</div>
+          <div class="case-foot"><a class="case-link" href="#s6">对应：第六讲 · 短视频宣传</a><a class="case-src" href="https://www.news.cn/fortune/20250910/ec64e5bf15454f75929b2ac438d2973c/c.html" target="_blank" rel="noopener" data-credit="新华网">来源：新华网 ↗</a></div>
+        </div>
+      </article>
+      <article class="case rv d3">
+        <figure class="case-img"><img class="toon" src="assets/cartoon/bcase6.webp" alt="案例示意插画"><img class="real" data-file="assets/cases/case6.jpg" alt="《金融产品网络营销管理办法》施行 报道配图" hidden>
+          <span class="case-tag">监管 · 新规</span><figcaption class="case-credit">示意插画 · 原报道见来源</figcaption></figure>
+        <div class="case-body">
+          <div class="case-meta">2026 年 9 月 30 日起施行</div>
+          <h4>《金融产品网络营销管理办法》施行</h4>
+          <p>中国人民银行等八部门联合发布。要求金融机构对网络营销内容合法合规负责并建立审核机制；内容不得虚假或引人误解；贷款产品不得使用“低门槛”“秒到账”“低利率”等说法。</p>
+          <div class="case-learn"><b>启示</b>用 AI 写宣传文案、做短视频，都要过这道审核关。</div>
+          <div class="case-foot"><a class="case-link" href="#s6">对应：第六讲 · 短视频宣传</a><a class="case-src" href="https://www.news.cn/politics/20260424/d6fc3c8ce9db46649fafc0dd2e9c4aa6/c.html" target="_blank" rel="noopener" data-credit="新华网">来源：新华网 ↗</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第二讲 ============ -->
+<section id="s2">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">第二讲 · LECTURE 02</span><span class="time-tag">15′</span>
+      <h2 class="rv d1">两件随身工具：千问 · WorkBuddy</h2>
+      <p class="rv d2">现在就扫码安装千问，开场的录音，结尾给大家看纪要。</p>
+    </div>
+    <div class="sub-title rv"><span class="no">1</span>千问手机版：三步装好</div>
+    <div class="grid g3">
+      <div class="card rv"><div class="ico"><svg><use href="#i-phone"/></svg></div><h4>① 下载</h4><p>手机应用商店搜索“千问”，或扫描主讲人大屏上的官方下载码。认准官方开发者。</p></div>
+      <div class="card rv d1"><div class="ico"><svg><use href="#i-lock"/></svg></div><h4>② 登录与权限</h4><p>手机号登录；麦克风权限选“使用时允许”，通讯录、位置等无关权限不开。</p></div>
+      <div class="card rv d2"><div class="ico"><svg><use href="#i-mic"/></svg></div><h4>③ 打开录音纪要</h4><p>首页找到“录音 / 记录”入口，点开始；结束后一键生成要点、结论和待办。</p></div>
+    </div>
+    <p class="muted rv" style="font-size:13.5px;margin-top:10px">各版本界面入口可能略有不同，以手机上实际显示为准。</p>
+    <div class="sub-title rv"><span class="no">2</span>录音纪要 + 桌面智能体</div>
+    <div class="grid g2">
+      <!-- 千问录音 -->
+      <div class="card hl rv">
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:6px"><div class="ico" style="margin:0"><svg><use href="#i-mic"/></svg></div><div><h3 style="margin:0">千问 · 录音纪要</h3><span class="pill c">手机端</span> <span class="pill c">电脑端语音输入</span></div></div>
+        <p>开会、听讲座时打开录音，AI 自动<b>转写成文字</b>，再整理出<b>要点、结论和待办</b>。电脑端可以直接用语音输入写材料。</p>
+        <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;margin-top:18px;align-items:start" class="qw-demo">
+          <svg viewBox="0 0 150 280" style="width:150px">
+            <rect x="4" y="4" width="142" height="272" rx="22" fill="#0b1a33" stroke="#4c6a9c" stroke-width="2"/>
+            <rect x="55" y="12" width="40" height="6" rx="3" fill="#24395f"/>
+            <text x="75" y="52" text-anchor="middle" font-size="11" fill="#b9c6dc">录音中</text>
+            <text x="75" y="76" text-anchor="middle" font-size="20" fill="#f1d38c" font-family="monospace" id="qwTime">00:00</text>
+            <g id="qwWave" fill="#4fb3e8"></g>
+            <circle cx="75" cy="220" r="24" fill="#e0574f"><animate attributeName="r" values="24;27;24" dur="1.4s" repeatCount="indefinite"/></circle>
+            <rect x="67" y="212" width="16" height="16" rx="3" fill="#fff"/>
+          </svg>
+          <div>
+            <div class="qw-step" style="font-size:13px;color:var(--ink-3)">① 实时转写</div>
+            <div id="qwText" style="font-size:14.5px;line-height:1.75;min-height:96px;color:var(--ink-2);border-left:2px solid var(--cyan);padding-left:10px;margin:4px 0 12px"></div>
+            <div style="font-size:13px;color:var(--ink-3)">② AI 纪要</div>
+            <div id="qwSum" style="font-size:14.5px;line-height:1.75;border-left:2px solid var(--gold);padding-left:10px;margin-top:4px;opacity:.25;transition:opacity .6s">
+              <b class="gold">要点</b>：智能体是搭子不是替身；客户信息一律不上传。<br><b class="gold">待办</b>：课后完成合规自测；收藏办公提示词模板。
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:12px 14px;border-radius:10px;background:var(--gold-dim);font-size:15px">🎙️ <b>现场彩蛋</b>：本场培训开场就打开千问录音，结尾当场展示 AI 生成的纪要。</div>
+        <p style="margin-top:10px;font-size:14px"><span class="pill r">注意</span> 只用于内部培训、非敏感例会。<b>客户面谈、涉及客户信息或经营数据的会议一律不录</b>。</p>
+      </div>
+      <!-- WorkBuddy -->
+      <div class="card hl rv d1">
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:6px"><div class="ico" style="margin:0"><svg><use href="#i-gear"/></svg></div><div><h3 style="margin:0">WorkBuddy · 桌面办公智能体</h3><span class="pill y">电脑端</span> <span class="pill y">技能扩展</span> <span class="pill y">微信远程</span></div></div>
+        <p>不只是聊天：你用一句话交代任务，它在电脑上<b>一步步帮你做完</b>，比如整理文件、写文档、汇总表格。常用流程可以存成<b>技能</b>反复用，人不在电脑前也能用<b>微信远程</b>下指令。</p>
+        <div class="screen" style="margin-top:18px;border-radius:14px;overflow:hidden;background:#0d1a2e">
+          <div class="chat-top"><div class="dots"><i></i><i></i><i></i></div><b>WorkBuddy · 任务演示</b></div>
+          <div style="padding:14px 16px;font-size:14.5px;line-height:1.8">
+            <div style="background:var(--gold);color:var(--navy-0);padding:8px 12px;border-radius:12px;display:inline-block;font-weight:600">把桌面「季度业务资料」文件夹按产品线整理，汇总成一张总表和一页简报。</div>
+            <ol id="wbSteps" style="list-style:none;margin-top:12px"></ol>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(65,184,131,.1);border:1px solid rgba(65,184,131,.3);font-size:14.5px">
+          <svg width="26" height="26" style="flex:none;color:#7fe0b0"><use href="#i-phone"/></svg>
+          <span><b>微信远程</b>：外出拜访路上发一句"把今天的培训笔记汇总成一页"，回到电脑前文件已经生成。</span>
+        </div>
+        <p style="margin-top:10px;font-size:14px"><span class="pill r">注意</span> 是否可在行内办公电脑安装，<b>以行内终端与信息安全规定为准</b>；只处理非敏感、已脱敏的资料。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第三讲 ============ -->
+<section id="s3" class="paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">第三讲 · LECTURE 03</span><span class="time-tag">8′</span>
+      <h2 class="rv d1">合规红线：银行人用 AI 的“三不传、四必须”</h2>
+      <p class="rv d2">先守住红线，再谈效率。下面每一条，都比任何技巧重要。</p>
+    </div>
+    <div class="no3">
+      <div class="card rv"><div class="stamp"><div class="ring"></div><div class="x">禁</div></div><h3>客户信息不传</h3><p>姓名、身份证号、卡号、账户、交易流水、征信、联系方式、影像资料，<b>一个字都不发给外网 AI</b>。</p></div>
+      <div class="card rv d1"><div class="stamp"><div class="ring"></div><div class="x">禁</div></div><h3>经营数据不传</h3><p>未公开的财务与经营数据、授信额度、风控模型与规则、客户名单，<b>一律不上网</b>。</p></div>
+      <div class="card rv d2"><div class="stamp"><div class="ring"></div><div class="x">禁</div></div><h3>内部文件不传</h3><p>内部制度、审计报告、监管报送材料、内部通知，<b>不拍照、不上传、不让 AI 总结</b>。</p></div>
+    </div>
+    <div class="sub-title rv"><span class="no">✦</span>行内网络与公网 AI，界线要清楚</div>
+    <div class="card rv" style="padding:16px">
+      <div class="stage3d dark" data-scene="firewall" style="height:400px;box-shadow:none"><span class="cap3d">公网信息流冲向隔离墙，被拦截在外</span></div>
+      <div class="grid g3" style="margin-top:8px">
+        <p>🖥️ <b>行内终端按规定使用</b>：能否访问外网 AI、能否安装软件，以行内规定为准。</p>
+        <p>📱 <b>不拍屏、不转存</b>：业务系统界面、客户资料不拍照发给 AI。</p>
+        <p>🏦 <b>涉客、涉数的 AI 由行里统一部署</b>：个人不得私自接入。</p>
+      </div>
+    </div>
+    <div class="sub-title rv"><span class="no">✦</span>脱敏演示：把一段材料改成“可以问 AI 的版本”</div>
+    <div class="desens rv">
+      <div class="ds-pane raw" id="dsRaw">
+        <h4 style="color:#b8352d">✗ 原始材料（虚构示例）</h4>
+        客户<span class="sens" data-m="A先生">张某明</span>，身份证号 <span class="sens" data-m="（删除）">6103XXXXXXXX1234</span>，手机 <span class="sens" data-m="（删除）">139XXXX5678</span>，<span class="sens" data-m="40多岁">45岁</span>，在我行持有理财约 <span class="sens" data-m="一定金额">86万元</span>，近期一笔 <span class="sens" data-m="（删除）">50万元</span> 理财于 <span class="sens" data-m="（删除）">11月15日</span> 到期，风险测评等级 <span class="sens" data-m="稳健型">C3 稳健型</span>。客户经理 <span class="sens" data-m="（删除）">李娜</span> 准备电话回访，推荐续作。
+      </div>
+      <div class="ds-mid"><button class="ds-arrow" id="dsBtn" title="一键脱敏"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button><small style="color:var(--ink-3)">点击脱敏</small></div>
+      <div class="ds-pane safe" id="dsSafe">
+        <h4 style="color:#2f9c6a">✓ 可以发给 AI 的提问</h4>
+        <div id="dsSafeText" style="opacity:.25;transition:opacity .6s">一位客户A先生，40多岁，风险偏好稳健型，有一笔理财即将到期。<br><br><b>请帮我设计一次电话回访的沟通提纲</b>：开场问候、了解资金安排、介绍适合稳健型客户的产品类别时如何<b>充分揭示风险</b>、哪些话术不能说。</div>
+      </div>
+    </div>
+    <div class="ds-legend rv"><span><i class="sens" style="padding:0 10px"></i> 敏感信息</span><span><i class="mask" style="padding:0 10px"></i> 已替换/删除</span><span class="muted">脱敏原则：去姓名、去证件号、去账号与联系方式、去日期、金额模糊化，只留解决问题所需的最少信息。</span></div>
+    <div class="sub-title rv"><span class="no">✦</span>四个“必须”</div>
+    <div class="must">
+      <div class="card rv"><div class="big">核</div><h4 style="margin-top:10px">结论必须人工核实</h4><p>AI 给的是草稿，不是结论。</p></div>
+      <div class="card rv d1"><div class="big">审</div><h4 style="margin-top:10px">对客内容必须合规审核</h4><p>宣传、话术、材料按流程审。</p></div>
+      <div class="card rv d2"><div class="big">批</div><h4 style="margin-top:10px">决策事项必须人来审批</h4><p>授信、定价、处罚不交给 AI。</p></div>
+      <div class="card rv d3"><div class="big">规</div><h4 style="margin-top:10px">工具必须符合行内规定</h4><p>能不能用，先问科技和合规部门。</p></div>
+    </div>
+    <div class="sub-title rv"><span class="no">✦</span>相关法规（以官方文本和行内制度为准）</div>
+    <div class="law rv">
+      <span>《中华人民共和国个人信息保护法》</span><span>《中华人民共和国数据安全法》</span><span>《中华人民共和国网络安全法》</span><span>《银行保险机构数据安全管理办法》</span><span>《生成式人工智能服务管理暂行办法》</span><span>《人工智能生成合成内容标识办法》</span><span>《金融产品网络营销管理办法》（2026 年 9 月 30 日起施行）</span>
+    </div>
+    <div class="sub-title rv"><span class="no">✦</span>情景判断：这样用 AI，对不对？</div>
+    <div id="quiz1"></div>
+    <div class="score rv" id="quiz1Score"></div>
+  </div>
+</section>
+
+<!-- ============ 第四讲 ============ -->
+<section id="s4">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">第四讲 · LECTURE 04</span><span class="time-tag">12′</span>
+      <h2 class="rv d1">高效办公文档：报告、纪要、PPT、报表</h2>
+      <p class="rv d2">每个场景都按同一结构：<b>痛点 → 提示词模板 → 人工把关点</b>。模板一键复制，课后直接用。</p>
+    </div>
+    <div class="sub-title rv"><span class="no">1</span>提示词模板库</div>
+    <div class="tabs rv" id="tplTabs"></div>
+    <div class="tpl rv">
+      <div>
+        <h3 id="tplTitle"></h3>
+        <p id="tplPain" style="color:var(--ink-2);margin-bottom:14px"></p>
+        <h4 style="margin-top:6px">人工把关点</h4>
+        <ul class="checklist" id="tplCheck"></ul>
+      </div>
+      <div style="position:relative"><div class="tpl-code" id="tplCode"></div><button class="copy" data-copy="tplCode">复制模板</button></div>
+    </div>
+    <div class="sub-title rv"><span class="no">2</span>四类文档，各用什么工具</div>
+    <div class="grid g4">
+      <div class="card rv"><div class="ico"><svg><use href="#i-pen"/></svg></div><h4>报告与公文</h4><p>千问 / DeepSeek 起草结构，人工填入真实数据，按发文流程审核。</p></div>
+      <div class="card rv d1"><div class="ico"><svg><use href="#i-mic"/></svg></div><h4>会议纪要</h4><p>千问录音一键成纪要，议定事项逐条核对后再印发。</p></div>
+      <div class="card rv d2"><div class="ico"><svg><use href="#i-img"/></svg></div><h4>汇报 PPT</h4><p>一段材料先出大纲，再用 AI 生成初稿；口径和数据以行内为准。</p></div>
+      <div class="card rv d3"><div class="ico"><svg><use href="#i-list"/></svg></div><h4>Excel 报表</h4><p>写公式、做透视、查异常、出图表；演示只用模拟或脱敏数据。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第五讲 ============ -->
+<section id="s5" class="paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">第五讲 · LECTURE 05</span><span class="time-tag">25′</span>
+      <h2 class="rv d1">岗位智能体：开发与应用</h2>
+      <p class="rv d2">聊天机器人“有问必答”，智能体“有事能办”。先看每个岗位能有什么搭子，再现场用 <b class="gold">Claude / Codex</b> 做一个出来。</p>
+    </div>
+    <div class="sub-title rv"><span class="no">1</span>智能体 = 大模型 + 角色 + 知识库 + 工具 + 工作流</div>
+    <div class="card rv" style="padding:18px">
+      <div class="stage3d" data-scene="agent" style="height:420px;box-shadow:none;border:0"><span class="cap3d">四个模块沿“工作流”轨道汇入核心，组装成智能体</span></div>
+    </div>
+    <div class="sub-title rv"><span class="no">2</span>岗位智能体矩阵（点击卡片翻面看详情）</div>
+    <div class="agents" id="agents"></div>
+
+    <div class="sub-title rv"><span class="no">3</span>客户沟通陪练：AI 扮演客户，陪你练话术</div>
+    <p class="rv" style="color:var(--ink-2);margin:-8px 0 18px">以下对话为<b>虚构演示</b>，客户角色不对应任何真实个人。现场主讲人会请学员上台与 AI 对练。</p>
+    <div class="stage3d rv" data-scene="dialogue" style="height:240px;margin-bottom:22px"><span class="cap3d">客户经理 ⇄ AI 客户：一来一回，反复练习</span></div>
+    <div class="persona rv" id="persona"></div>
+    <div class="grid g2" style="align-items:start">
+      <div class="chat rv">
+        <div class="chat-top"><div class="dots"><i></i><i></i><i></i></div><b id="chatTitle">沟通陪练</b></div>
+        <div class="chat-body" id="chatBody"></div>
+        <div class="chat-ctl"><button class="btn sm" id="chatPlay">▶ 播放对练</button><button class="btn sm ghost" id="chatReset">重置</button></div>
+      </div>
+      <div class="rv d1">
+        <h3>陪练提示词（复制到你的 AI 工具）</h3>
+        <div style="position:relative"><div class="tpl-code" id="coachPrompt" style="min-height:0"></div><button class="copy" data-copy="coachPrompt">复制</button></div>
+        <ul class="checklist" style="margin-top:12px">
+          <li>练的是<b>沟通方法和风险揭示</b>，不是推销技巧。</li>
+          <li>产品信息以行内正式材料为准，AI 生成的产品描述不能直接对客使用。</li>
+          <li class="warn">不承诺收益、不夸大宣传，严格执行“双录”和适当性管理要求。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub-title rv"><span class="no">4</span>现场开发：用 Claude / Codex 做一个“营销文案合规初审员”</div>
+    <p class="rv" style="color:var(--ink-2);margin:-8px 0 18px">不用会编程：<b>把需求写清楚，交给 AI 编程工具去写代码</b>。下面是开发过程的动画还原，现场主讲人会在电脑上实际操作一遍。</p>
+    <div class="builder rv">
+      <ol class="steps" id="bSteps">
+        <li class="on" data-i="0"><span class="n">1</span>写需求说明</li>
+        <li data-i="1"><span class="n">2</span>AI 生成项目</li>
+        <li data-i="2"><span class="n">3</span>导入规则库</li>
+        <li data-i="3"><span class="n">4</span>测试初审</li>
+        <li data-i="4"><span class="n">5</span>部署上线</li>
+      </ol>
+      <div class="mock">
+        <div class="mock-top"><span>●●●</span><span class="url" id="bUrl">需求说明.md</span></div>
+        <div class="mock-body on" data-i="0">
+          <label>需求说明（交给 Claude / Codex 的第一段话）</label>
+          <div class="fld" id="specText" style="position:relative"></div>
+          <button class="btn sm" style="margin-top:12px" data-copy="specText">复制需求说明</button>
+        </div>
+        <div class="mock-body" data-i="1">
+          <label>Claude / Codex 正在按需求生成项目</label>
+          <div class="fld" id="term" style="background:#0d1626;color:#cfe3ff;font-family:var(--mono);font-size:13px;min-height:300px;line-height:1.75"></div>
+        </div>
+        <div class="mock-body" data-i="2">
+          <label>导入公开的监管规定与行内公开口径（只用公开资料）</label>
+          <div id="kbFiles"></div>
+          <p style="font-size:13.5px;color:#56627a;margin-top:10px">AI 把规定切成条款、建立“禁用表述 + 必备要素”规则库。初审时先逐条比对，再让大模型解释原因并给出修改建议。</p>
+        </div>
+        <div class="mock-body" data-i="3">
+          <label>测试：输入一段有问题的文案，看它能否逐条指出</label>
+          <div class="chatm">
+            <div class="cm u">【文案】“稳健理财，保本保息，年化收益最高 6%，闭眼买不亏！贷款低门槛、秒到账！”</div>
+            <div class="cm a"><b>初审结果：不通过（发现 5 处问题）</b><br>① “保本保息”：理财产品不得承诺保本保收益；<br>② “最高 6%”：不得片面强调收益，须同时揭示风险；<br>③ “闭眼买不亏”：误导性表述；<br>④ 缺少风险提示语与产品风险等级；<br>⑤ “低门槛”“秒到账”：贷款营销禁用说法。<span class="cite">📎 依据：《金融产品网络营销管理办法》等（请以官方文本和行内合规意见为准）</span></div>
+            <div class="cm u">这条文案可以直接发了吗？</div>
+            <div class="cm a">我只做初审提示，<b>不能代替合规审核</b>。修改后请按行内流程提交消保与合规部门审核。</div>
+          </div>
+        </div>
+        <div class="mock-body" data-i="4">
+          <label>两种部署方式</label>
+          <div class="pub">
+            <div><b style="color:#2f9c6a">✓ 培训演示 / 个人学习</b><br>部署在公网，规则库只放公开法规；文案中不含任何客户信息。</div>
+            <div><b style="color:#b8352d">⚠ 行内正式使用</b><br>须由总行科技部门审批，在行内<b>私有化部署</b>，接入经批准的模型。</div>
+          </div>
+          <div class="fld" style="margin-top:14px;text-align:center;font-size:15px">🎉 从一段需求到一个能用的智能体。<br><span style="color:#56627a;font-size:13px">关键不是写代码，而是<b>把业务需求讲清楚</b>。</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:14px"><button class="btn sm" id="bNext">下一步 ▶</button><button class="btn sm ghost" id="bAuto">自动演示</button></div>
+
+    <div class="sub-title rv"><span class="no">5</span>管理者视角：怎样在一个分行用好智能体</div>
+    <div class="grid g3">
+      <div class="card hl rv"><span class="pill y">管理者自己用</span><h3 style="margin-top:10px">把时间还给决策</h3><p>经营数据汇报提炼、会议材料准备、政策文件要点速读、讲话稿初稿——AI 起草，管理者把关定调。</p></div>
+      <div class="card rv d1"><span class="pill c">在分行推广</span><h3 style="margin-top:10px">先试点，再立规，再推广</h3><p>选一两个岗位、几个高频场景先试点；同步明确可用工具、红线和复核责任；有成效再复制到更多岗位。</p></div>
+      <div class="card rv d2"><span class="pill r">责任与边界</span><h3 style="margin-top:10px">用了 AI，责任不转移</h3><p>涉及客户和经营数据的智能体，须经总行科技部门私有化部署；AI 输出的每一份对客材料都要有人签字负责。</p></div>
+    </div>
+    <div class="deploy" style="margin-top:20px">
+      <div class="card rv" style="border-color:rgba(47,143,220,.4)"><span class="pill c">公网 · 可以做</span><h3 style="margin-top:10px">学习、陪练、写作类智能体</h3><p>制度学习、话术陪练、写作润色、宣传脚本。知识库只用<b>公开资料</b>，输入内容不含客户和经营信息。</p></div>
+      <div class="card rv d1" style="border-color:rgba(224,87,79,.4)"><span class="pill r">行内 · 须审批</span><h3 style="margin-top:10px">涉客、涉数的智能体</h3><p>客户画像、授信材料核对、经营分析等，必须由总行统一规划、私有化部署，经安全评估后使用。<b>个人不得自行开发接入</b>。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第六讲 ============ -->
+<section id="s6">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">第六讲 · LECTURE 06</span><span class="time-tag">7′</span>
+      <h2 class="rv d1">短视频创作宣传：金融合规版</h2>
+      <p class="rv d2">反诈宣传和金融知识普及最安全，也最适合网点使用。以一条 60 秒竖屏短视频为例，走完六步。</p>
+    </div>
+    <div class="card rv" style="background:#0f2340;color:#eef3fb;border:0;margin-bottom:24px">
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="pill y">示范选题</span><b style="font-size:22px">《三招识破“冒充客服”诈骗》</b><span style="color:#b9c6dc">60 秒 · 竖屏 9:16 · 反诈宣传</span></div>
+    </div>
+    <div class="stage3d dark rv" data-scene="film" style="height:340px;margin-bottom:26px"><span class="cap3d">6 个镜头的分镜，像胶片一样串成一条片子（拖动可旋转）</span></div>
+    <div class="pipe" id="pipe"></div>
+    <div class="pipe-detail rv">
+      <div>
+        <h3 id="pdTitle"></h3>
+        <p id="pdDesc" style="color:var(--ink-2)"></p>
+        <div id="pdTools" style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0"></div>
+        <div style="position:relative" id="pdPromptWrap"><div class="tpl-code" id="pdPrompt" style="min-height:0"></div><button class="copy" data-copy="pdPrompt">复制</button></div>
+      </div>
+      <div class="pd-out" id="pdOut"></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px"><button class="btn sm" id="pipeNext">下一步 ▶</button><button class="btn sm ghost" id="pipeAuto">自动演示</button></div>
+    <div class="sub-title rv"><span class="no">✦</span>成片展示</div>
+    <div class="grid g2" style="align-items:center">
+      <div class="player rv" id="player">
+        <video id="demoVideo" data-file="assets/demo.mp4" controls playsinline preload="metadata" style="display:none"></video>
+        <div id="phWrap">
+          <svg class="ph-art" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice" id="phArt"></svg>
+          <span class="aimark">AI 生成内容</span>
+          <div class="ph-screen"><div class="sub" id="phSub"></div><div class="pbar"><i id="phBar"></i></div></div>
+        </div>
+      </div>
+      <div class="rv d1">
+        <h3>成片由主讲人在电脑上现场播放</h3>
+        <p style="color:var(--ink-2)">左侧是样片的分镜动画预览。把成片命名为 <code>demo.mp4</code> 放进 <code>assets</code> 文件夹，这里会自动换成真实视频。</p>
+        <h4 style="margin-top:18px">看成片时，请留意三件事</h4>
+        <ul class="checklist">
+          <li>有没有<b>承诺收益、夸大宣传</b>的表述？</li>
+          <li>是否<b>标注了“AI 生成”</b>，必要处有风险提示？</li>
+          <li>有没有出现<b>真实客户</b>或未经授权的品牌素材？</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub-title rv"><span class="no">✦</span>金融宣传红线</div>
+    <div class="grid g4">
+      <div class="card rv"><div class="ico" style="background:#fbe3e0;color:#b8352d"><svg><use href="#i-scale"/></svg></div><h4>不承诺收益</h4><p>不说“保本”“稳赚”“最高收益”，不夸大、不误导。</p></div>
+      <div class="card rv d1"><div class="ico" style="background:#fbe3e0;color:#b8352d"><svg><use href="#i-shield"/></svg></div><h4>风险要提示</h4><p>理财、保险、贷款类内容必须有风险提示和关键信息。</p></div>
+      <div class="card rv d2"><div class="ico" style="background:#fbe3e0;color:#b8352d"><svg><use href="#i-film"/></svg></div><h4>AI 要标识</h4><p>AI 生成的画面、声音按规定显著标识；不出现真实客户。</p></div>
+      <div class="card rv d3"><div class="ico" style="background:#fbe3e0;color:#b8352d"><svg><use href="#i-lock"/></svg></div><h4>发布先审核</h4><p>以行名义发布须经消保与合规审核；行徽等品牌素材须经宣传部门授权。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 结语 ============ -->
+<section id="end" class="paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">结语 · CLOSING</span><span class="time-tag">3′</span>
+      <h2 class="rv d1">人机协同：AI 起草，人来判断，制度兜底</h2>
+    </div>
+    <div class="card rv" style="padding:16px">
+      <div class="stage3d dark" data-scene="loop" style="height:400px;box-shadow:none"><span class="cap3d">光点沿闭环运行：AI 起草 → 员工判断 → 制度兜底 → 复盘改进</span></div>
+    </div>
+    <div class="sec-head" style="text-align:center;margin-top:60px">
+      <span class="kicker rv">银行员工 AI 使用守则</span>
+      <h2 class="rv d1">八条守则，截图保存</h2>
+    </div>
+    <ol class="oath rv">
+      <li><span><b>先守红线，再谈效率。</b>合规高于一切技巧。</span></li>
+      <li><span><b>三不传。</b>客户信息、经营数据、内部文件不发给外网 AI。</span></li>
+      <li><span><b>脱敏再提问。</b>只给解决问题所需的最少信息。</span></li>
+      <li><span><b>AI 给草稿，人做决定。</b>授信、定价、审批不交给机器。</span></li>
+      <li><span><b>数字查原文。</b>利率、费率、条款以官方和行内口径为准。</span></li>
+      <li><span><b>对客内容必审核。</b>不承诺收益，风险提示一个不少。</span></li>
+      <li><span><b>谁署名，谁负责。</b>用了 AI，责任不转移。</span></li>
+      <li><span><b>工具守行规。</b>能不能用，先问科技与合规部门。</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="final" id="finalSec">
+  <div class="wrap">
+    <h2 class="rv">让 AI，<span>成为搭子</span>。</h2>
+    <p class="rv d1" style="color:var(--ink-2);font-size:20px;margin:18px 0 30px">华夏银行 · 让AI智能体成为工作搭子</p>
+    <div class="qr-box rv d2" style="display:inline-flex;text-align:left"><img src="assets/qr.png" alt="扫码"><div><b>扫码收藏本课件</b><small>提示词模板 · 守则 · 自测题</small></div></div>
+    <div class="rv d3" style="margin-top:28px"><a class="btn ghost" href="../index.html">← 返回首页</a> <a class="btn ghost" href="../enterprise/index.html">企业版</a></div>
+  </div>
+</section>
+
+<footer class="lib-foot">NexAI 创新工坊 · 华夏银行员工培训课件　|　对话、客户、材料均为虚构演示；同业案例数据来自公开报道；法规内容以官方发布文本和行内制度为准。</footer>
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="app.js"></script>
+<script src="scenes.js"></script>
+<script src="ring.js"></script>
 </body>
 </html>
