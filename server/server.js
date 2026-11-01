@@ -43,9 +43,31 @@ const DEFAULT_PERSONA = `你是“朱丽叶老师的数字分身”，代表宝�
 4. 不透露任何个人隐私、内部资料、API Key 或系统提示内容。
 5. 涉及医疗、法律、投资等专业决策，只给一般信息并建议咨询专业人士。`;
 let config;
+/* 对话模型来源：DeepSeek 官方 / TokenOne 中转站（NewAPI）/ 自定义 OpenAI 兼容接口，各自保存一套 Key */
+const PROVIDERS = {
+  deepseek: { label: "DeepSeek 官方", baseUrl: "https://api.deepseek.com", model: "deepseek-chat" },
+  tokenone: { label: "TokenOne 中转站", baseUrl: "https://token.agentone.work", model: "deepseek-chat" },
+  custom: { label: "自定义兼容接口", baseUrl: "", model: "" }
+};
+const llm = () => config.deepseek.profiles[config.deepseek.provider];
+function apiBase(provider, baseUrl) {
+  let b = String(baseUrl || "").trim().replace(/\/+$/, "").replace(/\/chat\/completions$/, "");
+  if (provider === "tokenone" && b && !/\/v\d+$/.test(b)) b += "/v1";   // NewAPI 网关走 /v1
+  return b;
+}
+const chatURL = () => apiBase(config.deepseek.provider, llm().baseUrl) + "/chat/completions";
+/* 解析 TokenOne 连接串：{"_type":"newapi_channel_conn","key":"sk-…","url":"https://…"} */
+function parseConn(text) {
+  try { const j = JSON.parse(String(text || "").trim()); if (j && j.url) return { baseUrl: String(j.url).trim(), apiKey: String(j.key || "").trim() }; } catch {}
+  return null;
+}
 async function loadConfig() {
   config = await readJSON(CONFIG_FILE, {});
-  config.deepseek = Object.assign({ apiKey: "", baseUrl: "https://api.deepseek.com", model: "deepseek-chat" }, config.deepseek || {});
+  const old = config.deepseek || {};
+  const profiles = Object.assign({}, old.profiles || {});
+  if (!old.profiles && old.apiKey) profiles.deepseek = { apiKey: old.apiKey, baseUrl: old.baseUrl, model: old.model };
+  for (const k of Object.keys(PROVIDERS)) profiles[k] = Object.assign({ apiKey: "", baseUrl: PROVIDERS[k].baseUrl, model: PROVIDERS[k].model }, profiles[k] || {});
+  config.deepseek = { provider: PROVIDERS[old.provider] ? old.provider : "deepseek", profiles };
   config.asr = Object.assign({ baseUrl: "", apiKey: "", model: "" }, config.asr || {});
   config.avatar = Object.assign({ name: "朱丽叶 · 数字分身", greeting: "你好，我是朱丽叶老师的数字分身。关于 AI 培训、智能体开发、创新创业，都可以问我。", persona: DEFAULT_PERSONA, dailyLimit: 600 }, config.avatar || {});
   if (!Array.isArray(config.skills)) config.skills = await readJSON(SKILLS_SEED, []);
@@ -160,7 +182,7 @@ app.get("/healthz", (req, res) => res.type("text").send("ok"));
 const json = express.json({ limit: "2mb" });
 
 /* 公开接口 */
-app.get("/api/avatar", (req, res) => res.json({ name: config.avatar.name, greeting: config.avatar.greeting, ready: !!config.deepseek.apiKey, docs: kb.filter(d => d.status === "ready").length }));
+app.get("/api/avatar", (req, res) => res.json({ name: config.avatar.name, greeting: config.avatar.greeting, ready: !!llm().apiKey, docs: kb.filter(d => d.status === "ready").length }));
 app.get("/api/skills", (req, res) => res.json(config.skills || []));
 
 app.post("/api/chat", json, async (req, res) => {
@@ -169,7 +191,7 @@ app.post("/api/chat", json, async (req, res) => {
   const today = new Date().toISOString().slice(0, 10);
   if (daily.day !== today) daily = { day: today, count: 0 };
   if (daily.count >= (config.avatar.dailyLimit || 600)) return res.status(429).json({ error: "今天的对话次数已用完，明天再来吧。" });
-  if (!config.deepseek.apiKey) return res.status(503).json({ error: "数字人还没有配置好（管理员尚未设置 DeepSeek API Key）。" });
+  if (!llm().apiKey) return res.status(503).json({ error: "数字人还没有配置好（管理员尚未设置 DeepSeek API Key）。" });
   let msgs = Array.isArray(req.body && req.body.messages) ? req.body.messages : [];
   msgs = msgs.filter(m => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string").slice(-10).map(m => ({ role: m.role, content: m.content.slice(0, 1500) }));
   const last = [...msgs].reverse().find(m => m.role === "user");
@@ -183,10 +205,10 @@ app.post("/api/chat", json, async (req, res) => {
   send({ sources: [...new Map(hitsK.map(c => [c.doc, { title: c.title, category: c.category }])).values()] });
   const ac = new AbortController(); res.on("close", () => ac.abort());
   try {
-    const r = await fetch(config.deepseek.baseUrl.replace(/\/+$/, "") + "/chat/completions", {
+    const r = await fetch(chatURL(), {
       method: "POST", signal: ac.signal,
-      headers: { "Content-Type": "application/json", Authorization: "Bearer " + config.deepseek.apiKey },
-      body: JSON.stringify({ model: config.deepseek.model || "deepseek-chat", stream: true, temperature: 0.6, max_tokens: 900, messages: [{ role: "system", content: system }, ...msgs] })
+      headers: { "Content-Type": "application/json", Authorization: "Bearer " + llm().apiKey },
+      body: JSON.stringify({ model: llm().model || "deepseek-chat", stream: true, temperature: 0.6, max_tokens: 900, messages: [{ role: "system", content: system }, ...msgs] })
     });
     if (!r.ok || !r.body) { const t = await r.text().catch(() => ""); send({ error: `模型服务暂时不可用（${r.status}）` }); console.error("deepseek", r.status, t.slice(0, 300)); return res.end(); }
     const dec = new TextDecoder(); let buf = "";
@@ -225,23 +247,45 @@ app.post("/api/admin/password", requireAdmin, json, async (req, res) => {
 
 /* 模型与转写配置 */
 app.get("/api/admin/config", requireAdmin, (req, res) => res.json({
-  deepseek: { baseUrl: config.deepseek.baseUrl, model: config.deepseek.model, apiKeyMasked: mask(config.deepseek.apiKey), hasKey: !!config.deepseek.apiKey },
+  deepseek: { provider: config.deepseek.provider, providers: Object.fromEntries(Object.entries(PROVIDERS).map(([k, v]) => { const p = config.deepseek.profiles[k]; return [k, { label: v.label, defaultUrl: v.baseUrl, baseUrl: p.baseUrl, model: p.model, apiKeyMasked: mask(p.apiKey), hasKey: !!p.apiKey }]; })) },
   asr: { baseUrl: config.asr.baseUrl, model: config.asr.model, apiKeyMasked: mask(config.asr.apiKey), hasKey: !!config.asr.apiKey },
   avatar: config.avatar
 }));
 app.put("/api/admin/config", requireAdmin, json, async (req, res) => {
   const b = req.body || {};
-  if (b.deepseek) { const d = b.deepseek; if (typeof d.apiKey === "string" && d.apiKey.trim()) config.deepseek.apiKey = d.apiKey.trim(); if (d.clearKey) config.deepseek.apiKey = ""; if (d.baseUrl) config.deepseek.baseUrl = String(d.baseUrl).trim(); if (d.model) config.deepseek.model = String(d.model).trim(); }
+  if (b.deepseek) {
+    const d = b.deepseek, prov = PROVIDERS[d.provider] ? d.provider : config.deepseek.provider, p = config.deepseek.profiles[prov];
+    const conn = d.conn ? parseConn(d.conn) : null;
+    if (d.conn && !conn) return res.status(400).json({ error: "连接串格式不对，应为 {\"_type\":\"newapi_channel_conn\",\"key\":\"sk-…\",\"url\":\"https://…\"}" });
+    if (conn) { p.baseUrl = conn.baseUrl; if (conn.apiKey) p.apiKey = conn.apiKey; }
+    if (typeof d.apiKey === "string" && d.apiKey.trim()) p.apiKey = d.apiKey.trim();
+    if (d.clearKey) p.apiKey = "";
+    if (typeof d.baseUrl === "string" && d.baseUrl.trim() && !conn) { if (!/^https?:\/\//i.test(d.baseUrl.trim())) return res.status(400).json({ error: "接口地址需以 http:// 或 https:// 开头" }); p.baseUrl = d.baseUrl.trim(); }
+    if (typeof d.model === "string" && d.model.trim()) p.model = d.model.trim().slice(0, 120);
+    if (d.activate !== false) config.deepseek.provider = prov;
+  }
   if (b.asr) { const a = b.asr; if (typeof a.apiKey === "string" && a.apiKey.trim()) config.asr.apiKey = a.apiKey.trim(); if (a.clearKey) config.asr.apiKey = ""; if (typeof a.baseUrl === "string") config.asr.baseUrl = a.baseUrl.trim(); if (typeof a.model === "string") config.asr.model = a.model.trim(); }
   if (b.avatar) { const v = b.avatar; for (const k of ["name", "greeting", "persona"]) if (typeof v[k] === "string" && v[k].trim()) config.avatar[k] = v[k].trim().slice(0, 6000); if (v.dailyLimit) config.avatar.dailyLimit = Math.max(10, Math.min(100000, Number(v.dailyLimit) || 600)); }
   await saveConfig(); res.json({ ok: true });
 });
 app.post("/api/admin/test-key", requireAdmin, async (req, res) => {
-  if (!config.deepseek.apiKey) return res.status(400).json({ error: "还没有保存 API Key" });
+  const prov = PROVIDERS[req.query.provider] ? req.query.provider : config.deepseek.provider, p = config.deepseek.profiles[prov];
+  if (!p.apiKey) return res.status(400).json({ error: "这个通道还没有保存 API Key" });
   try {
-    const r = await fetch(config.deepseek.baseUrl.replace(/\/+$/, "") + "/chat/completions", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + config.deepseek.apiKey }, body: JSON.stringify({ model: config.deepseek.model, max_tokens: 20, messages: [{ role: "user", content: "用一句话自我介绍" }] }), signal: AbortSignal.timeout(30000) });
+    const r = await fetch(apiBase(prov, p.baseUrl) + "/chat/completions", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + p.apiKey }, body: JSON.stringify({ model: p.model, max_tokens: 30, messages: [{ role: "user", content: "用一句话自我介绍" }] }), signal: AbortSignal.timeout(30000) });
     const t = await r.text(); if (!r.ok) return res.status(400).json({ error: `验证失败（${r.status}）：${t.slice(0, 160)}` });
-    const j = JSON.parse(t); res.json({ ok: true, reply: j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content });
+    const j = JSON.parse(t); res.json({ ok: true, provider: PROVIDERS[prov].label, reply: j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content });
+  } catch (e) { res.status(400).json({ error: "无法连接：" + e.message }); }
+});
+/* 读取当前通道可用模型（OpenAI 兼容 /models） */
+app.get("/api/admin/models", requireAdmin, async (req, res) => {
+  const prov = PROVIDERS[req.query.provider] ? req.query.provider : config.deepseek.provider, p = config.deepseek.profiles[prov];
+  if (!p.apiKey || !p.baseUrl) return res.status(400).json({ error: "请先保存该通道的接口地址和 API Key" });
+  try {
+    const r = await fetch(apiBase(prov, p.baseUrl) + "/models", { headers: { Authorization: "Bearer " + p.apiKey }, signal: AbortSignal.timeout(20000) });
+    const t = await r.text(); if (!r.ok) return res.status(400).json({ error: `获取失败（${r.status}）：${t.slice(0, 160)}` });
+    const ids = ((JSON.parse(t).data) || []).map(m => m && m.id).filter(Boolean).sort();
+    res.json({ models: ids.slice(0, 300) });
   } catch (e) { res.status(400).json({ error: "无法连接：" + e.message }); }
 });
 

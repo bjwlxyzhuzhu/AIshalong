@@ -59,6 +59,7 @@ dialog::backdrop{background:rgba(40,20,5,.35);backdrop-filter:blur(6px)}
 .sk{border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;background:#fff}
 .sk .grid2{gap:10px}.sk label{margin:6px 0 4px}
 .testchat{border:1px solid var(--line);border-radius:14px;background:#fffaf5;padding:12px;min-height:80px;white-space:pre-wrap;line-height:1.7;font-size:14px;margin-top:10px}
+.seg{display:flex;gap:4px;padding:4px;border:1px solid #e2d6c9;border-radius:12px;background:#fff8f1;margin-bottom:6px;flex-wrap:wrap}.seg button{flex:1;min-width:92px;border:0;background:none;padding:8px 10px;border-radius:9px;font:inherit;font-size:13px;color:#6b5a4c;cursor:pointer}.seg button.on{background:#2a1d15;color:#fff}.seg button .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#2fa36b;margin-left:5px;vertical-align:middle}.linkbtn{border:0;background:none;color:#b0461a;font:inherit;font-size:12px;cursor:pointer;margin-left:8px;text-decoration:underline}textarea#dsConn{font-family:ui-monospace,monospace;font-size:12px;min-height:64px;height:64px}
 </style>
 </head>
 <body>
@@ -117,12 +118,20 @@ dialog::backdrop{background:rgba(40,20,5,.35);backdrop-filter:blur(6px)}
     <div class="grid2">
       <div class="box">
         <h3>DeepSeek（数字人对话）</h3>
+        <label>接入方式 <span class="code" id="dsActive"></span></label>
+        <div class="seg" id="dsProv" role="radiogroup">
+          <button type="button" data-p="deepseek">DeepSeek 官方</button><button type="button" data-p="tokenone">TokenOne 中转站</button><button type="button" data-p="custom">自定义</button>
+        </div>
+        <div id="dsConnBox" hidden>
+          <label>TokenOne 连接串（可选，粘贴后自动拆出地址和 Key）</label>
+          <textarea id="dsConn" rows="2" placeholder='{"_type":"newapi_channel_conn","key":"sk-…","url":"https://token.agentone.work"}'></textarea>
+        </div>
         <label>API Key <span id="dsMask" class="code"></span></label>
         <input type="password" id="dsKey" placeholder="sk-…（留空表示不修改）" autocomplete="off">
         <label>接口地址</label><input type="text" id="dsUrl" placeholder="https://api.deepseek.com">
-        <label>模型</label><input type="text" id="dsModel" placeholder="deepseek-chat">
-        <p class="hint">在 DeepSeek 开放平台（platform.deepseek.com）创建 API Key。接口为 OpenAI 兼容格式，也可以填 TokenOne 等兼容网关的地址。</p>
-        <div class="row" style="margin-top:12px"><button class="btn sm" id="dsSave">保存</button><button class="btn ghost sm" id="dsTest">测试连接</button><button class="btn danger sm" id="dsClear">清除 Key</button></div>
+        <label>模型 <button type="button" class="linkbtn" id="dsModels">获取模型列表</button></label><input type="text" id="dsModel" list="dsModelList" placeholder="deepseek-chat"><datalist id="dsModelList"></datalist>
+        <p class="hint" id="dsHint"></p>
+        <div class="row" style="margin-top:12px"><button class="btn sm" id="dsSave">保存并启用</button><button class="btn ghost sm" id="dsTest">测试连接</button><button class="btn danger sm" id="dsClear">清除 Key</button></div>
         <div class="msg" id="dsMsg"></div>
       </div>
       <div class="box">
@@ -225,14 +234,27 @@ $$("[data-close]").forEach(b=>b.onclick=()=>$("#edit").close());
 $("#edSave").onclick=async()=>{try{await api("/api/admin/kb/"+cur,{method:"PUT",body:JSON.stringify({title:$("#edTitle").value,category:$("#edCat").value,text:$("#edText").value})});$("#edit").close();loadKB()}catch(e){say($("#edMsg"),e.message)}};
 
 /* 配置 */
+let DS=null,dsSel=null;
+const DS_HINT={deepseek:"在 DeepSeek 开放平台（platform.deepseek.com）创建 API Key，地址保持 https://api.deepseek.com，模型 deepseek-chat（对话）或 deepseek-reasoner（推理）。",
+  tokenone:"TokenOne 中转站（NewAPI）：地址 https://token.agentone.work，系统会自动接 /v1。可以把中转站给的连接串整段粘贴进上面的框，也可以只填 Key。模型名以中转站实际开通的为准，点“获取模型列表”可选。",
+  custom:"任意 OpenAI 兼容接口：填写到 /v1 为止的地址，例如 https://example.com/v1。"};
+function showProv(){const p=DS.providers[dsSel];
+  $$("#dsProv button").forEach(b=>{const k=b.dataset.p;b.classList.toggle("on",k===dsSel);b.setAttribute("aria-checked",k===dsSel);b.innerHTML=DS.providers[k].label+(DS.providers[k].hasKey?'<span class="dot" title="已保存 Key"></span>':"")});
+  $("#dsActive").textContent="当前启用："+DS.providers[DS.provider].label;
+  $("#dsConnBox").hidden=dsSel!=="tokenone";$("#dsConn").value="";$("#dsKey").value="";
+  $("#dsMask").textContent=p.hasKey?p.apiKeyMasked:"未设置";$("#dsUrl").value=p.baseUrl||"";$("#dsUrl").placeholder=p.defaultUrl||"https://example.com/v1";$("#dsModel").value=p.model||"";
+  $("#dsHint").textContent=DS_HINT[dsSel];$("#dsModelList").innerHTML=""}
+$("#dsProv").onclick=e=>{const b=e.target.closest("button");if(!b||!DS)return;dsSel=b.dataset.p;showProv();$("#dsMsg").textContent=""};
+$("#dsConn").oninput=()=>{try{const j=JSON.parse($("#dsConn").value.trim());if(j.url)$("#dsUrl").value=j.url;if(j.key)$("#dsKey").value=j.key;say($("#dsMsg"),"已识别连接串"+(j.key?"":"（未包含 Key，请单独填写）"),true)}catch{}};
+$("#dsModels").onclick=async()=>{say($("#dsMsg"),"读取中…",true);try{const j=await api("/api/admin/models?provider="+dsSel);$("#dsModelList").innerHTML=j.models.map(m=>`<option value="${m.replace(/"/g,"&quot;")}">`).join("");say($("#dsMsg"),`共 ${j.models.length} 个模型，点击模型框即可选择：`+j.models.filter(m=>/deepseek/i.test(m)).slice(0,6).join("、"),true)}catch(e){say($("#dsMsg"),e.message)}};
 async function loadCfg(){const c=await api("/api/admin/config");
-  $("#dsMask").textContent=c.deepseek.hasKey?c.deepseek.apiKeyMasked:"未设置";$("#dsUrl").value=c.deepseek.baseUrl;$("#dsModel").value=c.deepseek.model;
+  DS=c.deepseek;if(!dsSel)dsSel=DS.provider;showProv();
   $("#asrMask").textContent=c.asr.hasKey?c.asr.apiKeyMasked:"未设置";$("#asrUrl").value=c.asr.baseUrl;$("#asrModel").value=c.asr.model;
   $("#avName").value=c.avatar.name;$("#avGreet").value=c.avatar.greeting;$("#avPersona").value=c.avatar.persona;$("#avLimit").value=c.avatar.dailyLimit}
 const put=b=>api("/api/admin/config",{method:"PUT",body:JSON.stringify(b)});
-$("#dsSave").onclick=async()=>{try{await put({deepseek:{apiKey:$("#dsKey").value,baseUrl:$("#dsUrl").value,model:$("#dsModel").value}});$("#dsKey").value="";say($("#dsMsg"),"已保存",true);loadCfg()}catch(e){say($("#dsMsg"),e.message)}};
-$("#dsClear").onclick=async()=>{if(!confirm("清除后数字人将无法回答，确定？"))return;await put({deepseek:{clearKey:true}});say($("#dsMsg"),"已清除",true);loadCfg()};
-$("#dsTest").onclick=async()=>{say($("#dsMsg"),"测试中…",true);try{const j=await api("/api/admin/test-key",{method:"POST"});say($("#dsMsg"),"连接成功："+(j.reply||"").slice(0,60),true)}catch(e){say($("#dsMsg"),e.message)}};
+$("#dsSave").onclick=async()=>{try{await put({deepseek:{provider:dsSel,apiKey:$("#dsKey").value,baseUrl:$("#dsUrl").value,model:$("#dsModel").value}});await loadCfg();say($("#dsMsg"),"已保存，数字人现在使用："+DS.providers[dsSel].label,true)}catch(e){say($("#dsMsg"),e.message)}};
+$("#dsClear").onclick=async()=>{if(!confirm("清除这个通道的 Key？如果它正在启用，数字人将无法回答。"))return;await put({deepseek:{provider:dsSel,clearKey:true,activate:false}});await loadCfg();say($("#dsMsg"),"已清除该通道的 Key",true)};
+$("#dsTest").onclick=async()=>{say($("#dsMsg"),"测试中…",true);try{const j=await api("/api/admin/test-key?provider="+dsSel,{method:"POST"});say($("#dsMsg"),`连接成功（${j.provider}）：`+(j.reply||"").slice(0,60),true)}catch(e){say($("#dsMsg"),e.message)}};
 $("#asrSave").onclick=async()=>{try{await put({asr:{apiKey:$("#asrKey").value,baseUrl:$("#asrUrl").value,model:$("#asrModel").value}});$("#asrKey").value="";say($("#asrMsg"),"已保存",true);loadCfg()}catch(e){say($("#asrMsg"),e.message)}};
 $("#asrClear").onclick=async()=>{await put({asr:{clearKey:true}});say($("#asrMsg"),"已清除",true);loadCfg()};
 $("#avSave").onclick=async()=>{try{await put({avatar:{name:$("#avName").value,greeting:$("#avGreet").value,persona:$("#avPersona").value,dailyLimit:$("#avLimit").value}});say($("#avMsg"),"已保存",true)}catch(e){say($("#avMsg"),e.message)}};

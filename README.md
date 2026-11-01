@@ -43,6 +43,7 @@ docker run -d --name nexai-salon --restart unless-stopped -p 8080:80 -v /opt/sal
 - 页面最下方“管理员登录”进入 `/admin/`：上传语音实录（课堂实录、讲座培训、企业沟通）或文字稿、校对转写、配置 DeepSeek API Key 与模型、设置数字人人设与每日对话上限、维护 Skill 商店、修改密码。
 - 管理员初始密码：在 Portainer 环境变量里设置 `ADMIN_PASSWORD`；不设置则首次启动随机生成，打印在容器日志，并写入 `/opt/salon/admin-initial-password.txt`，首次登录后请修改。
 - DeepSeek 没有语音转写接口。音频要自动转文字，需要在“模型与转写”里另配一个 OpenAI 兼容的 `/audio/transcriptions` 服务（如硅基流动 SenseVoice）；也可以用千问录音导出文字稿后直接粘贴。
+- 对话模型支持三种接入：DeepSeek 官方（https://api.deepseek.com）、TokenOne 中转站（NewAPI，https://token.agentone.work，自动补 /v1，可直接粘贴 `newapi_channel_conn` 连接串）、自定义 OpenAI 兼容接口；每种各存一套 Key，点“保存并启用”切换，“获取模型列表”可读取可用模型。
 - API Key 只保存在服务器 `/data/config.json`，界面只显示脱敏后的值，前端接口不返回 Key。
 - 本地运行：`cd server && npm ci && PUBLIC_DIR=../dist DATA_DIR=./data PORT=8080 node server.js`。
 
