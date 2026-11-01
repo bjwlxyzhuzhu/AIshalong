@@ -1,0 +1,19 @@
+{
+  "name": "nexai-salon-server",
+  "private": true,
+  "version": "1.0.0",
+  "description": "NexAI 创新工坊：静态站点 + 数字人 / 知识库 / Skill 商店后台",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "compression": "1.8.1",
+    "express": "4.21.2",
+    "multer": "2.0.2"
+  }
+}

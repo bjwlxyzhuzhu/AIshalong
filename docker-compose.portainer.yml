@@ -5,11 +5,16 @@ services:
     restart: unless-stopped
     ports:
       - "8080:80"
+    environment:
+      - TZ=Asia/Shanghai
+      # 管理员初始密码（可选）。不填则首次启动随机生成，见容器日志或 /opt/salon/admin-initial-password.txt
+      # - ADMIN_PASSWORD=请改成你自己的强密码
     volumes:
+      # 数字人知识库、DeepSeek Key、管理员账号都保存在这里，升级镜像不会丢
       - /opt/salon:/data
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1/"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1/healthz"]
       interval: 30s
       timeout: 3s
       retries: 3
-      start_period: 5s
+      start_period: 10s

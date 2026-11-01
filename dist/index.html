@@ -125,6 +125,67 @@
     .work-links .work-dl:hover{background:#a84016;border-color:#a84016}
     @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:720px){.works-grid{grid-template-columns:1fr}.t-full{display:none}.t-short{display:inline}.nav .motion{display:none}}
+    /* Skill 商店 */
+    .skill-howto{display:flex;flex-direction:column;gap:2px;font-size:13px;line-height:1.7;color:#6c5d50;background:#fbefe6;border-radius:14px;padding:12px 16px;margin-bottom:14px}
+    .skill-howto b{color:#a84016;font-weight:500}
+    .skill-filter{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+    .skill-filter button{font-size:13px;padding:6px 14px;border-radius:99px;border:1px solid #d8cabc;background:#fff;cursor:pointer}
+    .skill-filter button.on{background:#261c16;color:#fff;border-color:#261c16}
+    .skill-card h3{font-size:16.5px}
+    .skill-feat{list-style:none;margin:8px 0 0;font-size:12.5px;color:#6c5d50;line-height:1.7}
+    .skill-feat li{padding-left:14px;position:relative}.skill-feat li::before{content:"";position:absolute;left:2px;top:.7em;width:5px;height:5px;border-radius:50%;background:#f26a32}
+    .work-links button{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:7px 12px;border-radius:99px;border:1px solid #d8cabc;color:#261c16;background:#fff;cursor:pointer;transition:background .2s,color .2s}
+    .work-links button svg{width:14px;height:14px}.work-links button:hover{background:#261c16;color:#fff;border-color:#261c16}
+    .work-links button.done{background:#2f9c6a;color:#fff;border-color:#2f9c6a}
+    /* 数字人 */
+    .dh{position:absolute;z-index:9;right:var(--gutter);bottom:150px;display:flex;flex-direction:column;align-items:flex-end;gap:12px;pointer-events:none}
+    .dh>*{pointer-events:auto}
+    .dh-avatar{position:relative;width:92px;height:92px;border-radius:50%;border:3px solid rgba(255,255,255,.9);padding:0;background:#fff;overflow:visible;cursor:pointer;box-shadow:0 14px 34px -10px rgba(60,20,0,.55);animation:dh-float 4.5s ease-in-out infinite;transition:transform .3s}
+    .dh-avatar:hover{transform:scale(1.06)}
+    .dh-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 18%;display:block}
+    .dh-online{position:absolute;right:4px;bottom:6px;width:16px;height:16px;border-radius:50%;background:#3ad07a;border:3px solid #fff}
+    .dh-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(255,255,255,.75);opacity:0;pointer-events:none}
+    .dh.talking .dh-ring{animation:dh-pulse 1.1s ease-out infinite}
+    @keyframes dh-float{0%,100%{translate:0 0}50%{translate:0 -7px}}
+    @keyframes dh-pulse{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.35)}}
+    .dh-bubble{position:relative;max-width:260px;padding:12px 30px 12px 14px;font-size:13.5px;line-height:1.65;color:#261c16;border-radius:16px 16px 4px 16px;background:rgba(255,255,255,.72);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border:1px solid rgba(255,255,255,.7);box-shadow:0 18px 40px -18px rgba(60,20,0,.5);cursor:pointer;animation:dh-in .45s cubic-bezier(.2,.8,.2,1)}
+    .dh-bubble-x{position:absolute;right:6px;top:4px;border:0;background:none;font-size:16px;color:#8a7a6d;cursor:pointer}
+    @keyframes dh-in{from{opacity:0;transform:translateY(10px) scale(.96)}}
+    .dh-panel{position:fixed;right:var(--gutter);bottom:24px;width:min(400px,calc(100vw - 32px));height:min(600px,calc(100svh - 120px));display:flex;flex-direction:column;border-radius:24px;overflow:hidden;color:#261c16;background:rgba(255,255,255,.7);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid rgba(255,255,255,.75);box-shadow:0 30px 80px -24px rgba(40,14,0,.6);animation:dh-in .4s cubic-bezier(.2,.8,.2,1);z-index:12}
+    .dh-panel[hidden]{display:none}
+    .dh.open .dh-avatar{opacity:0;pointer-events:none}
+    .dh-head{display:flex;align-items:center;gap:10px;padding:14px 14px 12px;border-bottom:1px solid rgba(38,28,22,.08)}
+    .dh-head img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 18%;border:2px solid #fff}
+    .dh-head div{flex:1;min-width:0}.dh-head b{display:block;font-size:15px;font-weight:500}.dh-head small{display:block;font-size:11.5px;color:#76685a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .dh-voice,.dh-close{width:34px;height:34px;border-radius:50%;border:1px solid rgba(38,28,22,.12);background:rgba(255,255,255,.6);cursor:pointer;font-size:16px;flex:none}
+    .dh-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+    .dh-msg{max-width:86%;padding:10px 13px;border-radius:16px;font-size:14px;line-height:1.7;word-break:break-word}
+    .dh-msg.bot{align-self:flex-start;background:rgba(255,255,255,.85);border-bottom-left-radius:4px;box-shadow:0 4px 14px -8px rgba(60,20,0,.3)}
+    .dh-msg.me{align-self:flex-end;background:#261c16;color:#fff;border-bottom-right-radius:4px}
+    .dh-msg.err{background:#fde8e4;color:#a33}
+    .dh-src{margin-top:6px;font-size:11.5px;color:#a84016}
+    .dh-typing{display:inline-flex;gap:4px}.dh-typing i{width:6px;height:6px;border-radius:50%;background:#b8a898;animation:dh-dot 1s infinite}.dh-typing i:nth-child(2){animation-delay:.15s}.dh-typing i:nth-child(3){animation-delay:.3s}
+    @keyframes dh-dot{50%{transform:translateY(-4px);opacity:.5}}
+    .dh-quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px}
+    .dh-quick[hidden]{display:none}
+    .dh-quick button{font-size:12.5px;padding:6px 11px;border-radius:99px;border:1px solid rgba(168,64,22,.25);background:rgba(255,255,255,.7);color:#a84016;cursor:pointer}
+    .dh-form{display:flex;gap:8px;align-items:flex-end;padding:10px 12px;border-top:1px solid rgba(38,28,22,.08)}
+    .dh-form textarea{flex:1;resize:none;border:1px solid rgba(38,28,22,.15);border-radius:14px;padding:9px 12px;font:inherit;font-size:14px;line-height:1.5;background:rgba(255,255,255,.85);outline:none;max-height:110px}
+    .dh-form textarea:focus{border-color:#f26a32}
+    .dh-form button{width:40px;height:40px;border-radius:50%;border:0;background:#f26a32;color:#fff;cursor:pointer;display:grid;place-items:center;flex:none}
+    .dh-form button svg{width:18px;height:18px}
+    .dh-note{font-size:10.5px;color:#8a7a6d;text-align:center;padding:0 12px 10px}
+    .admin-entry{position:absolute;z-index:6;left:50%;bottom:8px;transform:translateX(-50%);font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.06em;transition:color .2s}
+    .admin-entry:hover{color:#fff}
+    @media(max-width:720px){
+      .dh{right:16px;bottom:58px}
+      .dh-avatar{width:58px;height:58px;border-width:2px}.dh-online{width:12px;height:12px;right:1px;bottom:3px;border-width:2px}
+      .dh-bubble{max-width:200px;font-size:12.5px}
+      .dh-panel{right:8px;left:8px;bottom:8px;width:auto;height:min(78svh,620px)}
+      .edition:last-child{padding-right:70px!important}
+      .editions{bottom:30px}
+      .admin-entry{bottom:6px}
+    }
   </style>
   <script type="importmap">{"imports":{"three":"./portal-assets/vendor/three.module.js","three/addons/":"./portal-assets/vendor/addons/"}}</script>
 </head>
@@ -145,6 +206,7 @@
         <button class="brand__menu" id="menu-toggle" type="button" aria-label="打开菜单 / Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
       </div>
       <button class="software-trigger lecturer-trigger" id="works-open" type="button" aria-haspopup="dialog"><span class="t-full">智能体作品</span><span class="t-short">作品</span></button>
+      <button class="software-trigger lecturer-trigger" id="skills-open" type="button" aria-haspopup="dialog"><span class="t-full">Skill 商店</span><span class="t-short">技能</span></button>
       <button class="software-trigger lecturer-trigger" id="lecturer-open" type="button" aria-haspopup="dialog"><span class="t-full">讲师介绍</span><span class="t-short">讲师</span></button>
       <button class="software-trigger" id="software-open" type="button" aria-haspopup="dialog"><span class="t-full">软件链接 <span lang="en">↗</span></span><span class="t-short">软件</span></button>
     </header>
@@ -167,6 +229,27 @@
       <p class="menu__foot">从对话，到创造。<br><span lang="en">One idea. More possibilities.</span></p>
     </nav>
   </main>
+  <!-- 数字人 -->
+  <div class="dh" id="dh">
+    <div class="dh-bubble" id="dh-bubble" hidden><button class="dh-bubble-x" type="button" aria-label="关闭提示">×</button><span id="dh-greet">你好，我是朱丽叶老师的数字分身，有问题可以问我。</span></div>
+    <button class="dh-avatar" id="dh-open" type="button" aria-label="打开朱丽叶老师数字分身对话"><img id="dh-img" src="./portal-assets/avatar-1.webp" alt="朱丽叶老师数字分身"><i class="dh-online"></i><span class="dh-ring"></span></button>
+    <section class="dh-panel" id="dh-panel" aria-label="数字人对话" hidden>
+      <header class="dh-head"><img id="dh-img2" src="./portal-assets/avatar-1.webp" alt=""><div><b id="dh-name">朱丽叶 · 数字分身</b><small id="dh-status">基于朱老师的课堂、讲座与企业沟通实录</small></div><button class="dh-voice" id="dh-voice" type="button" title="语音播报" aria-pressed="false">🔈</button><button class="dh-close" id="dh-close" type="button" aria-label="关闭">×</button></header>
+      <div class="dh-msgs" id="dh-msgs"></div>
+      <div class="dh-quick" id="dh-quick"><button type="button">AI 培训都讲哪些内容？</button><button type="button">怎么开发一个教学智能体？</button><button type="button">千问录音纪要怎么用？</button></div>
+      <form class="dh-form" id="dh-form"><textarea id="dh-input" rows="1" placeholder="问朱老师的数字分身…" maxlength="1000"></textarea><button type="submit" id="dh-send" aria-label="发送"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button></form>
+      <p class="dh-note">AI 生成内容，仅供参考；合作与报价请联系朱老师本人。</p>
+    </section>
+  </div>
+  <a class="admin-entry" href="./admin/" rel="nofollow">管理员登录</a>
+  <dialog class="software-dialog works-dialog skills-dialog" id="skills-dialog" aria-labelledby="skills-title">
+    <header class="software-head"><h2 id="skills-title">Skill 商店<small lang="en">朱劳斯在 SkillHub 上架的技能 · 一键下载安装</small></h2><button class="software-close" type="button" aria-label="关闭 Skill 商店 / Close">×</button></header>
+    <div class="software-body">
+      <div class="skill-howto"><b>两种安装方式</b><span>① 点“复制安装提示词”，粘贴给 WorkBuddy、Claude、Codex 等 AI 助手，它会自动安装；</span><span>② 点“下载 Zip”，解压后放进 AI 助手的 skills 目录。</span></div>
+      <div class="skill-filter" id="skill-filter"></div>
+      <div class="works-grid" id="skill-grid"><p class="software-note">正在加载…</p></div>
+    </div>
+  </dialog>
   <dialog class="software-dialog works-dialog" id="works-dialog" aria-labelledby="works-title">
     <header class="software-head"><h2 id="works-title">智能体作品<small lang="en">Agent showcase · demos &amp; source code</small></h2><button class="software-close" type="button" aria-label="关闭智能体作品 / Close">×</button></header>
     <div class="software-body"><p class="software-note">以下为教育系列作品墙中的智能体应用，可直接打开演示，或在 GitHub 查看源码。部分演示需要登录。</p>
@@ -176,13 +259,13 @@
   <dialog class="software-dialog lecturer-dialog" id="lecturer-dialog" aria-labelledby="lecturer-title">
     <header class="software-head"><h2 id="lecturer-title">讲师介绍<small lang="en">Workshop Speaker</small></h2><button class="software-close" type="button" aria-label="关闭讲师介绍 / Close">×</button></header>
     <div class="software-body lecturer-body">
-      <figure class="lecturer-portrait"><img src="./portal-assets/lecturer-portrait.webp" width="435" height="425" alt="朱丽叶老师 Lecturer Zhu Liye"><figcaption>朱丽叶 · 课程主讲<span lang="en">Zhu Liye · Workshop Speaker</span></figcaption></figure>
+      <figure class="lecturer-portrait"><img src="./portal-assets/lecturer-portrait.webp" width="900" height="900" alt="朱丽叶老师 Lecturer Zhu Liye"><figcaption>朱丽叶 · 课程主讲<span lang="en">Zhu Liye · Workshop Speaker</span></figcaption></figure>
       <div class="lecturer-copy">
-        <section><h3>教育与公共服务<span lang="en">Education &amp; Public Service</span></h3><p>宝鸡文理学院计算机学院人工智能系教师，人工智能＋大学生创新创业团队负责人，民盟宝鸡文理学院总支副主委，陕西省科学家精神宣讲团成员。</p></section>
-        <section><h3>产业与社会职务<span lang="en">Industry &amp; Professional Roles</span></h3><p>同时担任宝鸡市人工智能产业促进中心秘书长、宝鸡低空智能飞行研究院执行院长、秦创原机器人产业聚集区特聘专家。</p></section>
-        <section><h3>导师与专家<span lang="en">Mentoring &amp; Expert Service</span></h3><p>陕西省创业导师、西安市创业导师、西安市科技局专家，宝鸡市首批青年工人技能成长导师，宝鸡市青年岗位能手。</p></section>
-        <section><h3>专业成果<span lang="en">Professional Achievements</span></h3><p>网络工程师、多媒体应用设计师、跨境电子商务师；教育部师生实践活动典型案例指导教师，省级本科教学案例、校级课程思政示范中心负责人，主持教育厅科研计划项目一项，获校级教师教学创新大赛特等奖，指导学生获得中国国际大学生创新大赛、挑战杯等 A 类大赛国家级 15 项、省部级 150 余项。</p></section>
-        <div class="lecturer-tags"><span>AI Education</span><span>Innovation &amp; Entrepreneurship</span><span>Low-Altitude Intelligence</span><span>Competition Coaching</span></div>
+        <section><h3>个人简介<span lang="en">Profile</span></h3><p>朱丽叶，男，硕士，宝鸡文理学院计算机学院人工智能系教师。中国人工智能学会会员，人工智能＋大学生创新创业团队负责人，民盟宝鸡文理学院总支副主委，陕西省科学家精神宣讲团成员。</p></section>
+        <section><h3>社会兼职<span lang="en">Professional Roles</span></h3><p>兼任宝鸡市人工智能产业促进中心秘书长、宝鸡低空智能飞行研究院执行院长、秦创原机器人产业聚集区特聘专家，并担任陕西省创业导师、西安市创业导师、西安市科技局专家、宝鸡市首批青年工人技能成长导师。</p></section>
+        <section><h3>研究方向<span lang="en">Research Interests</span></h3><p>主要研究方向为大语言模型与多智能体协同、人工智能教育、创新创业教育、产教赛融合育人及智能制造。</p></section>
+        <section><h3>荣誉与成果<span lang="en">Honors &amp; Achievements</span></h3><p>获2026全国高校人工智能教育大会“AI教学创新与资源建设专项案例”特等奖、陕西省优秀创新创业导师、陕西省本科教学案例、陕西省高校精品资源（课件）、宝鸡市青年岗位能手等荣誉，25年至今受邀为西安、宝鸡、榆林等地的政企事业单位开展AI方向的讲座50余场。指导大学生获得国创赛、挑战杯等A+类榜单赛事国家级奖项15项、省部级186项，中小学生获得白名单赛事国家级9项，省部级86项。</p></section>
+        <div class="lecturer-tags"><span>LLM &amp; Multi-Agent</span><span>AI Education</span><span>Innovation &amp; Entrepreneurship</span><span>Intelligent Manufacturing</span></div>
       </div>
     </div>
   </dialog>
@@ -232,6 +315,55 @@
       });
       document.addEventListener('click',e=>{if(!e.target.closest('.edition--group'))groups.forEach(g=>set(g,false))});
       document.querySelectorAll('.menu__grouphead').forEach(b=>b.addEventListener('click',()=>{const li=b.closest('.menu__group');const open=!li.classList.contains('open');li.classList.toggle('open',open);b.setAttribute('aria-expanded',String(open))}));
+    })();
+  </script>
+  <script>
+    /* Skill 商店 */
+    (()=>{const d=document.querySelector('#skills-dialog'),grid=d.querySelector('#skill-grid'),flt=d.querySelector('#skill-filter');let all=[],cat='全部',loaded=false;
+      const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+      const EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg>',DL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>',CP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>';
+      function render(){const cats=['全部',...new Set(all.map(x=>x.category).filter(Boolean))];flt.innerHTML=cats.map(c=>`<button type="button" class="${c===cat?'on':''}">${esc(c)}</button>`).join('');
+        const list=all.filter(x=>cat==='全部'||x.category===cat);
+        grid.innerHTML=list.length?list.map((x,i)=>`<article class="work-card skill-card"><div class="work-top"><span class="work-cat">${esc(x.category||'技能')}</span><span class="work-build">${esc(x.version||'')}</span></div><h3>${esc(x.name)}</h3><p>${esc(x.summary)}</p>${(x.features||[]).length?`<ul class="skill-feat">${x.features.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>`:''}<div class="work-links">${x.download?`<a class="work-dl" href="${esc(x.download)}" target="_blank" rel="noopener noreferrer">${DL}下载 Zip</a>`:''}${x.install?`<button type="button" data-copy="${esc(x.install)}">${CP}复制安装提示词</button>`:''}${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">详情${EXT}</a>`:''}</div></article>`).join(''):'<p class="software-note">暂无技能。</p>'}
+      async function load(){if(loaded)return;try{const r=await fetch('/api/skills');if(!r.ok)throw 0;all=await r.json()}catch(e){try{all=await (await fetch('./portal-assets/skills.json')).json()}catch(e2){all=[]}}loaded=true;render()}
+      flt.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;cat=b.textContent;render()});
+      grid.addEventListener('click',async e=>{const b=e.target.closest('[data-copy]');if(!b)return;const t=b.dataset.copy;try{await navigator.clipboard.writeText(t)}catch(_){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}const o=b.innerHTML;b.textContent='已复制，粘贴给你的 AI 助手 ✓';b.classList.add('done');setTimeout(()=>{b.innerHTML=o;b.classList.remove('done')},2200)});
+      document.querySelector('#skills-open').addEventListener('click',()=>{d.showModal();load()});d.querySelector('.software-close').addEventListener('click',()=>d.close());
+      d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()}});})();
+
+    /* 数字人 */
+    (()=>{const $=s=>document.querySelector(s);const pick=Math.random()<.5?1:2;$('#dh-img').src=$('#dh-img2').src=`./portal-assets/avatar-${pick}.webp`;
+      const panel=$('#dh-panel'),msgs=$('#dh-msgs'),input=$('#dh-input'),bubble=$('#dh-bubble'),root=$('#dh');let hist=[],busy=false,voice=false,ready=null,greeting='';
+      const esc=t=>String(t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+      const md=t=>esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/^#{1,4}\s*(.+)$/gm,'<b>$1</b>').replace(/^\s*[-*]\s+/gm,'• ').replace(/\n/g,'<br>');
+      fetch('/api/avatar').then(r=>r.ok?r.json():null).then(j=>{if(!j)return;ready=j.ready;if(j.name)$('#dh-name').textContent=j.name;if(j.greeting){greeting=j.greeting;$('#dh-greet').textContent=j.greeting}}).catch(()=>{ready=false});
+      setTimeout(()=>{if(panel.hidden&&!sessionStorageGet('dh-hide'))bubble.hidden=false},2600);
+      function sessionStorageGet(k){try{return sessionStorage.getItem(k)}catch(e){return null}}
+      function sessionStorageSet(k,v){try{sessionStorage.setItem(k,v)}catch(e){}}
+      bubble.querySelector('.dh-bubble-x').onclick=e=>{e.stopPropagation();bubble.hidden=true;sessionStorageSet('dh-hide','1')};
+      bubble.onclick=()=>open();
+      function add(role,html){const el=document.createElement('div');el.className='dh-msg '+role;el.innerHTML=html;msgs.appendChild(el);msgs.scrollTop=msgs.scrollHeight;return el}
+      function open(){panel.hidden=false;bubble.hidden=true;root.classList.add('open');if(!msgs.children.length)add('bot',md(greeting||$('#dh-greet').textContent));setTimeout(()=>input.focus(),80)}
+      $('#dh-open').onclick=()=>panel.hidden?open():close();$('#dh-close').onclick=close;
+      function close(){panel.hidden=true;root.classList.remove('open');speechSynthesis&&speechSynthesis.cancel()}
+      $('#dh-voice').onclick=function(){voice=!voice;this.textContent=voice?'🔊':'🔈';this.setAttribute('aria-pressed',voice);if(!voice&&window.speechSynthesis)speechSynthesis.cancel()};
+      function speak(t){if(!voice||!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/[#*`>-]/g,'').slice(0,600));u.lang='zh-CN';u.rate=1.02;u.onstart=()=>root.classList.add('talking');u.onend=u.onerror=()=>root.classList.remove('talking');speechSynthesis.speak(u)}
+      $('#dh-quick').onclick=e=>{const b=e.target.closest('button');if(b){input.value=b.textContent;ask()}};
+      input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();ask()}});
+      input.addEventListener('input',()=>{input.style.height='auto';input.style.height=Math.min(110,input.scrollHeight)+'px'});
+      $('#dh-form').onsubmit=e=>{e.preventDefault();ask()};
+      async function ask(){const q=input.value.trim();if(!q||busy)return;busy=true;input.value='';input.style.height='auto';$('#dh-quick').hidden=true;add('me',esc(q));hist.push({role:'user',content:q});
+        const el=add('bot','<span class="dh-typing"><i></i><i></i><i></i></span>');root.classList.add('talking');let txt='',src=[];
+        try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist.slice(-10)})});
+          if(!r.ok){let j={};try{j=await r.json()}catch(_){}throw new Error(j.error||(r.status===404||r.status===405?'数字人服务暂未开通。':'暂时无法回答，请稍后再试。'))}
+          const rd=r.body.getReader(),dec=new TextDecoder();let buf='';
+          while(true){const {value,done}=await rd.read();if(done)break;buf+=dec.decode(value,{stream:true});let i;while((i=buf.indexOf('\n\n'))>=0){const l=buf.slice(0,i);buf=buf.slice(i+2);if(!l.startsWith('data:'))continue;let j;try{j=JSON.parse(l.slice(5))}catch(_){continue}if(j.sources)src=j.sources;if(j.t){txt+=j.t;el.innerHTML=md(txt);msgs.scrollTop=msgs.scrollHeight}if(j.error)throw new Error(j.error)}}
+          if(!txt)throw new Error('没有收到回答，请换个问法试试。');
+          if(src.length)el.insertAdjacentHTML('beforeend',`<div class="dh-src">参考实录：${src.map(s=>'《'+esc(s.title)+'》').join(' ')}</div>`);
+          hist.push({role:'assistant',content:txt});speak(txt)}
+        catch(err){el.innerHTML=esc(err.message||'出错了');el.classList.add('err');hist.pop()}
+        finally{busy=false;if(!voice)root.classList.remove('talking');msgs.scrollTop=msgs.scrollHeight}}
+      document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)close()});
     })();
   </script>
   <script type="module">

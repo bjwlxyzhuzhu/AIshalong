@@ -1,0 +1,194 @@
+[
+ {
+  "name": "朱劳斯AI创赛贯通社—OPC大学生科创训练营",
+  "slug": "kechuangying",
+  "category": "教育学习",
+  "version": "v1.0.1",
+  "summary": "规划、生成与改造 AI 创赛贯通社 OPC 大学生科创训练营 D1—D7 课程及配套产物。",
+  "features": [
+   "单日课纲、完整 PPT 与实操手册",
+   "课堂任务、作业与拍摄清单",
+   "真实问题项目孵化与科研论文路径",
+   "赛事适配、Demo Day 路演与结营材料"
+  ],
+  "url": "https://skillhub.cn/skills/user_19ceba97/kechuangying",
+  "download": "https://api.skillhub.cn/api/v1/download?slug=@user_19ceba97/kechuangying",
+  "install": "请根据 https://skillhub.cn/install/skillhub.md，安装 @user_19ceba97/kechuangying。"
+ },
+ {
+  "name": "朱劳斯高师院校智能体大赛助手",
+  "slug": "zhulaosi-2026-gaoxiao-jiaoshi-zhinengti-cailiao",
+  "category": "内容创作",
+  "version": "v1.0.3",
+  "summary": "为高师院校 / 中国教育技术协会教学智能体大赛制作全套参赛材料。",
+  "features": [
+   "对照评分规则写《智能体设计与应用说明书》",
+   "应用场景、成效及推广价值材料",
+   "原理、框架、流程图与双盲脱敏",
+   "部署包与 6–10 分钟带字幕展示视频"
+  ],
+  "url": "https://skillhub.cn/skills/user_19ceba97/zhulaosi-2026-gaoxiao-jiaoshi-zhinengti-cailiao",
+  "download": "https://api.skillhub.cn/api/v1/download?slug=@user_19ceba97/zhulaosi-2026-gaoxiao-jiaoshi-zhinengti-cailiao",
+  "install": "请根据 https://skillhub.cn/install/skillhub.md，安装 @user_19ceba97/zhulaosi-2026-gaoxiao-jiaoshi-zhinengti-cailiao。"
+ },
+ {
+  "name": "朱劳斯国创2026产业赛道助手",
+  "slug": "guochuang-2026-industry-assistant",
+  "category": "商业运营",
+  "version": "v1.0.1",
+  "summary": "读取项目材料，为 2026 国创产业赛道撮合企业命题并生成 Word 分析报告。",
+  "features": [
+   "资格与真实性核验",
+   "检索并精排官网企业命题",
+   "揭榜、企业对接与解题方案改写",
+   "成果转化组方案与可打印 Word 报告"
+  ],
+  "url": "https://skillhub.cn/skills/user_19ceba97/guochuang-2026-industry-assistant",
+  "download": "https://api.skillhub.cn/api/v1/download?slug=@user_19ceba97/guochuang-2026-industry-assistant",
+  "install": "请根据 https://skillhub.cn/install/skillhub.md，安装 @user_19ceba97/guochuang-2026-industry-assistant。"
+ },
+ {
+  "name": "朱劳斯陕西省教育科学十五五规划年度课题项目申报",
+  "slug": "shaanxi-edu-science-15th-five-year-application",
+  "category": "教育学习",
+  "version": "v1.0.1",
+  "summary": "陕西省教育科学“十五五”规划年度课题从选题到申请书、匿名活页成稿。",
+  "features": [
+   "选题诊断与最多 5 轮苏格拉底式访谈",
+   "政策与文献核验",
+   "三位专家模拟评分与 95 分质量门槛",
+   "官方申请评审书与匿名活页 Word 成稿"
+  ],
+  "url": "https://skillhub.cn/skills/user_19ceba97/shaanxi-edu-science-15th-five-year-application",
+  "download": "https://api.skillhub.cn/api/v1/download?slug=@user_19ceba97/shaanxi-edu-science-15th-five-year-application",
+  "install": "请根据 https://skillhub.cn/install/skillhub.md，安装 @user_19ceba97/shaanxi-edu-science-15th-five-year-application。"
+ },
+ {
+  "name": "朱劳斯国创路演陪练专家（2026）",
+  "slug": "guochuang-roadshow-coach",
+  "category": "教育学习",
+  "version": "v1.2.1",
+  "summary": "国创及同类创新创业赛事的路演与答辩训练陪练，内置 2026 官方十套评分表。",
+  "features": [
+   "材料体检与证据缺口分析",
+   "7 分钟路演稿生成与高分改写",
+   "PPT 逐页评委问题预测与 50 问模拟答辩",
+   "国赛级压力追问与赛前飞行检查"
+  ],
+  "url": "https://skillhub.cn/skills/user_19ceba97/guochuang-roadshow-coach",
+  "download": "https://api.skillhub.cn/api/v1/download?slug=@user_19ceba97/guochuang-roadshow-coach",
+  "install": "请根据 https://skillhub.cn/install/skillhub.md，安装 @user_19ceba97/guochuang-roadshow-coach。"
+ },
+ {
+  "name": "朱劳斯国创赛网评打磨专家",
+  "slug": "guochuangwangping",
+  "category": "办公效率",
+  "version": "v1.2.1",
+  "summary": "按指定评审规则解析国创 PDF/PPT，三评委模拟评分并输出逐页整改 Word 报告。",
+  "features": [
+   "分赛道三评委模拟评分",
+   "真实性与一票否决审计",
+   "逐页修改与 30—40 页网评版重构",
+   "支持陕西省人工智能 OPC 专项赛审查"
+  ],
+  "url": "https://skillhub.cn/skills/user_19ceba97/guochuangwangping",
+  "download": "https://api.skillhub.cn/api/v1/download?slug=@user_19ceba97/guochuangwangping",
+  "install": "请根据 https://skillhub.cn/install/skillhub.md，安装 @user_19ceba97/guochuangwangping。"
+ },
+ {
+  "name": "朱劳斯论文自检排版大师",
+  "slug": "academic-paper-master",
+  "category": "办公效率",
+  "version": "v1.0.1",
+  "summary": "检查并规范化 Word/WPS 论文的公式、上下标、单位、图表题与样式。",
+  "features": [
+   "识别假上标、假下标与单位符号问题",
+   "图题表题与样式规范化",
+   "不可编辑插图重建为 Mermaid / draw.io / SVG",
+   "不改动数据、结论与引用事实"
+  ],
+  "url": "https://skillhub.cn/skills/user_19ceba97/academic-paper-master",
+  "download": "https://api.skillhub.cn/api/v1/download?slug=@user_19ceba97/academic-paper-master",
+  "install": "请根据 https://skillhub.cn/install/skillhub.md，安装 @user_19ceba97/academic-paper-master。"
+ },
+ {
+  "name": "朱劳斯新文科大赛国赛网评助手",
+  "slug": "zhulaosi-xinwenke-wangping",
+  "category": "教育学习",
+  "version": "v1.0.3",
+  "summary": "新文科大赛实践创新报告与 PPT 的联合网评与打磨。",
+  "features": [
+   "锁定当届评分规则并查找官方模板",
+   "逐节逐页打磨与模拟评分",
+   "证据审计、科研配图与表格方案",
+   "按官方模板改写排版的 Word 报告"
+  ],
+  "url": "https://skillhub.cn/skills/user_19ceba97/zhulaosi-xinwenke-wangping",
+  "download": "https://api.skillhub.cn/api/v1/download?slug=@user_19ceba97/zhulaosi-xinwenke-wangping",
+  "install": "请根据 https://skillhub.cn/install/skillhub.md，安装 @user_19ceba97/zhulaosi-xinwenke-wangping。"
+ },
+ {
+  "name": "朱劳斯国创公务员公文排版大师",
+  "slug": "civil-service-gongwen-master",
+  "category": "内容创作",
+  "version": "v2.1.1",
+  "summary": "中文公文的文种判断、起草、修改讲评与可编辑 DOCX 排版。",
+  "features": [
+   "通知、请示、报告、函、纪要等写作",
+   "GB/T 9704 版式检查",
+   "公共事务实践训练与修改讲评",
+   "适配《人工智能时代的公文写作与公共事务实践》课程"
+  ],
+  "url": "https://skillhub.cn/skills/user_19ceba97/civil-service-gongwen-master",
+  "download": "https://api.skillhub.cn/api/v1/download?slug=@user_19ceba97/civil-service-gongwen-master",
+  "install": "请根据 https://skillhub.cn/install/skillhub.md，安装 @user_19ceba97/civil-service-gongwen-master。"
+ },
+ {
+  "name": "朱劳斯学术清润 · Claude 去水印",
+  "slug": "zhulaosi-scholar-polish",
+  "category": "教育学习",
+  "version": "v1.0.1",
+  "summary": "清理 Claude 生成学术文档中的不可见字符与来源元数据，并做学术化润色。",
+  "features": [
+   "检查并清理不可见字符与文档元数据",
+   "中英文正文学术化润色",
+   "保留事实、数据、引文与结论强度",
+   "不保证消除模型级文本水印"
+  ],
+  "url": "https://skillhub.cn/skills/user_19ceba97/zhulaosi-scholar-polish",
+  "download": "https://api.skillhub.cn/api/v1/download?slug=@user_19ceba97/zhulaosi-scholar-polish",
+  "install": "请根据 https://skillhub.cn/install/skillhub.md，安装 @user_19ceba97/zhulaosi-scholar-polish。"
+ },
+ {
+  "name": "青少年科学探究建模能力大赛助手",
+  "slug": "simcc-research-coach",
+  "category": "教育学习",
+  "version": "v1.5.0",
+  "summary": "通过苏格拉底式访谈，为 SIMCC 学生、家长、学校或教练完成选题与备赛方案。",
+  "features": [
+   "普及 / 拔尖分流与个人、整校选题",
+   "器材与能力匹配、官网规则核验",
+   "备考方案与模拟练习网页",
+   "成绩诊断与可打印分析报告"
+  ],
+  "url": "https://skillhub.cn/skills/user_19ceba97/simcc-research-coach",
+  "download": "https://api.skillhub.cn/api/v1/download?slug=@user_19ceba97/simcc-research-coach",
+  "install": "请根据 https://skillhub.cn/install/skillhub.md，安装 @user_19ceba97/simcc-research-coach。"
+ },
+ {
+  "name": "朱劳斯科学探究建模大赛复赛助手",
+  "slug": "zhulaosi-simcc-finals-assistant",
+  "category": "教育学习",
+  "version": "v1.1.1",
+  "summary": "面向全国青少年科学探究建模能力大赛复赛的自适应辅导。",
+  "features": [
+   "覆盖 A—F 各赛项要求",
+   "项目探究、限时测评与实时答辩",
+   "作品提交、设备检录与模拟题",
+   "按学段、省份、线上线下切换辅导"
+  ],
+  "url": "https://skillhub.cn/skills/user_19ceba97/zhulaosi-simcc-finals-assistant",
+  "download": "https://api.skillhub.cn/api/v1/download?slug=@user_19ceba97/zhulaosi-simcc-finals-assistant",
+  "install": "请根据 https://skillhub.cn/install/skillhub.md，安装 @user_19ceba97/zhulaosi-simcc-finals-assistant。"
+ }
+]
