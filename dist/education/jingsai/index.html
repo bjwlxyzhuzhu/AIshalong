@@ -1,62 +1,55 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="赛道一·竞赛训练营：三次课（选题→竞赛PPT→申报书与答辩），含 DeepSeek Harness + TokenOne + Claude Opus 5.5 实操"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
 <title>竞赛训练营 · 赛道一</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
-/* 布局：赛场跑道 —— 顶部进度轨 + 三站课程，每站一节「时间轴 + 互动工具」 */
+/* 布局：赛场跑道 —— 3D 粒子开场 + 三站课程，每站「3D 主视觉 + 时间轴 + 真实截图 + 互动工具」 */
 :root{
-  --bg:#EEF2EF;       /* 冷调纸面 */
-  --surface:#FAFCFA;
-  --ink:#0F2233;      /* 深海军蓝 */
-  --muted:#566673;
-  --line:#CED8D3;
-  --s1:#0E7A6E;       /* 第1站 青 */
-  --s2:#B2730F;       /* 第2站 奖牌金 */
-  --s3:#3F4FA8;       /* 第3站 靛 */
-  --warn:#B4362B;
-  --s1-soft:#D6EBE6; --s2-soft:#F3E4C6; --s3-soft:#DDE1F4;
-  --f-display:"Noto Serif SC","Songti SC","STSong",serif;
-  --f-body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
-  --f-mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+  --bg:#EEF2EF; --surface:#FAFCFA; --ink:#0F2233; --muted:#566673; --line:#CED8D3;
+  --s1:#0E7A6E; --s2:#B2730F; --s3:#3F4FA8; --warn:#B4362B;
+  --s1-soft:#D6EBE6; --s2-soft:#F3E4C6; --s3-soft:#DDE1F4; --stage:#0F2233;
+  --f-display:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC","SimSun",serif;
+  --f-body:"PingFang SC","Microsoft YaHei","Noto Sans SC","Source Han Sans SC",system-ui,sans-serif;
+  --f-mono:"SFMono-Regular","Cascadia Mono",Consolas,"Menlo",monospace;
   --r:10px;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0C151D;--surface:#121E28;--ink:#E3EAEE;--muted:#93A3AE;--line:#24333F;
   --s1:#3DBFAE;--s2:#E3A945;--s3:#8E9BEA;--warn:#F07A6E;
-  --s1-soft:#123A36;--s2-soft:#3A2C12;--s3-soft:#1F2650;color-scheme:dark}}
+  --s1-soft:#123A36;--s2-soft:#3A2C12;--s3-soft:#1F2650;--stage:#081018;color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0C151D;--surface:#121E28;--ink:#E3EAEE;--muted:#93A3AE;--line:#24333F;
   --s1:#3DBFAE;--s2:#E3A945;--s3:#8E9BEA;--warn:#F07A6E;
-  --s1-soft:#123A36;--s2-soft:#3A2C12;--s3-soft:#1F2650;color-scheme:dark}
+  --s1-soft:#123A36;--s2-soft:#3A2C12;--s3-soft:#1F2650;--stage:#081018;color-scheme:dark}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-.wrap{max-width:1120px;margin:0 auto}
-h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.25;margin:0}
-h2{font-size:clamp(26px,3.6vw,38px);font-weight:900}
-h3{font-size:20px;font-weight:600}
+.wrap{max-width:1160px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.25;margin:0;font-weight:900}
+h2{font-size:clamp(26px,3.6vw,38px)}
+h3{font-size:20px;font-weight:700}
 h4{margin:0;font-size:16px}
 p{margin:0}
 .mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
 .eyebrow{font-size:13px;letter-spacing:.14em;color:var(--muted);font-weight:700}
-.lead{color:var(--muted);max-width:62ch}
+.lead{color:var(--muted);max-width:64ch}
 section{padding-block:56px;border-top:1px solid var(--line)}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--s3);outline-offset:2px}
+img{max-width:100%;display:block}
 
 /* 顶栏 */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);
-  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));
-  padding-inline:max(16px,env(safe-area-inset-left,0px))}
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+  margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
 .bar .wrap{display:flex;align-items:center;gap:12px;min-height:54px;flex-wrap:wrap;padding-block:6px}
-.bar nav{display:flex;gap:4px;flex-wrap:wrap;flex:1;min-width:0}
+.bar nav{display:flex;gap:2px;flex-wrap:wrap;flex:1;min-width:0}
 .bar nav a{text-decoration:none;font-size:14px;padding:4px 10px;border-radius:99px;color:var(--muted)}
 .bar nav a:hover{background:var(--surface);color:var(--ink)}
-.brand{font-family:var(--f-display);font-weight:900;font-size:16px;white-space:nowrap}
+.brand{font-family:var(--f-display);font-weight:900;font-size:16px;white-space:nowrap;text-decoration:none}
+@media (max-width:760px){.bar nav{order:3;flex-basis:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-6px}.bar nav::-webkit-scrollbar{display:none}.bar nav a{white-space:nowrap}.bar .btn{margin-left:auto}}
 .btn{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);
   padding:6px 14px;border-radius:99px;cursor:pointer;white-space:nowrap}
 .btn:hover{border-color:var(--ink)}
@@ -72,24 +65,36 @@ body.editing [data-k]:focus{outline:2px solid var(--s2);background:color-mix(in 
 .editbar .btn{background:transparent;color:var(--bg);border-color:color-mix(in srgb,var(--bg) 40%,transparent)}
 .editbar .btn.primary{background:var(--s2);border-color:var(--s2);color:#fff}
 
+/* 3D 舞台 */
+.stage{position:relative;border-radius:14px;overflow:hidden;background:
+  radial-gradient(120% 90% at 70% 20%,color-mix(in srgb,var(--s3) 22%,var(--stage)) 0%,var(--stage) 70%);min-width:0}
+.stage canvas{display:block;width:100%;height:100%}
+.stage .cap{position:absolute;left:14px;bottom:12px;right:14px;color:#E6EEF2;font-size:13px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;pointer-events:none}
+.stage .cap b{font-family:var(--f-display);font-size:16px}
+.stage .cap .pill{pointer-events:auto}
+.pill{font:inherit;font-size:12.5px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#E6EEF2;padding:3px 11px;border-radius:99px;cursor:pointer}
+.pill[aria-pressed="true"]{background:#E6EEF2;color:#0F2233;border-color:#E6EEF2}
+.stage.nogl{background:linear-gradient(135deg,var(--s1),var(--s3))}
+.stage.nogl canvas{display:none}
+
 /* 英雄区 */
-.hero{padding-block:48px 40px;display:grid;gap:28px}
-.hero h1{font-size:clamp(34px,6vw,68px);font-weight:900;letter-spacing:-.01em}
+.hero{padding-block:40px 36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:28px;align-items:center}
+.hero h1{font-size:clamp(34px,5.4vw,62px);letter-spacing:-.01em}
 .hero h1 em{font-style:normal;color:var(--s2)}
-.track{width:100%;height:auto;display:block}
-.track text{font-family:var(--f-body);fill:var(--ink)}
+.hero .stage{height:clamp(320px,46vw,460px)}
+@media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}}
 .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .kpi{border-top:3px solid var(--ink);padding-top:10px}
 .kpi .v{font-family:var(--f-mono);font-size:clamp(26px,4vw,40px);font-weight:600;line-height:1}
 .kpi .l{font-size:13px;color:var(--muted)}
 @media (max-width:720px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* 通用网格 */
+/* 通用 */
 .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 @media (max-width:860px){.grid2,.grid3{grid-template-columns:minmax(0,1fr)}}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;min-width:0}
-.stack{display:grid;gap:14px}
+.stack{display:grid;gap:14px;align-content:start}
 .tag{display:inline-block;font-size:12px;padding:1px 9px;border-radius:99px;border:1px solid currentColor;font-weight:700;letter-spacing:.04em}
 ul.clean{list-style:none;padding:0;margin:0;display:grid;gap:8px}
 ul.clean li{padding-left:16px;position:relative}
@@ -101,16 +106,34 @@ th{font-size:13px;color:var(--muted);font-weight:700;background:color-mix(in srg
 tr:last-child td{border-bottom:0}
 .src{font-size:12.5px;color:var(--muted)}
 
+/* 真实截图 */
+.shot{margin:0;display:grid;gap:8px;min-width:0}
+.shot button{all:unset;cursor:zoom-in;display:block;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--surface);
+  box-shadow:0 1px 0 var(--line);transition:transform .25s,box-shadow .25s}
+.shot button:hover{transform:translateY(-3px);box-shadow:0 12px 30px -12px rgba(15,34,51,.35)}
+.shot button:focus-visible{outline:2px solid var(--s3);outline-offset:2px}
+.shot img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top}
+.shot figcaption{font-size:13px;color:var(--muted);line-height:1.5}
+.shot figcaption b{color:var(--ink);font-weight:700}
+.wall{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+@media (max-width:960px){.wall{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.wall{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 /* 讲师 */
+.teacher{display:grid;grid-template-columns:220px minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.portrait{border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:1;background:var(--surface)}
+.portrait img{width:100%;height:100%;object-fit:cover}
+@media (max-width:960px){.teacher{grid-template-columns:160px minmax(0,1fr)}.teacher>.panel{grid-column:1/-1}}
+@media (max-width:520px){.teacher{grid-template-columns:minmax(0,1fr)}.portrait{max-width:180px}}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;padding:2px 10px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
 .cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
 .case{border-left:3px solid var(--s1);padding:4px 0 4px 14px}
 .case:nth-child(3n+2){border-color:var(--s2)} .case:nth-child(3n){border-color:var(--s3)}
 .case h4{font-size:15.5px}
 .case p{font-size:14px;color:var(--muted)}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font-size:13px;padding:2px 10px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
 
-/* 数据看板 */
+/* 数据 */
 .funnel{display:grid;gap:10px}
 .frow{display:grid;grid-template-columns:120px minmax(0,1fr) 110px;gap:10px;align-items:center;font-size:14px}
 .fbar{height:26px;background:color-mix(in srgb,var(--line) 50%,transparent);border-radius:4px;overflow:hidden}
@@ -118,7 +141,7 @@ tr:last-child td{border-bottom:0}
 .frow .num{text-align:right}
 @media (max-width:520px){.frow{grid-template-columns:84px minmax(0,1fr) 84px;font-size:13px}}
 
-/* 评分探索器 */
+/* 评分 */
 .seg{display:flex;flex-wrap:wrap;gap:6px}
 .seg button{font:inherit;font-size:13.5px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 12px;border-radius:6px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -134,17 +157,19 @@ tr:last-child td{border-bottom:0}
 .dim .num{font-size:18px;text-align:right}
 
 /* 课次 */
-.sess-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:end;margin-bottom:28px}
-.badge{font-family:var(--f-mono);font-weight:600;font-size:15px;color:#fff;background:var(--c);padding:10px 14px;border-radius:8px;line-height:1.2;text-align:center}
-.badge b{display:block;font-size:30px}
 .sess{--c:var(--s1);--soft:var(--s1-soft)}
 .sess.two{--c:var(--s2);--soft:var(--s2-soft)}
 .sess.three{--c:var(--s3);--soft:var(--s3-soft)}
-.sess h2{color:var(--ink)}
-.goal{background:var(--soft);border-radius:var(--r);padding:16px 18px;margin-bottom:24px}
+.sess-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:stretch;margin-bottom:24px}
+.sess-head .stage{min-height:260px}
+.sess-head .txt{display:grid;gap:14px;align-content:center}
+@media (max-width:860px){.sess-head{grid-template-columns:minmax(0,1fr)}}
+.badge{display:inline-flex;gap:10px;align-items:baseline;font-family:var(--f-mono);font-weight:600;font-size:14px;color:#fff;background:var(--c);padding:6px 14px;border-radius:8px;width:max-content}
+.badge b{font-size:22px}
+.goal{background:var(--soft);border-radius:var(--r);padding:16px 18px}
 .goal b{color:var(--c)}
 
-/* 90 分钟时间轴 */
+/* 时间轴 */
 .tl{display:flex;height:54px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
 .tl button{font:inherit;border:0;border-right:2px solid var(--bg);background:color-mix(in srgb,var(--c) var(--o,35%),var(--surface));
   color:var(--ink);cursor:pointer;min-width:0;padding:4px 6px;text-align:left;font-size:12.5px;line-height:1.3;overflow:hidden;position:relative}
@@ -153,45 +178,73 @@ tr:last-child td{border-bottom:0}
 .tl button.now::after{content:"";position:absolute;inset:auto 0 0 0;height:4px;background:var(--warn)}
 .tl .t{font-family:var(--f-mono);display:block;font-size:11.5px;opacity:.85}
 .tlscale{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11.5px;color:var(--muted);margin-top:4px}
-.seginfo{margin-top:14px;display:grid;grid-template-columns:minmax(0,1fr);gap:8px;border-left:3px solid var(--c);padding:4px 0 4px 16px;min-height:120px}
+.seginfo{margin-top:14px;display:grid;gap:8px;border-left:3px solid var(--c);padding:4px 0 4px 16px;min-height:120px}
 .seginfo .meta{font-family:var(--f-mono);font-size:13px;color:var(--c);font-weight:600}
 .seginfo h4{font-size:18px;font-family:var(--f-display)}
 .seginfo ul{margin:0;padding-left:20px}
 @media (max-width:640px){.tl{height:44px}.tl .lbl{display:none}}
 
-.block-title{display:flex;align-items:baseline;gap:10px;margin:36px 0 14px}
+.block-title{display:flex;align-items:baseline;gap:10px;margin:40px 0 14px;flex-wrap:wrap}
 .block-title h3{font-size:22px}
 .block-title .tag{color:var(--c)}
+.new{font-size:11px;font-weight:700;color:#fff;background:var(--warn);padding:1px 7px;border-radius:4px;letter-spacing:.06em}
 
-/* 三圈选题 */
+/* 三圈 */
 .venn{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
-.venn circle{mix-blend-mode:multiply;cursor:pointer;transition:opacity .25s, transform .25s;transform-origin:center;transform-box:fill-box}
+.venn circle{mix-blend-mode:multiply;cursor:pointer;transition:opacity .25s}
 :root[data-theme="dark"] .venn circle{mix-blend-mode:screen}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .venn circle{mix-blend-mode:screen}}
-.venn circle:hover{transform:scale(1.03)}
 .venn text{font-family:var(--f-body);fill:var(--ink);pointer-events:none}
 
-/* 六步逻辑 */
-.steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;position:relative}
+/* 六步 */
+.steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
 .steps button{font:inherit;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:10px 6px;cursor:pointer;text-align:center;font-size:14px;min-width:0}
 .steps button .n{display:block;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
 .steps button[aria-pressed="true"]{border-color:var(--c);background:var(--soft)}
 .steps button.done{border-color:var(--c)}
 @media (max-width:640px){.steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.stepcard{margin-top:12px}
 .prompt{font-family:var(--f-mono);font-size:13px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;white-space:pre-wrap;word-break:break-word}
 .copy{float:right;margin:-4px -4px 6px 8px;font-size:12px;padding:3px 10px}
 
 /* PPT 页序 */
 .pages{display:flex;flex-wrap:wrap;gap:4px}
-.pg{width:44px;height:33px;border-radius:3px;font-family:var(--f-mono);font-size:11px;display:grid;place-items:center;color:#fff;cursor:default;
+.pg{width:44px;height:33px;border-radius:3px;font-family:var(--f-mono);font-size:11px;display:grid;place-items:center;color:#fff;
   opacity:0;transform:translateY(6px);animation:pgIn .4s forwards}
 @keyframes pgIn{to{opacity:1;transform:none}}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;margin-top:10px}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .legend i{width:12px;height:12px;border-radius:2px;display:inline-block}
 
-/* 评委打分 */
+/* 工具实操 */
+.toolwrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:960px){.toolwrap{grid-template-columns:minmax(0,1fr)}}
+.toolwrap .stage{height:360px;cursor:zoom-in}
+.tsteps{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tsteps button{font:inherit;font-size:13.5px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 10px;border-radius:8px;cursor:pointer;display:inline-flex;gap:6px;align-items:baseline}
+.tsteps button .n{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.tsteps button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#fff}
+.tsteps button[aria-pressed="true"] .n{color:#fff}
+.tpanel .meta{font-family:var(--f-mono);font-size:13px;color:var(--c);font-weight:600}
+.tpanel h4{font-family:var(--f-display);font-size:20px;margin-top:4px}
+.tpanel ol{margin:10px 0 0;padding-left:20px;display:grid;gap:6px}
+.kv{display:grid;gap:6px;margin-top:12px}
+.kv div{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:13.5px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.kv span{color:var(--muted)}
+.kv code{font-family:var(--f-mono);word-break:break-all}
+.kv .btn{font-size:12px;padding:2px 10px}
+.thumbs{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.thumbs button{all:unset;cursor:zoom-in;width:140px;max-width:46%;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.thumbs img{aspect-ratio:16/10;object-fit:cover;object-position:top;width:100%}
+.warnbox{border:1px solid var(--warn);border-radius:var(--r);padding:16px 18px}
+.warnbox h4{color:var(--warn)}
+.fix{display:grid;gap:10px}
+.fix div{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:12px;font-size:14px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+.fix div:last-child{border-bottom:0;padding-bottom:0}
+.fix b{color:var(--ink)}
+@media (max-width:560px){.fix div{grid-template-columns:minmax(0,1fr);gap:2px}}
+.ptabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+
+/* 评委 */
 .slider{display:grid;grid-template-columns:110px minmax(0,1fr) 54px;gap:10px;align-items:center;font-size:14px}
 .slider input{width:100%;accent-color:var(--c)}
 .judges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
@@ -202,37 +255,43 @@ tr:last-child td{border-bottom:0}
 .verdict .num{font-size:34px;font-weight:600;color:var(--c)}
 @media (max-width:520px){.judges{grid-template-columns:minmax(0,1fr)}}
 
-/* 路演节奏 */
+/* 路演 */
 .pitch{display:flex;height:40px;border-radius:6px;overflow:hidden}
 .pitch div{display:grid;place-items:center;font-size:12px;color:#fff;min-width:0;overflow:hidden;white-space:nowrap;border-right:2px solid var(--bg)}
 .pitch div:last-child{border-right:0}
 .pitch-play{position:relative}
 .pitch-head{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--warn);left:0}
 
-/* 答辩卡片 */
+/* 答辩卡 */
 .qcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
 .qc{perspective:900px;height:160px;cursor:pointer;border:0;padding:0;background:none;font:inherit;color:inherit;text-align:left}
 .qc .in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
 .qc.flip .in{transform:rotateY(180deg)}
-.qc .f,.qc .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px;overflow:auto}
+.qc .f,.qc .b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px;overflow:auto}
 .qc .f{background:var(--surface);border:1px solid var(--line)}
 .qc .b{background:var(--c);color:#fff;transform:rotateY(180deg);font-size:13.5px}
 .qc .k{font-size:12px;color:var(--c);font-weight:700;letter-spacing:.06em}
-.qc .f p{font-family:var(--f-display);font-size:17px;font-weight:600;line-height:1.45}
+.qc .f p{font-family:var(--f-display);font-size:17px;font-weight:700;line-height:1.45}
 
 /* 计时器 */
 .timer{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center}
 .clock{font-family:var(--f-mono);font-size:clamp(44px,8vw,80px);font-weight:600;line-height:1}
 @media (max-width:640px){.timer{grid-template-columns:minmax(0,1fr)}}
-
-.redline{border:1px solid var(--warn);border-radius:var(--r);padding:16px 18px;color:var(--ink)}
+.redline{border:1px solid var(--warn);border-radius:var(--r);padding:16px 18px}
 .redline h4{color:var(--warn)}
 
 footer{padding-block:40px 90px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line)}
 .toast{position:fixed;top:calc(64px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));z-index:40;background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none}
 .toast.on{opacity:1}
 
-/* 进场动效：静止态可见，仅轻微位移 */
+/* 大图查看 */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(6,12,18,.82);display:grid;place-items:center;
+  padding:calc(20px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb figure{margin:0;display:grid;gap:10px;max-width:min(1200px,100%);max-height:100%}
+.lb img{max-height:calc(100vh - 140px);width:auto;max-width:100%;border-radius:10px;margin:0 auto;background:#fff}
+.lb figcaption{color:#E6EEF2;font-size:14px;text-align:center}
+.lb .x{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:calc(14px + env(safe-area-inset-right,0px));background:#E6EEF2;color:#0F2233;border:0;width:40px;height:40px;border-radius:50%;font-size:22px;cursor:pointer}
+
 .rise{animation:rise .8s both}
 @keyframes rise{from{transform:translateY(14px);opacity:.001}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.pg{opacity:1;transform:none}html{scroll-behavior:auto}}
@@ -240,16 +299,16 @@ footer{padding-block:40px 90px;color:var(--muted);font-size:13.5px;border-top:1p
 
 <header class="bar">
   <div class="wrap">
-    <span class="brand">赛道一 · 竞赛训练营</span>
+    <a class="brand" href="#top">赛道一 · 竞赛训练营</a>
     <nav aria-label="页面导航">
       <a href="#teacher">讲师</a><a href="#data">赛事数据</a><a href="#rules">评分规则</a>
-      <a href="#s1">第1次课</a><a href="#s2">第2次课</a><a href="#s3">第3次课</a><a href="#timer">课堂计时</a>
+      <a href="#s1">第1次课</a><a href="#s2">第2次课</a><a href="#tools">工具实操</a><a href="#s3">第3次课</a><a href="#timer">计时</a>
     </nav>
     <button class="btn" id="editBtn" aria-pressed="false">编辑内容</button>
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="top">
 
 <!-- ========== 英雄区 ========== -->
 <div class="hero">
@@ -257,29 +316,28 @@ footer{padding-block:40px 90px;color:var(--muted);font-size:13.5px;border-top:1p
     <span class="eyebrow">NEXAI 创新工坊 · 竞赛训练营课程大纲</span>
     <h1>三次课，把一个想法<br>做成<em>能拿奖</em>的项目</h1>
     <p class="lead">6 课时、3 次课、每次 90 分钟。一条线贯通：选题成形 → PPT 成稿 → 文本与答辩。每次课都拿真实项目做案例，学生当堂用 AI 工具产出成果，带着作品下课。</p>
+    <div class="kpis">
+      <div class="kpi"><div class="v" data-count="6">6</div><div class="l">课时 · 分 3 次上</div></div>
+      <div class="kpi"><div class="v" data-count="270">270</div><div class="l">分钟面授</div></div>
+      <div class="kpi"><div class="v" data-count="4">4</div><div class="l">份带走的成果</div></div>
+      <div class="kpi"><div class="v" data-count="8">8</div><div class="l">步接入 Opus 5.5</div></div>
+    </div>
   </div>
-  <svg class="track" viewBox="0 0 1000 150" role="img" aria-label="课程进度跑道：第1次课选题、第2次课PPT、第3次课答辩">
-    <path id="trackPath" d="M40 95 C 200 20, 330 20, 500 80 S 800 140, 960 60" fill="none" stroke="var(--line)" stroke-width="14" stroke-linecap="round"/>
-    <path id="trackRun" d="M40 95 C 200 20, 330 20, 500 80 S 800 140, 960 60" fill="none" stroke="var(--ink)" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
-    <g font-size="15" font-weight="700">
-      <circle cx="40" cy="95" r="11" fill="var(--s1)"/><text x="40" y="132" text-anchor="middle">起点：一个想法</text>
-      <circle cx="330" cy="40" r="15" fill="var(--s1)"/><text x="330" y="20" text-anchor="middle">第1次 · 项目雏形卡</text>
-      <circle cx="655" cy="113" r="15" fill="var(--s2)"/><text x="655" y="148" text-anchor="middle">第2次 · PPT 初稿</text>
-      <circle cx="960" cy="60" r="15" fill="var(--s3)"/><text x="940" y="28" text-anchor="end">第3次 · 申报书 + 答辩</text>
-    </g>
-    <circle id="runner" r="8" fill="var(--warn)" cx="40" cy="95"/>
-  </svg>
-  <div class="kpis">
-    <div class="kpi"><div class="v" data-count="6">6</div><div class="l">课时 · 分 3 次上</div></div>
-    <div class="kpi"><div class="v" data-count="270">270</div><div class="l">分钟面授 · 每次 90′</div></div>
-    <div class="kpi"><div class="v" data-count="4">4</div><div class="l">份带走的成果</div></div>
-    <div class="kpi"><div class="v" data-count="3">3</div><div class="l">位 AI 模拟评委</div></div>
+  <div class="stage" id="heroStage">
+    <canvas id="heroCv" aria-label="3D 粒子动画：想法聚合成选题、展开成 PPT 页面、最后凝成奖杯"></canvas>
+    <div class="cap"><b id="heroLbl">想法</b>
+      <button class="pill" data-m="0" type="button">想法</button>
+      <button class="pill" data-m="1" type="button">第1次 · 选题成形</button>
+      <button class="pill" data-m="2" type="button">第2次 · PPT 成稿</button>
+      <button class="pill" data-m="3" type="button">第3次 · 答辩登台</button>
+    </div>
   </div>
 </div>
 
 <!-- ========== 讲师 ========== -->
 <section id="teacher">
-  <div class="grid2">
+  <div class="teacher">
+    <div class="portrait"><img src="img/lecturer.webp" alt="主讲教师照片" loading="lazy" width="900" height="900"></div>
     <div class="stack">
       <span class="eyebrow">讲师与实践底子</span>
       <h2>不是讲方法论，是讲做过的项目</h2>
@@ -300,6 +358,10 @@ footer{padding-block:40px 90px;color:var(--muted);font-size:13.5px;border-top:1p
       <p class="src" style="margin-top:12px">学科方向：教育、文传、音乐、研究生、国传、计算机。数据来自讲师网站与项目运行记录。</p>
     </div>
   </div>
+
+  <div class="block-title" style="--c:var(--s1)"><h3>作品墙：10 个平台的真实界面</h3><span class="tag">点图看大图</span></div>
+  <div class="wall" id="wall"></div>
+
   <div class="block-title" style="--c:var(--s1)"><h3>课上会拆解的真实案例</h3><span class="tag">案例库</span></div>
   <div class="cases">
     <div class="case"><h4>掐丝珐琅钛杯《铜纹栖钛，周韵珐琅》</h4><p>宝鸡钛产业 × 非遗工艺的国创赛遴选项目。用来讲选题的"在地性"和逐页打磨到 95 分以上的过程。</p></div>
@@ -328,9 +390,7 @@ footer{padding-block:40px 90px;color:var(--muted);font-size:13.5px;border-top:1p
       <p class="src" style="margin-top:12px">条形按与"报名学生"同一刻度绘制；院校与总决赛条形过短，已设最小可见宽度。</p>
     </div>
     <div class="panel stack">
-      <div>
-        <div class="kpi" style="border-color:var(--warn)"><div class="v num" style="color:var(--warn)">≈ 0.076%</div><div class="l">报名项目进入总决赛的比例（4720 ÷ 619 万）</div></div>
-      </div>
+      <div class="kpi" style="border-color:var(--warn)"><div class="v num" style="color:var(--warn)">≈ 0.076%</div><div class="l">报名项目进入总决赛的比例（4720 ÷ 619 万）</div></div>
       <div class="grid2" style="gap:14px">
         <div class="kpi"><div class="v" data-count="161">161</div><div class="l">个国家和地区参赛</div></div>
         <div class="kpi"><div class="v" data-count="5">5</div><div class="l">大赛道</div></div>
@@ -358,13 +418,16 @@ footer{padding-block:40px 90px;color:var(--muted);font-size:13.5px;border-top:1p
 <!-- ========== 第1次课 ========== -->
 <section id="s1" class="sess one">
   <div class="sess-head">
-    <div class="badge">课时<b>1–2</b>90 分钟</div>
-    <div class="stack">
-      <span class="eyebrow" style="color:var(--s1)">第 1 次课</span>
+    <div class="txt">
+      <span class="badge">第 1 次课 · 课时 <b>1–2</b> · 90′</span>
       <h2>优质选题挖掘 + 项目创新思路搭建</h2>
+      <div class="goal"><p><b>本次目标：</b>每组选定一个赛事和赛道，形成一个"有真问题、有专业支撑、有 AI 亮点"的项目雏形，下课交出《项目雏形卡》。</p></div>
+    </div>
+    <div class="stage" id="s1Stage">
+      <canvas id="s1Cv" aria-label="3D 选题星图：专业、产业、AI 三簇节点向中心汇聚"></canvas>
+      <div class="cap"><b>选题星图</b><span>专业 · 产业 · AI 三簇节点，汇向中心的"好选题"</span></div>
     </div>
   </div>
-  <div class="goal"><p><b>本次目标：</b>每组选定一个赛事和赛道，形成一个"有真问题、有专业支撑、有 AI 亮点"的项目雏形，下课交出《项目雏形卡》。</p></div>
 
   <div class="tl" id="tl1" role="group" aria-label="第1次课时间分配"></div>
   <div class="tlscale"><span>0′</span><span>30′</span><span>60′</span><span>90′</span></div>
@@ -401,35 +464,45 @@ footer{padding-block:40px 90px;color:var(--muted);font-size:13.5px;border-top:1p
     <div class="panel stack" id="vennInfo" aria-live="polite"></div>
   </div>
 
+  <div class="block-title"><h3>三圈交出来的真实作品</h3><span class="tag">真实截图</span></div>
+  <div class="grid3">
+    <figure class="shot"><button type="button" data-lb="img/p-cxcy.webp" data-cap="双创星球：创新创业教育平台公开首页"><img src="img/p-cxcy.webp" alt="双创星球平台首页截图" loading="lazy" width="1265" height="712"></button><figcaption><b>双创星球</b>　专业圈：创新创业教育；AI 圈：一群懂创赛的智能搭子。</figcaption></figure>
+    <figure class="shot"><button type="button" data-lb="img/p-qyzp.webp" data-cap="琴韵智评：钢琴练习与评价平台登录页"><img src="img/p-qyzp.webp" alt="琴韵智评登录页截图" loading="lazy" width="1265" height="712"></button><figcaption><b>琴韵智评</b>　专业圈：钢琴教学；产业圈：音乐教育评价；500 余名学生常态化使用。</figcaption></figure>
+    <figure class="shot"><button type="button" data-lb="img/p-zhaizi.webp" data-cap="宅兹周秦：周秦出土文献研究平台登录页"><img src="img/p-zhaizi.webp" alt="宅兹周秦平台截图" loading="lazy" width="1280" height="720"></button><figcaption><b>宅兹周秦</b>　专业圈：出土文献；在地圈：宝鸡周秦文化；文科也能做 AI 项目。</figcaption></figure>
+  </div>
+
   <div class="block-title"><h3>从零搭建项目逻辑：六步追问</h3><span class="tag">分组实操 · 25′</span></div>
   <p class="lead" style="margin-bottom:12px">每一步都配一段可直接复制给千问 / WorkBuddy 的追问提示词。AI 只负责问，不替学生回答，逼出一个具体的问题。</p>
   <div class="steps" id="steps" role="group" aria-label="六步项目逻辑"></div>
-  <div class="panel stepcard" id="stepCard" aria-live="polite"></div>
+  <div class="panel" id="stepCard" style="margin-top:12px" aria-live="polite"></div>
 
   <div class="block-title"><h3>课后作业：《项目雏形卡》</h3><span class="tag">产出</span></div>
   <div class="grid3">
     <div class="panel"><h4>项目名 + 一句话定位</h4><p class="src">"为谁，解决什么问题，用什么方式"不超过 30 字</p></div>
     <div class="panel"><h4>目标赛道与组别</h4><p class="src">写出对应评分表的四项要点和分值</p></div>
-    <div class="panel"><h4>核心痛点 + 3 个创新点</h4><p class="src">每个创新点配一条可验证的证据线索</p></div>
+    <div class="panel"><h4>核心痛点 + 3 个创新点</h4><p class="src">每个创新点配一条可验证的证据线索；存成文件，第 2 次课要交给 AI 读</p></div>
   </div>
 </section>
 
 <!-- ========== 第2次课 ========== -->
 <section id="s2" class="sess two">
   <div class="sess-head">
-    <div class="badge">课时<b>3–4</b>90 分钟</div>
-    <div class="stack">
-      <span class="eyebrow" style="color:var(--s2)">第 2 次课</span>
+    <div class="txt">
+      <span class="badge">第 2 次课 · 课时 <b>3–4</b> · 90′</span>
       <h2>项目精细化打磨 · 高分竞赛 PPT 制作</h2>
+      <div class="goal"><p><b>本次目标：</b>按评分表倒推页序；当堂装好 DeepSeek Harness，在 TokenOne 充值并新建 Claude Opus 5.5 密钥，用 Opus 5.5 生成逐页大纲和 Demo，最后让 AI 三评委打一次分。</p></div>
+    </div>
+    <div class="stage" id="s2Stage">
+      <canvas id="s2Cv" aria-label="3D PPT 页面螺旋：32 页按评分要点着色"></canvas>
+      <div class="cap"><b>32 页螺旋</b><span>颜色 = 每页服务的评分要点</span></div>
     </div>
   </div>
-  <div class="goal"><p><b>本次目标：</b>按评分表倒推页序，搭出评委喜欢的 PPT 逻辑框架，产出 PPT 初稿，并让 AI 模拟三位评委打一次分，领回逐页整改清单。</p></div>
 
   <div class="tl" id="tl2" role="group" aria-label="第2次课时间分配"></div>
   <div class="tlscale"><span>0′</span><span>30′</span><span>60′</span><span>90′</span></div>
   <div class="seginfo" id="info2" aria-live="polite"></div>
 
-  <div class="block-title"><h3>拆解高分 PPT 逻辑框架：网评版 32 页页序</h3><span class="tag">讲授 · 20′</span></div>
+  <div class="block-title"><h3>拆解高分 PPT 逻辑框架：网评版 32 页页序</h3><span class="tag">讲授 · 15′</span></div>
   <div class="panel">
     <div class="pages" id="pages" aria-label="32页PPT页序示意"></div>
     <div class="legend" id="pagesLegend"></div>
@@ -458,11 +531,48 @@ footer{padding-block:40px 90px;color:var(--muted);font-size:13.5px;border-top:1p
     </div>
   </div>
 
-  <div class="block-title"><h3>AI 加速制作流水线</h3><span class="tag">实操 · 25′</span></div>
-  <div class="grid3">
-    <div class="panel"><span class="tag" style="color:var(--s2)">① 千问 / WorkBuddy</span><h4 style="margin-top:8px">生成逐页大纲</h4><p class="src">把雏形卡 + 评分表丢给 AI，要求按 32 页页序输出每页标题结论句和要放的证据。</p></div>
-    <div class="panel"><span class="tag" style="color:var(--s2)">② PRD + 原型图</span><h4 style="margin-top:8px">零代码描述产品</h4><p class="src">一份需求文档加一张参考原型图，多轮对话打磨，不要求会写代码。</p></div>
-    <div class="panel"><span class="tag" style="color:var(--s2)">③ Codex / Claude</span><h4 style="margin-top:8px">做出可演示 Demo</h4><p class="src">把 PRD 交给编程智能体生成网页原型，截图放进 PPT 的"方案与产品"部分。</p></div>
+  <!-- 工具实操 -->
+  <div id="tools"></div>
+  <div class="block-title"><h3>工具实操：DeepSeek Harness + TokenOne + Claude Opus 5.5</h3><span class="new">新增</span><span class="tag">实操 · 25′</span></div>
+  <p class="lead" style="margin-bottom:14px">八步走完：装软件、充值、建密钥、接进 DeepSeek Harness、调用 Opus 5.5。点下方步骤，3D 轮播会转到对应的真实界面截图；点画面看大图。</p>
+  <div class="toolwrap">
+    <div>
+      <div class="stage" id="carStage" title="点击查看大图">
+        <canvas id="carCv" aria-label="3D 截图轮播：八个操作步骤的真实界面"></canvas>
+        <div class="cap"><b id="carLbl">第 1 步</b><span id="carCap"></span></div>
+      </div>
+      <div class="tsteps" id="tsteps" role="group" aria-label="八个操作步骤"></div>
+    </div>
+    <div class="panel tpanel" id="tpanel" aria-live="polite"></div>
+  </div>
+
+  <div class="grid2" style="margin-top:20px">
+    <div class="panel">
+      <h3 style="font-size:18px;margin-bottom:12px">卡住了先查这张表</h3>
+      <div class="fix">
+        <div><b>提示 401 / 无权限</b><span>密钥没复制全，或钱包余额不足。重新"复制密钥"粘贴，看钱包余额。</span></div>
+        <div><b>提示模型不存在</b><span>模型 ID 和 TokenOne 模型广场不一致。用"获取可用模型"自动拉取，不要手打。</span></div>
+        <div><b>连接失败</b><span>选 Anthropic Messages 时地址填根地址 https://gts.tokenone.work（程序自动拼 /v1/messages）；改用 OpenAI Chat Completions 协议时地址要写 https://gts.tokenone.work/v1。</span></div>
+        <div><b>模型下拉里没有 Opus</b><span>先"选择工作区"；再到设置 → 模型，确认 TokenOne 一行亮绿点。</span></div>
+        <div><b>钱花得比预期快</b><span>Opus 是高价模型（截图里分组倍率 1.8x）。课堂每组只发 3 轮，长文件先让模型摘要。</span></div>
+      </div>
+    </div>
+    <div class="warnbox stack">
+      <h4>密钥安全三条</h4>
+      <ul class="clean">
+        <li>API 密钥等于钱包密码：不发群、不截图、不写进 PPT 和申报书。</li>
+        <li>每个项目单独建一把密钥，用完在 TokenOne 里停用或删除。</li>
+        <li>TokenOne 是第三方 API 服务，费用、隐私与合规由使用者自行评估；涉密、未公开数据不要发给模型。</li>
+      </ul>
+      <p class="src">软件只从官网下载：www.deepseek.com/harness/。网上个人账号发布的"桌面版"安装包一律不用。</p>
+    </div>
+  </div>
+
+  <div class="block-title"><h3>调用 Opus 5.5：三条课堂提示词</h3><span class="tag">实操 · 15′</span></div>
+  <div class="panel">
+    <div class="ptabs seg" id="ptabs" role="group" aria-label="选择提示词"></div>
+    <div class="prompt"><button class="btn copy" type="button" id="pcopy">复制提示词</button><span id="ptext"></span></div>
+    <p class="src" style="margin-top:10px">用法：工作区里放好《项目雏形卡》，模型选 TokenOne / Claude Opus 5.5，依次发送。生成的大纲和 Demo 截图放进 PPT"方案与产品"部分；发送后回 TokenOne"使用日志"核对模型与费用。</p>
   </div>
 
   <div class="block-title"><h3>AI 模拟三评委打分（课堂演示）</h3><span class="tag">实操 + 点评 · 15′</span></div>
@@ -482,13 +592,16 @@ footer{padding-block:40px 90px;color:var(--muted);font-size:13.5px;border-top:1p
 <!-- ========== 第3次课 ========== -->
 <section id="s3" class="sess three">
   <div class="sess-head">
-    <div class="badge">课时<b>5–6</b>90 分钟</div>
-    <div class="stack">
-      <span class="eyebrow" style="color:var(--s3)">第 3 次课</span>
+    <div class="txt">
+      <span class="badge">第 3 次课 · 课时 <b>5–6</b> · 90′</span>
       <h2>项目最终完善 · 策划书撰写 + 答辩专项特训</h2>
+      <div class="goal"><p><b>本次目标：</b>申报书与 PPT 口径一致，7 分钟路演讲得清楚，答辩顶得住追问，项目没有明显短板。</p></div>
+    </div>
+    <div class="stage" id="s3Stage">
+      <canvas id="s3Cv" aria-label="3D 领奖台与旋转奖章"></canvas>
+      <div class="cap"><b>领奖台</b><span>文本、路演、答辩三块都要站得住</span></div>
     </div>
   </div>
-  <div class="goal"><p><b>本次目标：</b>申报书与 PPT 口径一致，7 分钟路演讲得清楚，答辩顶得住追问，项目没有明显短板。</p></div>
 
   <div class="tl" id="tl3" role="group" aria-label="第3次课时间分配"></div>
   <div class="tlscale"><span>0′</span><span>30′</span><span>60′</span><span>90′</span></div>
@@ -510,19 +623,26 @@ footer{padding-block:40px 90px;color:var(--muted);font-size:13.5px;border-top:1p
       </tbody>
     </table>
   </div>
+  <p class="src" style="margin-top:8px">延续第 2 次课：同一个 DeepSeek Harness 工作区里，让 Opus 5.5 按 PPT 扩写申报书初稿，再逐条人工核实。</p>
 
   <div class="block-title"><h3>答辩话术：7 分钟路演节奏</h3><span class="tag">讲授 · 15′</span></div>
   <div class="panel">
     <div class="pitch-play"><div class="pitch" id="pitch"></div><div class="pitch-head" id="pitchHead"></div></div>
     <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap">
-      <button class="btn primary" id="pitchBtn">演示 7 分钟节奏（加速 20 倍）</button>
+      <button class="btn primary" id="pitchBtn" type="button">演示 7 分钟节奏（加速 20 倍）</button>
       <span class="mono" id="pitchNow">00:00 · 准备</span>
     </div>
     <p class="src" style="margin-top:10px">讲法："一个故事 + 三个数字"。开场 30 秒用一个真实用户场景抓人，全程只强调三个最硬的数字。</p>
   </div>
 
+  <div class="block-title"><h3>先预演，再上场</h3><span class="tag">真实截图</span></div>
+  <div class="grid2">
+    <figure class="shot"><button type="button" data-lb="img/p-yzzw.webp" data-cap="演知中文：国际中文研课与课堂预演平台首页"><img src="img/p-yzzw.webp" alt="演知中文平台首页截图" loading="lazy" width="1280" height="720"></button><figcaption><b>演知中文</b>　"让每一次教学构想在真实课堂前先被看见。"答辩同理：先在 AI 评委面前预演，再站到真评委面前。</figcaption></figure>
+    <figure class="shot"><button type="button" data-lb="img/p-kcsz.webp" data-cap="演知思政：课程思政与虚拟教研平台首页"><img src="img/p-kcsz.webp" alt="演知思政平台首页截图" loading="lazy" width="1265" height="712"></button><figcaption><b>演知思政</b>　"在走进课堂之前，先看见课堂。"研课场 + 演课场的思路，可直接借来设计答辩彩排。</figcaption></figure>
+  </div>
+
   <div class="block-title"><h3>全真模拟答辩：高频追问卡</h3><span class="tag">分组演练 · 35′</span></div>
-  <p class="lead" style="margin-bottom:12px">点卡片翻面看回答思路。课上每组路演后，由 AI 生成追问，讲师再补一轮现场压力追问。</p>
+  <p class="lead" style="margin-bottom:12px">点卡片翻面看回答思路。课上每组路演后，由 Opus 5.5 生成追问，讲师再补一轮现场压力追问。</p>
   <div class="qcards" id="qcards"></div>
 
   <div class="block-title"><h3>项目短板优化：答辩病历</h3><span class="tag">总结 · 15′</span></div>
@@ -543,12 +663,12 @@ footer{padding-block:40px 90px;color:var(--muted);font-size:13.5px;border-top:1p
     <div class="timer" style="margin-top:18px">
       <div class="clock" id="clock">90:00</div>
       <div class="stack">
-        <div id="timerNow" style="font-family:var(--f-display);font-size:20px;font-weight:600">未开始</div>
+        <div id="timerNow" style="font-family:var(--f-display);font-size:20px;font-weight:700">未开始</div>
         <div class="src" id="timerNext"></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn primary" id="tStart">开始</button>
-          <button class="btn" id="tReset">重置</button>
-          <button class="btn" id="tSkip">跳到下一环节</button>
+          <button class="btn primary" id="tStart" type="button">开始</button>
+          <button class="btn" id="tReset" type="button">重置</button>
+          <button class="btn" id="tSkip" type="button">跳到下一环节</button>
         </div>
       </div>
     </div>
@@ -560,41 +680,48 @@ footer{padding-block:40px 90px;color:var(--muted);font-size:13.5px;border-top:1p
 
 <footer>
   <div class="wrap stack">
-    <p><b>数据来源</b></p>
+    <p><b>数据与图片来源</b></p>
     <ul class="clean">
       <li>2025 国创赛规模（报名项目 619 万、学生 2443 万人次、院校 5673 所、161 个国家和地区、总决赛 4720 项、五大赛道）：<a href="https://www.yzwb.net/news/jiangsu/202510/t20251014_276487.html" target="_blank" rel="noopener">扬子晚报网</a>、<a href="https://m.voc.com.cn/xhn/news/202510/30707117.html" target="_blank" rel="noopener">华声在线</a></li>
       <li>评分要点与分值：<a href="https://www.cupk.edu.cn/cxcy/upload/resources/file/2025/06/23/102490.pdf" target="_blank" rel="noopener">中国国际大学生创新大赛（2025）评审规则</a></li>
       <li>第十九届"挑战杯"覆盖高校与学生数：<a href="https://www.stdaily.com/web/gdxw/2025-11/05/content_426850.html" target="_blank" rel="noopener">科技日报</a></li>
-      <li>讲师平台数据：<a href="https://salon.tokenone.work" target="_blank" rel="noopener">NexAI 创新工坊 salon.tokenone.work</a></li>
+      <li>DeepSeek Harness：<a href="https://www.deepseek.com/harness/" target="_blank" rel="noopener">官网下载</a>、<a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">官方仓库</a>。界面截图为官方 0.2.1 预览版实机截图（2026 年 11 月），示例密钥为假值；软件仍在快速迭代，菜单以实际版本为准。</li>
+      <li>TokenOne 截图来自本站企业版课件（讲师账号，敏感信息已打码）；作品墙截图来自讲师已上线平台。</li>
     </ul>
-    <p>点右上角"编辑内容"可直接改页面上的文字；表格、正文、标题都能改，网站版的修改只保存在当前浏览器，适合课前临时调整讲稿。</p>
+    <p>点右上角"编辑内容"可直接改页面上的文字，修改保存在当前浏览器。</p>
   </div>
 </footer>
 
 <div class="editbar" id="editBar" hidden>
   <span id="editMsg">编辑中：点击虚线框里的文字直接修改</span>
-  <button class="btn" id="editCancel">放弃修改</button>
-  <button class="btn primary" id="editSave">保存</button>
+  <button class="btn" id="editCancel" type="button">放弃修改</button>
+  <button class="btn primary" id="editSave" type="button">保存</button>
+</div>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="查看大图">
+  <button class="x" id="lbX" type="button" aria-label="关闭大图">×</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
 </div>
 <div class="toast" id="toast" role="status"></div>
 
+<script src="vendor/three.min.js"></script>
 <script>
 (function(){
 "use strict";
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove("on"),2400)}
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim()||"#888";
+const sc=n=>n==="--ink"?"#E6EEF2":n==="--muted"?"#9FB3C1":css(n); /* 3D 舞台恒为深色底 */
 
-/* ---------- 可编辑区域：给静态文字分配稳定编号（必须在任何脚本渲染之前） ---------- */
-const EDIT_SEL='main h1, main h2, main h3, main h4, main p, main li, main td, main th, main .case p, footer li, footer p';
+/* ---------- 可编辑区域（必须在脚本渲染之前编号） ---------- */
+const EDIT_SEL='main h1, main h2, main h3, main h4, main p, main li, main td, main th, main figcaption, footer li, footer p';
 const editables=[];
 $$(EDIT_SEL).forEach(el=>{
-  if(el.closest("[data-k]")) return;              // 不嵌套
-  if(el.closest("svg,.seg,.tl,.seginfo,#dims,#stepCard,#vennInfo,#sliders,#judges,#qcards,.timer,.verdict,.kpi")) return;
+  if(el.closest("[data-k]")) return;
+  if(el.closest("svg,.seg,.tl,.seginfo,#dims,#stepCard,#vennInfo,#sliders,#judges,#qcards,.timer,.verdict,.kpi,.stage,#tpanel,#wall,.lb")) return;
   el.dataset.k="e"+editables.length; editables.push(el);
 });
 const original={}; editables.forEach(el=>original[el.dataset.k]=el.innerHTML);
-
 const ALLOWED=new Set(["B","STRONG","EM","I","BR","SPAN","A"]);
 function clean(html){
   const t=document.createElement("template"); t.innerHTML=html;
@@ -612,17 +739,12 @@ function clean(html){
 }
 let saved={};
 function applyEdits(map){Object.entries(map||{}).forEach(([k,v])=>{const el=$(`[data-k="${k}"]`); if(el && typeof v==="string") el.innerHTML=clean(v)})}
-
 let LS=null; try{LS=window.localStorage}catch(e){}
 async function loadEdits(){
-  let map=null;
-  try{const r=await fetch("edits.json",{cache:"no-store"}); if(r.ok) map=await r.json()}catch(e){}
-  if(map && typeof map==="object") saved=map;
-  try{const d=LS&&LS.getItem("camp-edits-local"); if(d){const m=JSON.parse(d); if(m&&m._local){Object.assign(saved,m.map||{})}}}catch(e){}
+  try{const r=await fetch("edits.json",{cache:"no-store"}); if(r.ok){const m=await r.json(); if(m&&typeof m==="object") saved=m}}catch(e){}
+  try{const d=LS&&LS.getItem("camp-edits-v2"); if(d){const m=JSON.parse(d); if(m&&m.map) Object.assign(saved,m.map)}}catch(e){}
   applyEdits(saved);
 }
-
-/* 编辑模式 */
 let editing=false, artifactNS=null, readOnly=false;
 const editBtn=$("#editBtn"), bar=$("#editBar");
 function setEditing(on){
@@ -638,36 +760,37 @@ document.addEventListener("paste",e=>{
   const sel=getSelection(); if(!sel.rangeCount) return; const r=sel.getRangeAt(0); r.deleteContents(); r.insertNode(document.createTextNode(txt)); r.collapse(false);
 });
 $("#editCancel").addEventListener("click",()=>{ editables.forEach(el=>{el.innerHTML=original[el.dataset.k]}); applyEdits(saved); setEditing(false); toast("已放弃本次修改") });
-
-function collect(){
-  const map={};
-  editables.forEach(el=>{const v=clean(el.innerHTML); if(v!==clean(original[el.dataset.k])) map[el.dataset.k]=v});
-  return map;
-}
+function collect(){const map={}; editables.forEach(el=>{const v=clean(el.innerHTML); if(v!==clean(original[el.dataset.k])) map[el.dataset.k]=v}); return map}
 $("#editSave").addEventListener("click",async()=>{
-  const map=collect();
-  setEditing(false);
+  const map=collect(); setEditing(false);
   if(artifactNS && !readOnly){
-    $("#editMsg").textContent="保存中…";
-    try{
-      await artifactNS.publish({"edits.json":{content:JSON.stringify(map),contentType:"application/json"}});
-      saved=map; try{LS&&LS.removeItem("camp-edits-local")}catch(e){}
-      toast("已保存，所有人打开都是新版本"); return;
-    }catch(err){
-      const c=err&&err.code;
+    try{ await artifactNS.publish({"edits.json":{content:JSON.stringify(map),contentType:"application/json"}});
+      saved=map; try{LS&&LS.removeItem("camp-edits-v2")}catch(e){} toast("已保存，所有人打开都是新版本"); return;
+    }catch(err){ const c=err&&err.code;
       if(c==="conflict"){toast("别人刚保存过新版本，页面将刷新到最新内容");return}
-      if(["not_writer","not_granted","consent_required","capability_disabled","capability_removed","not_declared"].includes(c)) readOnly=true;
-      else {toast("保存失败（"+(c||"未知原因")+"），修改已暂存在本浏览器")}
-    }
+      readOnly=true; }
   }
-  try{LS&&LS.setItem("camp-edits-local",JSON.stringify({_local:true,map}))}catch(e){}
-  saved=map; toast(readOnly||!artifactNS?"你没有该页面的编辑权限，修改只保存在本浏览器":"修改已暂存在本浏览器");
+  try{LS&&LS.setItem("camp-edits-v2",JSON.stringify({map}))}catch(e){}
+  saved=map; toast("修改已保存在本浏览器");
 });
-
 loadEdits();
 if(window.claude&&claude.use){claude.use("artifact").then(ns=>{artifactNS=ns}).catch(()=>{})}
 
-/* ---------- 数字滚动 ---------- */
+/* ---------- 大图查看 ---------- */
+const lb=$("#lb");
+function openLB(src,cap){ if(editing) return; $("#lbImg").src=src; $("#lbImg").alt=cap||""; $("#lbCap").textContent=cap||""; lb.hidden=false; $("#lbX").focus() }
+function closeLB(){ lb.hidden=true; $("#lbImg").removeAttribute("src") }
+$("#lbX").addEventListener("click",closeLB);
+lb.addEventListener("click",e=>{ if(e.target===lb) closeLB() });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!lb.hidden) closeLB() });
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-lb]"); if(b){e.preventDefault(); openLB(b.dataset.lb,b.dataset.cap)}});
+
+/* ---------- 作品墙 ---------- */
+const WALL=[["教育","爱宝保教智囊团","aibao","学前教育保教实践"],["教育","双创星球","cxcy","创新创业教育"],["文传","镜里知微","ysjs","教师智能体平台"],["文传","宅兹周秦","zhaizi","周秦出土文献研究"],["音乐","琴韵智评","qyzp","钢琴练习与评价"],
+  ["音乐","舞镜智练","wudao","舞蹈技能训练 · 指导开发"],["研究生","山海问知","kaoyan","学习支持"],["国传","演知中文","yzzw","国际中文研课与课堂预演"],["计算机","演知思政","kcsz","课程思政与虚拟教研"],["国传","华文探究","globaledu","多语言学习"]];
+$("#wall").innerHTML=WALL.map(([c,n,k,t])=>`<figure class="shot"><button type="button" data-lb="img/p-${k}.webp" data-cap="${n}：${t}"><img src="img/p-${k}.webp" alt="${n}平台界面截图" loading="lazy" width="1280" height="720"></button><figcaption><b>${n}</b> · ${c}<br>${t}</figcaption></figure>`).join("");
+
+/* ---------- 数字滚动 / 进场 ---------- */
 function countUp(el){
   const end=+el.dataset.count, suf=el.dataset.suffix||""; if(reduce){el.textContent=end+suf;return}
   const t0=performance.now(), dur=1200;
@@ -682,15 +805,217 @@ const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){
 }}),{threshold:.3});
 $$("[data-count]").forEach(el=>io.observe(el)); io.observe($("#funnel")); io.observe($("#pages"));
 
-/* ---------- 跑道动画 ---------- */
-(function(){
-  const path=$("#trackPath"), dot=$("#runner"); const L=path.getTotalLength();
-  if(reduce){const p=path.getPointAtLength(L);dot.setAttribute("cx",p.x);dot.setAttribute("cy",p.y);return}
-  let t0=null;
-  function f(t){ if(!t0)t0=t; const p=((t-t0)/5200)%1.15; const q=Math.min(1,p); const e=q<.5?2*q*q:1-Math.pow(-2*q+2,2)/2;
-    const pt=path.getPointAtLength(e*L); dot.setAttribute("cx",pt.x); dot.setAttribute("cy",pt.y); requestAnimationFrame(f)}
-  requestAnimationFrame(f);
-})();
+/* ================= three.js 舞台 ================= */
+const STAGES=[];
+let hasGL=!!window.THREE;
+function dotTexture(){
+  const c=document.createElement("canvas"); c.width=c.height=64; const g=c.getContext("2d");
+  const gr=g.createRadialGradient(32,32,0,32,32,32); gr.addColorStop(0,"rgba(255,255,255,1)"); gr.addColorStop(.45,"rgba(255,255,255,.9)"); gr.addColorStop(1,"rgba(255,255,255,0)");
+  g.fillStyle=gr; g.fillRect(0,0,64,64); const t=new THREE.CanvasTexture(c); return t;
+}
+function makeStage(canvas,opt){
+  const host=canvas.parentElement;
+  let r;
+  try{ r=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:"low-power"}); }catch(e){ host.classList.add("nogl"); return null }
+  r.setPixelRatio(Math.min(2,window.devicePixelRatio||1)); r.outputEncoding=THREE.sRGBEncoding;
+  const scene=new THREE.Scene(); const cam=new THREE.PerspectiveCamera(opt.fov||45,1,.1,100);
+  cam.position.set(0,opt.camY||0,opt.camZ||8);
+  const st={r,scene,cam,host,canvas,visible:false,mx:0,my:0,t:0,tick:null,theme:null,dirty:true};
+  const size=()=>{const w=host.clientWidth,h=host.clientHeight; if(!w||!h) return; r.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix(); if(opt.onResize) opt.onResize(st,w,h); st.dirty=true};
+  new ResizeObserver(size).observe(host); size();
+  new IntersectionObserver(es=>{st.visible=es[0].isIntersecting; st.dirty=true},{threshold:0}).observe(host);
+  host.addEventListener("pointermove",e=>{const b=host.getBoundingClientRect(); st.mx=(e.clientX-b.left)/b.width*2-1; st.my=(e.clientY-b.top)/b.height*2-1});
+  host.addEventListener("pointerleave",()=>{st.mx=0;st.my=0});
+  opt.build(st);
+  STAGES.push(st); return st;
+}
+let last=performance.now();
+function loop(now){
+  const dt=Math.min(.05,(now-last)/1000); last=now;
+  for(const st of STAGES){ if(!st.visible) continue; if(reduce && !st.dirty) continue;
+    st.t+=reduce?0:dt; if(st.tick) st.tick(dt,st); st.r.render(st.scene,st.cam); st.dirty=false; }
+  requestAnimationFrame(loop);
+}
+function themeChanged(){ STAGES.forEach(st=>{ if(st.theme) st.theme(st); st.dirty=true }) }
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",themeChanged);
+new MutationObserver(themeChanged).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+
+/* ---- 英雄区：粒子变形（想法 → 星球 → 32 页 → 奖杯） ---- */
+const HERO_N=2600;
+function shapeCloud(){const a=new Float32Array(HERO_N*3);for(let i=0;i<HERO_N;i++){const r=1.2+Math.random()*3.4,t=Math.random()*Math.PI*2,p=Math.acos(2*Math.random()-1);a[i*3]=r*Math.sin(p)*Math.cos(t)*1.3;a[i*3+1]=r*Math.cos(p)*.8;a[i*3+2]=r*Math.sin(p)*Math.sin(t)}return a}
+function shapeSphere(){const a=new Float32Array(HERO_N*3),g=Math.PI*(3-Math.sqrt(5));for(let i=0;i<HERO_N;i++){const y=1-2*(i+.5)/HERO_N,r=Math.sqrt(1-y*y),th=g*i,R=2.5;a[i*3]=Math.cos(th)*r*R;a[i*3+1]=y*R;a[i*3+2]=Math.sin(th)*r*R}return a}
+function shapePages(){const a=new Float32Array(HERO_N*3),cols=8,rows=4,pw=.78,ph=.56,gx=.94,gy=.74;for(let i=0;i<HERO_N;i++){const pg=i%32,c=pg%cols,rr=Math.floor(pg/cols);const edge=Math.random()<.55;let u=Math.random(),v=Math.random();if(edge){if(Math.random()<.5){u=Math.random()<.5?0:1}else{v=Math.random()<.5?0:1}}
+  const x=(c-(cols-1)/2)*gx+(u-.5)*pw,y=((rows-1)/2-rr)*gy+(v-.5)*ph;a[i*3]=x;a[i*3+1]=y;a[i*3+2]=Math.sin(x*.9)*.35}return a}
+function shapeCup(){const a=new Float32Array(HERO_N*3);const prof=y=>{ if(y<.25) return 1.1; if(y<.45) return .45; if(y<1.1) return .18; if(y<1.35) return .18+(y-1.1)*2.4; return .78+Math.sin((y-1.35)/1.6*Math.PI*.5)*.55 };
+  for(let i=0;i<HERO_N;i++){let y; if(i%9===0){y=.25+Math.random()*.2}else{y=Math.random()*2.95} const th=Math.random()*Math.PI*2;let r=prof(y); if(y<.25&&Math.random()<.5) r*=Math.random();
+   a[i*3]=Math.cos(th)*r;a[i*3+1]=y-1.45;a[i*3+2]=Math.sin(th)*r}
+  for(let i=0;i<180;i++){const k=HERO_N-1-i,t=i/180*Math.PI,side=i%2?1:-1;a[k*3]=side*(1.32+Math.sin(t)*.42);a[k*3+1]=.9+Math.cos(t)*.42;a[k*3+2]=0}
+  return a}
+const SHAPES=[shapeCloud(),shapeSphere(),shapePages(),shapeCup()];
+const HERO_LBL=["想法：散落的灵感","第1次课：聚成一个好选题","第2次课：展开成 32 页 PPT","第3次课：凝成一座奖杯"];
+let heroMode=0,heroAuto=!reduce,heroTimer=0;
+function heroColors(mode){
+  const pal=[[sc("--muted"),css("--s1"),css("--s3")],[css("--s1"),css("--s1"),css("--s3")],null,[css("--s2"),css("--s2"),css("--warn")]][mode];
+  const out=new Float32Array(HERO_N*3), c=new THREE.Color();
+  const pageCols=[sc("--muted"),sc("--ink"),css("--s1"),css("--s1"),css("--s1"),css("--s1"),css("--s2"),css("--s2"),css("--s2"),css("--s2"),css("--s2"),css("--s2"),css("--s2"),css("--s2"),css("--s2"),css("--s2"),css("--s2"),css("--s2"),css("--s1"),css("--s1"),css("--s1"),css("--s1"),css("--s3"),css("--s3"),css("--s3"),css("--s3"),css("--warn"),css("--warn"),css("--warn"),sc("--muted"),sc("--muted"),sc("--muted")];
+  for(let i=0;i<HERO_N;i++){ c.set(pal?pal[i%3]:pageCols[i%32]); if(mode===0||mode===3) c.offsetHSL(0,0,(Math.random()-.5)*.12); out[i*3]=c.r;out[i*3+1]=c.g;out[i*3+2]=c.b }
+  return out;
+}
+const heroSt=hasGL?makeStage($("#heroCv"),{camZ:8.4,build(st){
+  const geo=new THREE.BufferGeometry(); const pos=SHAPES[0].slice(); geo.setAttribute("position",new THREE.BufferAttribute(pos,3));
+  const col=heroColors(0); geo.setAttribute("color",new THREE.BufferAttribute(col.slice(),3));
+  const mat=new THREE.PointsMaterial({size:.075,vertexColors:true,map:dotTexture(),transparent:true,depthWrite:false,alphaTest:.02});
+  const pts=new THREE.Points(geo,mat); st.scene.add(pts);
+  let tgtCol=col;
+  st.setMode=m=>{heroMode=m; tgtCol=heroColors(m); $("#heroLbl").textContent=HERO_LBL[m]; $$("#heroStage .pill").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.m===m))); st.dirty=true;
+    if(reduce){pos.set(SHAPES[m]); geo.attributes.position.needsUpdate=true; geo.attributes.color.array.set(tgtCol); geo.attributes.color.needsUpdate=true}};
+  st.theme=()=>{tgtCol=heroColors(heroMode); if(reduce){geo.attributes.color.array.set(tgtCol);geo.attributes.color.needsUpdate=true}};
+  st.tick=(dt)=>{
+    if(heroAuto){heroTimer+=dt; if(heroTimer>4.8){heroTimer=0; st.setMode((heroMode+1)%4)}}
+    const T=SHAPES[heroMode], P=geo.attributes.position.array, C=geo.attributes.color.array, k=Math.min(1,dt*2.6);
+    for(let i=0;i<P.length;i++){ P[i]+=(T[i]-P[i])*k*(.6+((i*7919)%100)/250) }
+    for(let i=0;i<C.length;i++){ C[i]+=(tgtCol[i]-C[i])*k }
+    geo.attributes.position.needsUpdate=true; geo.attributes.color.needsUpdate=true;
+    const ry=heroMode===2?Math.sin(st.t*.4)*.25:st.t*.18;
+    pts.rotation.y+=((ry+st.mx*.4)-pts.rotation.y)*.06; pts.rotation.x+=((st.my*.25)-pts.rotation.x)*.06;
+  };
+  st.setMode(0);
+}}):null;
+$$("#heroStage .pill").forEach(b=>b.addEventListener("click",()=>{heroAuto=false; if(heroSt) heroSt.setMode(+b.dataset.m)}));
+if(!heroSt) $$("#heroStage .pill").forEach(b=>b.addEventListener("click",()=>{$("#heroLbl").textContent=HERO_LBL[+b.dataset.m]}));
+
+/* ---- 第1次课：选题星图 ---- */
+if(hasGL) makeStage($("#s1Cv"),{camZ:6.3,camY:1.1,build(st){
+  st.cam.lookAt(0,0,0);
+  const group=new THREE.Group(); st.scene.add(group);
+  const clusters=[], nodes=[], linePos=[];
+  for(let k=0;k<3;k++){const a=k/3*Math.PI*2+.3; const cx=Math.cos(a)*2.7, cz=Math.sin(a)*2.7, cy=(k-1)*.35; clusters.push([cx,cy,cz]);
+    for(let j=0;j<16;j++){const r=.35+Math.random()*.8,t=Math.random()*Math.PI*2,p=Math.acos(2*Math.random()-1);const n=[cx+r*Math.sin(p)*Math.cos(t),cy+r*Math.cos(p)*.7,cz+r*Math.sin(p)*Math.sin(t),k];nodes.push(n);linePos.push(n[0],n[1],n[2],cx,cy,cz)}
+    linePos.push(cx,cy,cz,0,0,0)}
+  const ng=new THREE.BufferGeometry(); const np=new Float32Array(nodes.length*3), nc=new Float32Array(nodes.length*3);
+  nodes.forEach((n,i)=>{np.set([n[0],n[1],n[2]],i*3)}); ng.setAttribute("position",new THREE.BufferAttribute(np,3)); ng.setAttribute("color",new THREE.BufferAttribute(nc,3));
+  const tex=dotTexture();
+  const nm=new THREE.PointsMaterial({size:.2,vertexColors:true,map:tex,transparent:true,depthWrite:false,alphaTest:.02}); group.add(new THREE.Points(ng,nm));
+  const hub=new THREE.Mesh(new THREE.IcosahedronGeometry(.42,2),new THREE.MeshBasicMaterial({wireframe:true})); group.add(hub);
+  const cg=new THREE.BufferGeometry(); cg.setAttribute("position",new THREE.BufferAttribute(new Float32Array(clusters.flat()),3));
+  const cm=new THREE.PointsMaterial({size:.55,map:tex,transparent:true,depthWrite:false,vertexColors:true}); const ccol=new Float32Array(9); cg.setAttribute("color",new THREE.BufferAttribute(ccol,3)); group.add(new THREE.Points(cg,cm));
+  const lg=new THREE.BufferGeometry(); lg.setAttribute("position",new THREE.BufferAttribute(new Float32Array(linePos),3));
+  const lm=new THREE.LineBasicMaterial({transparent:true,opacity:.28}); group.add(new THREE.LineSegments(lg,lm));
+  const SP=140, sg=new THREE.BufferGeometry(), sp=new Float32Array(SP*3), sc=new Float32Array(SP*3), sd=[];
+  for(let i=0;i<SP;i++) sd.push({n:nodes[(Math.random()*nodes.length)|0],t:Math.random()});
+  sg.setAttribute("position",new THREE.BufferAttribute(sp,3)); sg.setAttribute("color",new THREE.BufferAttribute(sc,3));
+  group.add(new THREE.Points(sg,new THREE.PointsMaterial({size:.09,vertexColors:true,map:tex,transparent:true,depthWrite:false})));
+  st.theme=()=>{const cols=[new THREE.Color(css("--s1")),new THREE.Color(css("--s2")),new THREE.Color(css("--s3"))];
+    nodes.forEach((n,i)=>{const c=cols[n[3]];nc.set([c.r,c.g,c.b],i*3)}); ng.attributes.color.needsUpdate=true;
+    cols.forEach((c,i)=>ccol.set([c.r,c.g,c.b],i*3)); cg.attributes.color.needsUpdate=true;
+    sd.forEach((s,i)=>{const c=cols[s.n[3]];sc.set([c.r,c.g,c.b],i*3)}); sg.attributes.color.needsUpdate=true;
+    hub.material.color.set("#F3E4C6"); lm.color.set("#C9D6DE");};
+  st.theme(st);
+  const upd=()=>{sd.forEach((s,i)=>{const n=s.n,cl=clusters[n[3]];let x,y,z;
+      if(s.t<.5){const u=s.t*2;x=n[0]+(cl[0]-n[0])*u;y=n[1]+(cl[1]-n[1])*u;z=n[2]+(cl[2]-n[2])*u}else{const u=(s.t-.5)*2;x=cl[0]*(1-u);y=cl[1]*(1-u);z=cl[2]*(1-u)}
+      sp.set([x,y,z],i*3)}); sg.attributes.position.needsUpdate=true};
+  upd();
+  st.tick=(dt)=>{sd.forEach(s=>{s.t+=dt*.28; if(s.t>1){s.t=0;s.n=nodes[(Math.random()*nodes.length)|0]}}); upd();
+    group.rotation.y+=dt*.22+st.mx*dt*.6; group.rotation.x+=((st.my*.2)-group.rotation.x)*.05; hub.rotation.y-=dt*.8; hub.scale.setScalar(1+Math.sin(st.t*2.4)*.08)};
+}});
+
+/* ---- 第2次课：32 页 PPT 螺旋 ---- */
+const PG=[["封面与目录",2,"--muted"],["项目概述",2,"--ink"],["痛点与调研",4,"--s1"],["方案与产品",5,"--s2"],["技术与创新点",5,"--s2"],["成效验证",4,"--s1"],["市场与商业模式",4,"--s3"],["团队与成长",3,"--warn"],["发展规划与结尾",3,"--muted"]];
+if(hasGL) makeStage($("#s2Cv"),{camZ:10.6,camY:.8,build(st){
+  st.cam.lookAt(0,0,0);
+  const group=new THREE.Group(); st.scene.add(group); const cards=[];
+  let k=0; PG.forEach(([n,c,col])=>{for(let i=0;i<c;i++){const m=new THREE.Mesh(new THREE.BoxGeometry(1.15,.78,.03),new THREE.MeshBasicMaterial({transparent:true,opacity:.92}));
+    const a=k*.42, y=(k-15.5)*.13; m.position.set(Math.sin(a)*2.6,y,Math.cos(a)*2.6); m.rotation.y=a; m.userData={col,base:m.position.clone(),a};
+    const e=new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.55})); m.add(e);
+    group.add(m); cards.push(m); k++}});
+  st.theme=()=>cards.forEach(m=>m.material.color.set(sc(m.userData.col)));
+  st.theme(st);
+  st.tick=(dt)=>{group.rotation.y+=dt*.25+st.mx*dt*.5; const hot=Math.floor(st.t*2.2)%32;
+    cards.forEach((m,i)=>{const on=i===hot; const s=on?1.35:1; m.scale.x+=(s-m.scale.x)*.15; m.scale.y+=(s-m.scale.y)*.15;
+      const out=on?.6:0; const tx=Math.sin(m.userData.a)*(2.6+out), tz=Math.cos(m.userData.a)*(2.6+out); m.position.x+=(tx-m.position.x)*.15; m.position.z+=(tz-m.position.z)*.15});
+    group.position.y=.35+Math.sin(st.t*.6)*.1};
+}});
+
+/* ---- 第2次课：工具实操 3D 截图轮播 ---- */
+const TOOL=[
+ {k:"装软件",m:5,img:"img/dsh-start.webp",cap:"DeepSeek Harness 首次打开：出现“开始使用”弹窗",t:"下载安装 DeepSeek Harness",
+  pts:["打开官网 www.deepseek.com/harness/，按电脑选 macOS（Apple 芯片）或 Windows（64 位）安装包。","只从官网下载；网上个人账号发布的“桌面版”安装包一律不用。","会用命令行也可以：装好 Node.js 后运行 npx @deepseek-ai/dsh web，浏览器打开 http://127.0.0.1:3080。","首次打开先点“继续”读完预览版说明，再关掉“开始使用”弹窗（本课不登录 DeepSeek 账号，接的是 TokenOne）。"],
+  kv:[["官网","https://www.deepseek.com/harness/"],["命令行","npx @deepseek-ai/dsh web"]]},
+ {k:"登录",m:2,img:"img/tokenone-home.webp",cap:"TokenOne 首页：右上角“登录”",t:"注册并登录 TokenOne",
+  pts:["浏览器打开 gts.tokenone.work，右上角“登录”，没有账号先注册。","TokenOne 是统一 API 网关：一个账号接入多家模型，按实际用量计费。"],kv:[["地址","https://gts.tokenone.work"]]},
+ {k:"充值",m:3,img:"img/tokenone-wallet.webp",cap:"钱包 → 添加资金：课程建议 50 或 100",t:"钱包充值",
+  pts:["左侧“钱包”→“添加资金”。","课程建议充值 50 或 100；付款方式 PaymentONE 最低 20。","Opus 属于高价模型，充值后随时在“使用日志”里看消耗。"]},
+ {k:"建密钥",m:3,img:"img/tokenone-keys.webp",cap:"API 密钥 → 创建 API 密钥；分组选“Claude满血”（截图为讲师账号）",t:"新建 Claude Opus 5.5 专用密钥",
+  pts:["左侧“API 密钥”→右上角“创建 API 密钥”。","名称写 opus55；分组选“Claude满血”（截图中倍率 1.8x，以页面实时显示为准）。","创建后在该行“…”菜单点“复制密钥”。这把密钥只给 Opus 5.5 用。"],kv:[["密钥名称","opus55"],["分组","Claude满血"]]},
+ {k:"打开设置",m:2,img:"img/dsh-settings.webp",cap:"DeepSeek Harness 左下角“更多”→“设置”",t:"打开 DeepSeek Harness 设置",
+  pts:["左下角“… 更多”→“设置”。","左侧选“模型”，点最下方“添加模型提供商”。"]},
+ {k:"填参数",m:4,img:"img/dsh-filled.webp",img2:"img/dsh-custom.webp",cap:"自定义模型 API：Provider ID、API 地址、协议、密钥、模型",t:"添加 TokenOne 为自定义模型 API",
+  pts:["切到“自定义模型 API”页签（用于中转站或兼容 OpenAI / Anthropic 协议的接口）。","Provider ID 填 tokenone，显示名称填 TokenOne。","API 地址填 https://gts.tokenone.work，API 协议选 Anthropic Messages。","API 密钥粘贴刚复制的 opus55 密钥。","模型目录点“获取可用模型”勾选 Opus 5.5；或点“添加模型”手动填 ID（以 TokenOne 模型广场显示的 ID 为准）。","点“创建提供商”。"],
+  kv:[["Provider ID","tokenone"],["API 地址","https://gts.tokenone.work"],["API 协议","Anthropic Messages"],["模型 ID","claude-opus-5-5"],["显示名称","Claude Opus 5.5"]]},
+ {k:"确认",m:1,img:"img/dsh-created.webp",cap:"模型列表出现 TokenOne（自定义），绿点表示密钥已配置",t:"确认提供商已生效",
+  pts:["模型列表多出一行 TokenOne，标“自定义”，后面亮绿点。","红点表示密钥没配好：点“编辑”重新粘贴。"]},
+ {k:"调用",m:5,img:"img/dsh-prompt.webp",img2:"img/dsh-picker.webp",cap:"选工作区“项目雏形”，模型选 TokenOne / Claude Opus 5.5，发送任务",t:"调用 Claude Opus 5.5",
+  pts:["电脑上新建文件夹“项目雏形”，放入第 1 次课的《项目雏形卡》。","对话框上方“选择工作区”选这个文件夹。","右下角模型下拉选 TokenOne → Claude Opus 5.5。","复制下方“课堂提示词”发送；完成后回 TokenOne“使用日志”核对模型和费用。"]}
+];
+let toolIdx=0, carSt=null;
+const tsteps=$("#tsteps");
+TOOL.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.innerHTML=`<span class="n">${i+1}</span>${s.k}`;b.addEventListener("click",()=>showTool(i));tsteps.append(b)});
+function copyBtn(text,btn){Promise.resolve().then(()=>navigator.clipboard.writeText(text)).then(()=>{btn.textContent="已复制"},()=>{btn.textContent="请手动选中复制"})}
+function showTool(i){
+  toolIdx=i; const s=TOOL[i];
+  $$("button",tsteps).forEach((b,j)=>b.setAttribute("aria-pressed",String(i===j)));
+  $("#carLbl").textContent=`第 ${i+1} 步 · ${s.k}`; $("#carCap").textContent=s.cap;
+  const st=TOOL.slice(0,i).reduce((a,x)=>a+x.m,0);
+  const imgs=[s.img].concat(s.img2?[s.img2]:[]);
+  $("#tpanel").innerHTML=`<span class="meta">第 ${i+1} / ${TOOL.length} 步 · 约 ${s.m} 分钟（实操段 ${st}′–${st+s.m}′）</span><h4>${s.t}</h4>
+    <ol>${s.pts.map(p=>`<li></li>`).join("")}</ol>
+    ${s.kv?`<div class="kv">${s.kv.map(()=>`<div><span></span><code></code><button class="btn" type="button">复制</button></div>`).join("")}</div>`:""}
+    <div class="thumbs">${imgs.map(()=>`<button type="button"><img alt="" loading="lazy"></button>`).join("")}</div>`;
+  $$("#tpanel ol li").forEach((li,j)=>li.textContent=s.pts[j]);
+  if(s.kv) $$("#tpanel .kv div").forEach((d,j)=>{d.querySelector("span").textContent=s.kv[j][0]; d.querySelector("code").textContent=s.kv[j][1]; const b=d.querySelector("button"); b.addEventListener("click",()=>copyBtn(s.kv[j][1],b))});
+  $$("#tpanel .thumbs button").forEach((b,j)=>{b.dataset.lb=imgs[j]; b.dataset.cap=s.cap; const im=b.querySelector("img"); im.src=imgs[j]; im.alt=s.t+" 截图"});
+  if(carSt) carSt.go(i);
+}
+if(hasGL) carSt=makeStage($("#carCv"),{camZ:6.9,camY:.25,fov:40,onResize(st,w,h){st.cam.position.z=2.2+Math.max(4.7,6.3/(w/h)); st.cam.lookAt(0,0,0)},build(st){
+  st.cam.lookAt(0,0,0);
+  const R=5.2, group=new THREE.Group(); group.position.z=-R+2.2; st.scene.add(group);
+  const loader=new THREE.TextureLoader(); const planes=[];
+  TOOL.forEach((s,i)=>{const a=i/TOOL.length*Math.PI*2;
+    const mat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.35,side:THREE.DoubleSide});
+    const m=new THREE.Mesh(new THREE.PlaneGeometry(4,2.5),mat); m.position.set(Math.sin(a)*R,0,Math.cos(a)*R); m.rotation.y=a; group.add(m); planes.push(m);
+    loader.load(s.img,tex=>{tex.encoding=THREE.sRGBEncoding; tex.anisotropy=4; mat.map=tex; mat.needsUpdate=true; const asp=tex.image.width/tex.image.height; m.scale.y=(4/asp)/2.5; st.dirty=true});
+  });
+  let target=0;
+  st.go=i=>{ let t=-i/TOOL.length*Math.PI*2; const cur=group.rotation.y; while(t-cur>Math.PI) t-=Math.PI*2; while(t-cur<-Math.PI) t+=Math.PI*2; target=t; if(reduce){group.rotation.y=t; planes.forEach((p,j)=>p.material.opacity=j===i?1:.35)} st.dirty=true };
+  st.tick=(dt)=>{group.rotation.y+=(target+st.mx*.08-group.rotation.y)*Math.min(1,dt*4);
+    planes.forEach((p,j)=>{const o=j===toolIdx?1:.28; p.material.opacity+=(o-p.material.opacity)*.1}); group.position.y=Math.sin(st.t*.8)*.05};
+}});
+$("#carStage").addEventListener("click",()=>{const s=TOOL[toolIdx]; openLB(s.img,s.cap)});
+showTool(0);
+
+/* ---- 第3次课：领奖台 ---- */
+if(hasGL) makeStage($("#s3Cv"),{camZ:7.4,camY:2.2,build(st){
+  st.cam.lookAt(0,.7,0);
+  st.scene.add(new THREE.AmbientLight(0xffffff,.55));
+  const dl=new THREE.DirectionalLight(0xffffff,.9); dl.position.set(3,6,5); st.scene.add(dl);
+  const sl=new THREE.PointLight(0xffe2a8,1.2,12); sl.position.set(0,4,2); st.scene.add(sl);
+  const g=new THREE.Group(); st.scene.add(g);
+  const blocks=[[0,1.7,"--s2","1"],[-1.45,1.15,"--s3","2"],[1.45,.8,"--s1","3"]].map(([x,h,col])=>{const m=new THREE.Mesh(new THREE.BoxGeometry(1.35,h,1.15),new THREE.MeshStandardMaterial({roughness:.45,metalness:.15}));m.position.set(x,h/2-.4,0);m.userData.col=col;g.add(m);return m});
+  const medal=new THREE.Mesh(new THREE.TorusGeometry(.42,.12,24,64),new THREE.MeshStandardMaterial({metalness:.9,roughness:.25}));
+  medal.position.set(0,2.15,0); g.add(medal);
+  const disc=new THREE.Mesh(new THREE.CircleGeometry(.36,48),new THREE.MeshStandardMaterial({metalness:.8,roughness:.3,side:THREE.DoubleSide})); medal.add(disc);
+  const N=420, cg=new THREE.BufferGeometry(), cp=new Float32Array(N*3), cc=new Float32Array(N*3), vel=[];
+  for(let i=0;i<N;i++){cp.set([(Math.random()-.5)*7,Math.random()*6-1,(Math.random()-.5)*4],i*3); vel.push(.4+Math.random()*.9)}
+  cg.setAttribute("position",new THREE.BufferAttribute(cp,3)); cg.setAttribute("color",new THREE.BufferAttribute(cc,3));
+  g.add(new THREE.Points(cg,new THREE.PointsMaterial({size:.09,vertexColors:true,map:dotTexture(),transparent:true,depthWrite:false})));
+  st.theme=()=>{blocks.forEach(b=>b.material.color.set(css(b.userData.col))); medal.material.color.set(css("--s2")); disc.material.color.set(css("--s2"));
+    const pal=[css("--s1"),css("--s2"),css("--s3"),css("--warn"),"#ffffff"].map(c=>new THREE.Color(c)); for(let i=0;i<N;i++){const c=pal[i%5];cc.set([c.r,c.g,c.b],i*3)} cg.attributes.color.needsUpdate=true};
+  st.theme(st);
+  st.tick=(dt)=>{for(let i=0;i<N;i++){cp[i*3+1]-=vel[i]*dt; cp[i*3]+=Math.sin(st.t*1.3+i)*dt*.15; if(cp[i*3+1]<-1.2) cp[i*3+1]=5}
+    cg.attributes.position.needsUpdate=true; medal.rotation.y+=dt*1.4; medal.position.y=2.15+Math.sin(st.t*2)*.08;
+    g.rotation.y+=((st.mx*.5+Math.sin(st.t*.3)*.25)-g.rotation.y)*.05};
+}});
+requestAnimationFrame(loop);
 
 /* ---------- 评分规则探索器 ---------- */
 const PAL=["var(--s1)","var(--s2)","var(--s3)","var(--warn)","var(--muted)"];
@@ -705,42 +1030,38 @@ const RULES=[
 ];
 const seg=$("#groupSeg");
 RULES.forEach((r,i)=>{const b=document.createElement("button");b.textContent=r.k;b.type="button";b.addEventListener("click",()=>showRule(i));seg.append(b)});
-function arc(cx,cy,R,r,a0,a1){
-  const p=(rad,a)=>[cx+rad*Math.cos(a),cy+rad*Math.sin(a)]; const lg=a1-a0>Math.PI?1:0;
-  const [x0,y0]=p(R,a0),[x1,y1]=p(R,a1),[x2,y2]=p(r,a1),[x3,y3]=p(r,a0);
-  return `M${x0} ${y0}A${R} ${R} 0 ${lg} 1 ${x1} ${y1}L${x2} ${y2}A${r} ${r} 0 ${lg} 0 ${x3} ${y3}Z`;
-}
+function arc(cx,cy,R,r,a0,a1){const p=(rad,a)=>[cx+rad*Math.cos(a),cy+rad*Math.sin(a)]; const lg=a1-a0>Math.PI?1:0;
+  const [x0,y0]=p(R,a0),[x1,y1]=p(R,a1),[x2,y2]=p(r,a1),[x3,y3]=p(r,a0); return `M${x0} ${y0}A${R} ${R} 0 ${lg} 1 ${x1} ${y1}L${x2} ${y2}A${r} ${r} 0 ${lg} 0 ${x3} ${y3}Z`}
 function showRule(i){
   $$("button",seg).forEach((b,j)=>b.setAttribute("aria-pressed",String(i===j)));
-  const r=RULES[i]; let a=-Math.PI/2; const svg=$("#donut"); let s="";
+  const r=RULES[i]; let a=-Math.PI/2; let s="";
   r.d.forEach(([n,v],j)=>{const a1=a+v/100*Math.PI*2-0.02; s+=`<path d="${arc(120,120,110,70,a,a1)}" fill="${PAL[j]}" data-j="${j}"><title>${n} ${v} 分</title></path>`; a+=v/100*Math.PI*2});
-  s+=`<text x="120" y="116" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="34" font-weight="600" fill="var(--ink)">100</text><text x="120" y="142" text-anchor="middle" font-size="13" fill="var(--muted)">总分</text>`;
-  svg.innerHTML=s;
+  s+=`<text x="120" y="116" text-anchor="middle" font-family="Consolas,monospace" font-size="34" font-weight="600" fill="var(--ink)">100</text><text x="120" y="142" text-anchor="middle" font-size="13" fill="var(--muted)">总分</text>`;
+  $("#donut").innerHTML=s;
   $("#dims").innerHTML=r.d.map(([n,v,t],j)=>`<div class="dim" data-j="${j}"><i style="background:${PAL[j]}"></i><div><b>${n}</b><p>${t}</p></div><span class="num">${v}</span></div>`).join("");
   const hl=j=>{$$("#donut path").forEach(p=>p.style.opacity=(j==null||+p.dataset.j===j)?1:.25)};
-  $$("#dims .dim").forEach(d=>{d.addEventListener("mouseenter",()=>hl(+d.dataset.j));d.addEventListener("mouseleave",()=>hl(null))});
-  $$("#donut path").forEach(p=>{p.addEventListener("mouseenter",()=>hl(+p.dataset.j));p.addEventListener("mouseleave",()=>hl(null))});
+  $$("#dims .dim,#donut path").forEach(d=>{d.addEventListener("mouseenter",()=>hl(+d.dataset.j));d.addEventListener("mouseleave",()=>hl(null))});
 }
 showRule(0);
 
 /* ---------- 三次课时间轴 ---------- */
 const SESS=[
- [ {m:10,n:"开场：从想法到项目",how:"讲授",pts:["展示讲师网站作品墙：10 个平台、9 项独立开发，拉出“想法 → 智能体 → 成果”的路径","抛出问题：评委在 30 秒内决定是否往下看，他看的是什么？"]},
+ [ {m:10,n:"开场：从想法到项目",how:"讲授",pts:["展示作品墙：10 个平台的真实界面，拉出“想法 → 智能体 → 成果”的路径","抛出问题：评委在 30 秒内决定是否往下看，他看的是什么？"]},
    {m:20,n:"主流赛事梳理",how:"讲授 + 对比表",pts:["国创赛五大赛道与组别、挑战杯、计算机设计大赛、大创项目的定位差异","教学生读评审规则：先看分值权重，再分配材料篇幅","近年赛程节奏：春季报名、夏季省赛、秋季总决赛"]},
-   {m:20,n:"三圈选题法与案例",how:"案例拆解",pts:["专业 × 产业 × AI 三圈交集才是好选题","案例：掐丝珐琅钛杯（在地产业 + 非遗）、琴韵智评（教学痛点 + 智能体）、钛合金工厂 Agents（产业真需求）","现场让每组写出自己的三个圈"]},
+   {m:20,n:"三圈选题法与案例",how:"案例拆解",pts:["专业 × 产业 × AI 三圈交集才是好选题","真实作品：双创星球、琴韵智评、宅兹周秦；在地案例：掐丝珐琅钛杯、钛合金工厂 Agents","现场让每组写出自己的三个圈"]},
    {m:25,n:"六步追问搭逻辑",how:"分组实操",pts:["痛点 → 用户 → 方案 → 创新点 → 验证 → 价值","用千问 / WorkBuddy 做苏格拉底式追问，AI 只问不答","每组产出：一句话定位 + 三个创新点"]},
-   {m:15,n:"1 分钟说清项目",how:"展示点评",pts:["每组 1 分钟陈述","讲师当场点评：“这个问题评委会买单吗？”","布置作业：《项目雏形卡》"]} ],
+   {m:15,n:"1 分钟说清项目",how:"展示点评",pts:["每组 1 分钟陈述","讲师当场点评：“这个问题评委会买单吗？”","布置作业：《项目雏形卡》（存成文件，下次课交给 AI 读）"]} ],
  [ {m:10,n:"雏形卡快评",how:"点评",pts:["挑 2–3 组典型问题：问题太大、创新点空、没有数据","明确本次课要把雏形卡变成 PPT 骨架"]},
-   {m:20,n:"高分 PPT 逻辑框架",how:"讲授",pts:["评委网评的阅读习惯：先看目录与结论页","按评分要点倒推 32 页页序","网评版与路演版的区别"]},
-   {m:20,n:"数据图表与亮点可视化",how:"讲授 + 正反例",pts:["真实数据从哪来：系统导出、问卷、访谈","一页一观点、结论句做标题、来源写图下","红线：不编造数据、不夸大成果"]},
-   {m:25,n:"AI 加速制作",how:"实操",pts:["AI 生成逐页大纲","PRD + 原型图 → Codex 做 Demo，截图进 PPT","零代码标准：不假设学生会写代码"]},
-   {m:15,n:"AI 三评委打分",how:"实操 + 点评",pts:["按所选赛道评分表，模拟教育型、技术型、投资型三位评委","输出逐页修改意见，各组领回整改清单"]} ],
- [ {m:25,n:"申报书模板拆解",how:"讲授 + 实操",pts:["八个章节的结构与篇幅","PPT 与申报书口径必须一致：数字、名称、时间点","AI 按 PPT 扩写初稿，人工逐条核实"]},
+   {m:15,n:"高分 PPT 逻辑框架",how:"讲授",pts:["评委网评的阅读习惯：先看目录与结论页","按评分要点倒推 32 页页序","网评版与路演版的区别"]},
+   {m:10,n:"图表与红线",how:"讲授 + 正反例",pts:["真实数据从哪来：系统导出、问卷、访谈","一页一观点、结论句做标题、来源写图下","红线：不编造数据、不夸大成果"]},
+   {m:25,n:"工具实操：接入 Opus 5.5",how:"实操",pts:["官网安装 DeepSeek Harness","TokenOne 登录、钱包充值（建议 50 或 100）","新建“Claude满血”分组的 Opus 5.5 专用密钥","设置 → 模型 → 自定义模型 API 接入 TokenOne，选中 Claude Opus 5.5"]},
+   {m:15,n:"调用 Opus 5.5 出大纲与 Demo",how:"实操",pts:["工作区放入《项目雏形卡》","提示词①：32 页逐页大纲；提示词②：单页 Demo","回 TokenOne 使用日志核对费用"]},
+   {m:15,n:"AI 三评委打分",how:"实操 + 点评",pts:["提示词③：Opus 5.5 扮演教育型、技术型、投资型三位评委","输出逐页修改意见，各组领回整改清单"]} ],
+ [ {m:25,n:"申报书模板拆解",how:"讲授 + 实操",pts:["八个章节的结构与篇幅","PPT 与申报书口径必须一致：数字、名称、时间点","Opus 5.5 按 PPT 扩写初稿，人工逐条核实"]},
    {m:15,n:"答辩话术定制",how:"讲授",pts:["7 分钟路演节奏","开场 30 秒抓人","一个故事 + 三个数字"]},
-   {m:35,n:"全真模拟答辩",how:"分组演练",pts:["每组路演 7 分钟 + 追问","AI 生成高频追问：技术真实性、数据来源、商业可行性、团队分工","讲师现场压力追问"]},
+   {m:35,n:"全真模拟答辩",how:"分组演练",pts:["每组路演 7 分钟 + 追问","Opus 5.5 生成高频追问：技术真实性、数据来源、商业可行性、团队分工","讲师现场压力追问"]},
    {m:15,n:"短板优化与总结",how:"总结",pts:["汇总各组“答辩病历”","按失分大小 × 修改成本排修改优先级","比赛节点与提交注意事项"]} ]
 ];
-const segState=[0,0,0];
 function buildTL(si){
   const tl=$("#tl"+(si+1)); let start=0;
   tl.innerHTML=SESS[si].map((s,j)=>{const b=`<button type="button" data-j="${j}" style="flex:${s.m};--o:${20+j*8}%"><span class="t">${start}–${start+s.m}′</span><span class="lbl">${s.n}</span></button>`;start+=s.m;return b}).join("");
@@ -748,8 +1069,7 @@ function buildTL(si){
   showSeg(si,0);
 }
 function showSeg(si,j){
-  segState[si]=j; const tl=$("#tl"+(si+1));
-  $$("button",tl).forEach((b,k)=>b.setAttribute("aria-pressed",String(k===j)));
+  const tl=$("#tl"+(si+1)); $$("button",tl).forEach((b,k)=>b.setAttribute("aria-pressed",String(k===j)));
   const s=SESS[si][j]; const st=SESS[si].slice(0,j).reduce((a,x)=>a+x.m,0);
   $("#info"+(si+1)).innerHTML=`<span class="meta">${st}′–${st+s.m}′ · ${s.m} 分钟 · ${s.how}</span><h4>${s.n}</h4><ul>${s.pts.map(p=>`<li>${p}</li>`).join("")}</ul>`;
 }
@@ -761,11 +1081,9 @@ const VENN={
  industry:["产业圈","谁会为这个问题买单或受益？",["宝鸡本地产业：钛及钛合金、青铜文化、文旅、教育","找一个真实的企业、学校或社区当“第一个用户”","产业价值 / 发展前景分从这里来"]],
  ai:["AI 圈","AI 让这件事好在哪里？",["更快：把几小时的工作压到几分钟","更准：评估、识别、诊断类任务","更便宜：一个人干一个团队的活","项目创新分要能说清 AI 带来的增量"]]
 };
-function showVenn(k){
-  const [t,q,list]=VENN[k];
+function showVenn(k){const [t,q,list]=VENN[k];
   $$("#venn circle").forEach(c=>c.style.opacity=c.dataset.v===k?.85:.3);
-  $("#vennInfo").innerHTML=`<span class="tag" style="color:var(--s1)">${t}</span><h3 style="font-size:20px">${q}</h3><ul class="clean">${list.map(x=>`<li>${x}</li>`).join("")}</ul><p class="src">三个圈都能答上来，才进入下一步的六步追问。</p>`;
-}
+  $("#vennInfo").innerHTML=`<span class="tag" style="color:var(--s1)">${t}</span><h3 style="font-size:20px">${q}</h3><ul class="clean">${list.map(x=>`<li>${x}</li>`).join("")}</ul><p class="src">三个圈都能答上来，才进入下一步的六步追问。</p>`}
 $$("#venn circle").forEach(c=>c.addEventListener("click",()=>showVenn(c.dataset.v)));
 $("#vennInfo").innerHTML=`<span class="tag" style="color:var(--s1)">怎么用</span><h3 style="font-size:20px">三个圈的交集才是好选题</h3><ul class="clean"><li>只有专业：容易做成课程作业</li><li>只有产业：学生讲不出自己的贡献</li><li>只有 AI：变成工具展示，缺少真问题</li></ul><p class="src">点左图任一圆圈看具体问题。</p>`;
 
@@ -780,27 +1098,33 @@ const STEPS=[
 ];
 const stepsEl=$("#steps"); const doneSet=new Set();
 STEPS.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.innerHTML=`<span class="n">0${i+1}</span>${s[0]}`;b.addEventListener("click",()=>showStep(i));stepsEl.append(b)});
-function showStep(i){
-  doneSet.add(i);
+function showStep(i){doneSet.add(i);
   $$("button",stepsEl).forEach((b,j)=>{b.setAttribute("aria-pressed",String(i===j));b.classList.toggle("done",doneSet.has(j))});
   const [n,q,p]=STEPS[i];
-  $("#stepCard").innerHTML=`<div class="stack"><span class="meta mono" style="color:var(--s1);font-size:13px">第 ${i+1} 步 · ${n}</span><h4 style="font-size:18px;font-family:var(--f-display)">${q}</h4><div class="prompt"><button class="btn copy" type="button">复制提示词</button><span class="ptext"></span></div></div>`;
+  $("#stepCard").innerHTML=`<div class="stack"><span class="mono" style="color:var(--s1);font-size:13px;font-weight:600">第 ${i+1} 步 · ${n}</span><h4 style="font-size:18px;font-family:var(--f-display)">${q}</h4><div class="prompt"><button class="btn copy" type="button">复制提示词</button><span class="ptext"></span></div></div>`;
   $(".ptext",$("#stepCard")).textContent=p;
-  $(".copy",$("#stepCard")).addEventListener("click",e=>{
-    const txt=p; const btn=e.currentTarget;
-    Promise.resolve().then(()=>navigator.clipboard.writeText(txt)).then(()=>{btn.textContent="已复制"},()=>{const r=document.createRange();r.selectNodeContents($(".ptext",$("#stepCard")));const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent="已选中，请按 Ctrl+C"});
-  });
+  const b=$(".copy",$("#stepCard")); b.addEventListener("click",()=>copyBtn(p,b));
 }
 showStep(0);
 
+/* ---------- 课堂提示词 ---------- */
+const PROMPTS=[
+ ["① 逐页大纲","你是国创赛评委。请读取工作区里的《项目雏形卡》，按高教主赛道创意组评分表（个人成长30、项目创新30、产业价值25、团队协作15），输出 32 页网评版 PPT 的逐页大纲：每页一句结论式标题 + 这一页要放的真实证据。不要编造任何数据，缺的证据标注“待补”。最后列一张“待补证据清单”。"],
+ ["② 单页 Demo","根据《项目雏形卡》，在工作区里做一个可以直接用浏览器打开的单页 Demo（index.html）：展示用户第一步做什么、系统返回什么、用户得到什么结果。只做界面原型，用明显的示例数据，页面右上角标注“演示原型”。完成后告诉我怎么打开。"],
+ ["③ 三评委打分","你现在同时扮演三位国创赛评委：教育型（看个人成长）、技术型（看项目创新）、投资型（看产业价值）。按高教主赛道创意组评分表，分别给我刚才的 PPT 大纲打分，每一项写出扣分原因和一条最具体的修改建议，最后给出三人平均分和最该先改的三页。"]
+];
+let pIdx=0;
+$("#ptabs").innerHTML=PROMPTS.map((p,i)=>`<button type="button" data-i="${i}">${p[0]}</button>`).join("");
+function showP(i){pIdx=i; $$("#ptabs button").forEach((b,j)=>b.setAttribute("aria-pressed",String(i===j))); $("#ptext").textContent=PROMPTS[i][1]; $("#pcopy").textContent="复制提示词"}
+$$("#ptabs button").forEach(b=>b.addEventListener("click",()=>showP(+b.dataset.i)));
+$("#pcopy").addEventListener("click",e=>copyBtn(PROMPTS[pIdx][1],e.currentTarget));
+showP(0);
+
 /* ---------- PPT 页序 ---------- */
-const PG=[["封面与目录",2,"var(--muted)"],["项目概述",2,"var(--ink)"],["痛点与调研",4,"var(--s1)"],["方案与产品",5,"var(--s2)"],["技术与创新点",5,"var(--s2)"],["成效验证",4,"var(--s1)"],["市场与商业模式",4,"var(--s3)"],["团队与成长",3,"var(--warn)"],["发展规划与结尾",3,"var(--muted)"]];
-const PGMAP={"var(--s1)":"个人成长（调研、成效）","var(--s2)":"项目创新","var(--s3)":"产业价值","var(--warn)":"团队协作","var(--ink)":"总览","var(--muted)":"结构页"};
-$("#pagesLegend").innerHTML=PG.map(([n,c,col])=>`<span><i style="background:${col}"></i>${n} · ${c} 页</span>`).join("");
-function buildPages(){
-  const el=$("#pages"); if(el.childElementCount) return; let k=0;
-  PG.forEach(([n,c,col])=>{for(let i=0;i<c;i++){k++;const d=document.createElement("div");d.className="pg";d.style.background=col;d.style.animationDelay=(reduce?0:k*45)+"ms";d.textContent=k;d.title=`第 ${k} 页 · ${n} · ${PGMAP[col]}`;el.append(d)}});
-}
+const PGMAP={"--s1":"个人成长（调研、成效）","--s2":"项目创新","--s3":"产业价值","--warn":"团队协作","--ink":"总览","--muted":"结构页"};
+$("#pagesLegend").innerHTML=PG.map(([n,c,col])=>`<span><i style="background:var(${col})"></i>${n} · ${c} 页</span>`).join("");
+function buildPages(){const el=$("#pages"); if(el.childElementCount) return; let k=0;
+  PG.forEach(([n,c,col])=>{for(let i=0;i<c;i++){k++;const d=document.createElement("div");d.className="pg";d.style.background=`var(${col})`;d.style.animationDelay=(reduce?0:k*45)+"ms";d.textContent=k;d.title=`第 ${k} 页 · ${n} · ${PGMAP[col]}`;el.append(d)}})}
 
 /* ---------- 三评委打分 ---------- */
 const DIMS=[["个人成长",30],["项目创新",30],["产业价值",25],["团队协作",15]];
@@ -824,18 +1148,16 @@ const PITCH=[[30,"开场钩子","var(--warn)"],[60,"痛点与数据","var(--s1)"
 $("#pitch").innerHTML=PITCH.map(([s,n,c])=>`<div style="flex:${s};background:${c}" title="${n} ${s} 秒">${n}</div>`).join("");
 let pitchRAF=null;
 const fmt=s=>String(Math.floor(s/60)).padStart(2,"0")+":"+String(Math.floor(s%60)).padStart(2,"0");
-$("#pitchBtn").addEventListener("click",()=>{
-  cancelAnimationFrame(pitchRAF); const t0=performance.now(), total=420, speed=20;
+$("#pitchBtn").addEventListener("click",()=>{cancelAnimationFrame(pitchRAF); const t0=performance.now(), total=420, speed=20;
   (function f(t){const sec=Math.min(total,(t-t0)/1000*speed); $("#pitchHead").style.left=(sec/total*100)+"%";
     let acc=0,cur=PITCH[0][1]; for(const [s,n] of PITCH){if(sec<acc+s){cur=n;break}acc+=s}
-    $("#pitchNow").textContent=fmt(sec)+" · "+(sec>=total?"时间到":cur); if(sec<total) pitchRAF=requestAnimationFrame(f)})(t0);
-});
+    $("#pitchNow").textContent=fmt(sec)+" · "+(sec>=total?"时间到":cur); if(sec<total) pitchRAF=requestAnimationFrame(f)})(t0)});
 
 /* ---------- 答辩卡 ---------- */
 const QS=[
  ["数据","你们的用户数和效果数据是怎么来的？","说清来源（系统导出 / 问卷 / 访谈）、样本量和时间范围；手边准备原始截图。"],
  ["竞品","市面上已有类似产品，你们的区别在哪？","承认对手存在，点名一处可验证的差异，最好有对比测试结果。"],
- ["技术","核心技术是自研的还是调用现成大模型？","坦白调用了什么，讲清自己做的部分：数据、流程、提示工程、评估方法。"],
+ ["技术","核心技术是自研的还是调用现成大模型？","坦白调用了什么（例如通过 TokenOne 调用 Claude Opus 5.5），讲清自己做的部分：数据、流程、提示工程、评估方法。"],
  ["团队","团队成员的专业和项目匹配吗？","按分工逐人说明专业背景与具体产出，避免“全员都做了所有事”。"],
  ["盈利","项目靠什么赚钱或持续运转？","给出收费对象、定价依据和第一笔收入的路径；公益项目讲资金来源。"],
  ["付费","用户真的愿意付费吗？有证据吗？","拿出意向书、试用转化、访谈记录；没有就说明下一步怎么验证。"],
@@ -873,7 +1195,7 @@ $("#tStart").addEventListener("click",()=>{
 });
 function resetT(){tRun=false;clearInterval(tTimer);tLeft=5400;$("#tStart").textContent="开始";renderT()}
 $("#tReset").addEventListener("click",resetT);
-$("#tSkip").addEventListener("click",()=>{const [j,end]=curIdx(); tLeft=Math.max(0,5400-end); if(!tRun&&tLeft===5400) tLeft=5399; renderT(); const [k]=curIdx(); showSeg(tSess,k)});
+$("#tSkip").addEventListener("click",()=>{const [,end]=curIdx(); tLeft=Math.max(0,5400-end); if(!tRun&&tLeft===5400) tLeft=5399; renderT(); const [k]=curIdx(); showSeg(tSess,k)});
 renderT();
 })();
 </script>
