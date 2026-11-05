@@ -1,4 +1,4 @@
-/* 华夏银行 · AI 星环（three.js）：中心总调度 + 12 个岗位智能体 */
+/* 商业银行 · AI 星环（three.js）：中心总调度 + 12 个岗位智能体 */
 (function(){
 "use strict";
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];

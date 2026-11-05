@@ -703,3 +703,11 @@ html.game,html.game body{height:100%;overflow:hidden;background:#06100c}
   .st-k{font-size:11px;letter-spacing:.16em}
   .st-tip{display:none}
 }
+
+/* 查找替换脱敏表 */
+.wtable{overflow-x:auto;margin-top:12px}
+.wtable table{width:100%;border-collapse:collapse;font-size:14.5px}
+.wtable th,.wtable td{text-align:left;padding:8px 10px;border-bottom:1px dashed var(--line-2);vertical-align:top}
+.wtable th{color:var(--ink-3);font-weight:600;font-size:13px;white-space:nowrap}
+.wtable td:last-child,.wtable td:first-child{white-space:nowrap}
+.wtable code{font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;font-size:13px;background:rgba(246,240,59,.22);padding:1px 6px;border-radius:4px;white-space:nowrap}

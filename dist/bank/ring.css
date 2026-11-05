@@ -1,4 +1,4 @@
-/* 华夏银行 · AI 星环大屏 */
+/* 商业银行 · AI 星环大屏 */
 :root{--hud-g:#5fe3ff;--hud-g2:#cdf7ff;--hud-line:rgba(95,227,255,.22);--hud-bg:rgba(3,7,14,.78);--hud-t:#d6e6f2;--hud-d:#7d93a8;--hud-y:#ffe066}
 html.game,html.game body{background:#02040a}
 #ring{position:fixed;inset:0;z-index:1;background:radial-gradient(1000px 700px at 50% 50%,#08142a 0%,#030711 60%,#010205 100%)}
