@@ -56,12 +56,12 @@ docker run -d --name nexai-salon --restart unless-stopped -p 8080:80 -v /opt/sal
 - 政务版可从首页底部入口和展开菜单进入，支持键盘访问。
 - 首页版本区为四组，悬停（电脑）或点按（手机）弹出二级菜单，展开菜单同样分组：
   - 01 教育系列：教育版、入学规划（美术设计）、前沿技术（计算机）、教师技能（外国语）、青少年科学探究建模大赛（后四项为外链）
-  - 02 企业系列：工具培训（原企业版）、华夏银行
+  - 02 企业系列：工具培训（原企业版）、商业银行
   - 03 机关单位：政务版、政法版
   - 04 短视频：千阳果树、农技专班、畜牧专班（外链）
 - 首页右上角“智能体作品”按钮：教育系列作品墙的 10 个智能体（演示地址 + GitHub 源码）及“AI实验室安全仿真演练”（https://shiyanshi.app.tokenone.work/ ，附下载攻略 `dist/portal-assets/zhian-guide.pdf`）。
 - 首页右上角“讲师介绍”按钮弹出讲师简介（内容取自企业版讲师页，头像 `dist/portal-assets/lecturer-portrait.webp`）。
-- `dist/bank/`：华夏银行员工培训《让AI智能体成为工作搭子》——“AI 星环”大屏（three.js：中心总调度 + 12 个岗位智能体），8 个课程站点；二维码指向 https://salon.tokenone.work/bank/ 。
+- `dist/bank/`：商业银行员工培训《让AI智能体成为工作搭子》——“AI 星环”大屏（three.js：中心总调度 + 12 个岗位智能体），8 个课程站点；二维码指向 https://salon.tokenone.work/bank/ 。
 - 展开菜单支持遮罩关闭、Escape 关闭及键盘焦点循环。
 - 首页提供 `https://salon.tokenone.work` 的真实二维码，已做解码核验；域名解析与正式服务器绑定仍需由部署方完成。本次不会改变 DNS。
 - 暂停按钮同时控制视频与 3D 浮动；尊重系统减少动态效果设置，页面隐藏时暂停。
