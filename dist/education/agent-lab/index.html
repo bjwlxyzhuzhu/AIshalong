@@ -209,7 +209,7 @@ footer a{color:var(--ink)}
       <span class="eyebrow">NEXAI 创新工坊 · 开放性实验教程</span>
       <h1 style="margin-top:12px">五步，把一个真实需求<br>做成<em>能上线</em>的智能体</h1>
       <p class="lead">这是朱丽叶老师开发智能体时一直在用的流程。核心只有一句话：<b>先问清楚，再画出来，拿给用户看，再写代码，最后上线。</b>每一步都有可直接复制的提示词，本教程以“辅导员工作智能体”为贯穿案例。</p>
-      <div class="tags"><span class="tag">苏格拉底式提问</span><span class="tag">画布 ONE 生图</span><span class="tag">千问录音纪要</span><span class="tag">PRD + 原型图驱动开发</span><span class="tag">DeepSeek / TokenOne</span><span class="tag">WorkBuddy 预览部署</span></div>
+      <div class="tags"><span class="tag">苏格拉底式提问</span><span class="tag">画布 ONE · gpt-image2.5</span><span class="tag">千问录音纪要</span><span class="tag">PRD + 原型图驱动开发</span><span class="tag">DeepSeek / TokenOne</span><span class="tag">WorkBuddy 预览部署</span></div>
     </div>
     <div class="pipe reveal" aria-label="五步流程总览">
       <ol>
@@ -298,7 +298,7 @@ footer a{color:var(--ink)}
     <div class="step-head reveal">
       <div class="bignum">02</div>
       <div><span class="eyebrow">STEP 2 · 前端 UI</span><h2>用画布 ONE，把方案“画”成界面</h2>
-      <p>把第一步的开发方案交给 <a href="https://creative.agentone.work/studio" target="_blank" rel="noopener">画布 ONE</a>，选用其中最强的生图模型。它会先根据方案推理“这个软件应该有哪些页面、每页放什么”，再生成前端界面图。这一步只做前端外观，不涉及后台。</p></div>
+      <p>把第一步的开发方案交给 <a href="https://creative.agentone.work/studio" target="_blank" rel="noopener">画布 ONE</a>，选用其中最强的生图模型 <b class="mono">gpt-image2.5</b>。它会先根据方案推理“这个软件应该有哪些页面、每页放什么”，再生成前端界面图。这一步只做前端外观，不涉及后台。</p></div>
     </div>
     <div class="grid2 reveal">
       <div class="card">
@@ -344,7 +344,7 @@ footer a{color:var(--ink)}
     </div>
 
     <div class="prompt reveal">
-      <div class="label"><span>画布 ONE 提示词（生成两张原型图）</span><button class="copy" data-copy="#p2">复制</button></div>
+      <div class="label"><span>画布 ONE 提示词（模型选 gpt-image2.5，生成两张原型图）</span><button class="copy" data-copy="#p2">复制</button></div>
       <pre id="p2"></pre>
     </div>
     <div class="out reveal"><span>原型图① 外观（首页）</span><span>原型图② 点进去（功能页）</span></div>
@@ -482,7 +482,7 @@ footer a{color:var(--ink)}
     <h2 style="margin-top:8px">五步速记</h2>
     <div class="sum">
       <div style="--c:var(--c1)"><b>1 需求</b>说清为谁、什么场景、解决什么问题；让 AI 苏格拉底式追问，信息够了再出方案。</div>
-      <div style="--c:var(--c2)"><b>2 前端 UI</b>画布 ONE 最强生图模型推理界面；至少“外观 + 点进去”两张；主色调跟行业。</div>
+      <div style="--c:var(--c2)"><b>2 前端 UI</b>画布 ONE 用 gpt-image2.5 推理界面；至少“外观 + 点进去”两张；主色调跟行业。</div>
       <div style="--c:var(--c3)"><b>3 沟通</b>拿方案和原型找用户；征得同意后录音；整理纪要，形成修订方案。</div>
       <div style="--c:var(--c4)"><b>4 开发</b>先生成 PRD；PRD + 两张原型图交给 AI 开发；后台可配置 DeepSeek / TokenOne。</div>
       <div style="--c:var(--c5)"><b>5 部署</b>预览用 WorkBuddy 上传部署包；正式使用由使用方向网信处申请云主机。</div>
@@ -616,7 +616,7 @@ footer a{color:var(--ink)}
 ${p1text()}
 
 二、前端 UI：用画布 ONE 把方案“画”成界面
-把开发方案交给画布 ONE（https://creative.agentone.work/studio），选用其中最强的生图模型，让它通过逻辑推理得出软件需要的前端界面。这一步只做前端，至少生成两张图：外观（首页）和点进去之后的功能页。
+把开发方案交给画布 ONE（https://creative.agentone.work/studio），选用其中最强的生图模型 gpt-image2.5，让它通过逻辑推理得出软件需要的前端界面。这一步只做前端，至少生成两张图：外观（首页）和点进去之后的功能页。
 主色调跟着行业走：辅导员从事学生思想政治工作，可用红色思政元素；农业类常用生态绿；科技类常用科技蓝；工业类常用工业灰。实在想不到，就对 AI 说“请根据行业帮我定主色调”。
 画布 ONE 提示词：
 ${p2text()}
