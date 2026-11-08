@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="开放性实验《智能体开发》：需求、前端UI、沟通、开发、部署五步走，从一个真实需求做出可上线的智能体。含提示词模板、行业配色、PRD 清单与部署路径。">
+<title>智能体开发 · 开放性实验</title>
+<style>
+/* 布局：实验手册 —— 方格纸背景 + 五站流水线，每站「做什么 / 怎么做 / 提示词 / 产出」 */
+:root{
+  --bg:#F4F1EA; --paper:#FBFAF6; --ink:#1B1F24; --muted:#5E646B; --line:#DAD4C7; --grid:rgba(27,31,36,.045);
+  --c1:#B3261E; --c2:#7A3FB5; --c3:#0F7A5C; --c4:#1F5FAE; --c5:#C26A00;
+  --soft1:#F6DEDA; --soft2:#EBDDF6; --soft3:#D6EEE5; --soft4:#DCE7F6; --soft5:#F7E4CC;
+  --code:#1E2329; --codeink:#E8E6DF;
+  --f-display:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC","SimSun",serif;
+  --f-body:"PingFang SC","Microsoft YaHei","Noto Sans SC","Source Han Sans SC",system-ui,sans-serif;
+  --f-mono:"SFMono-Regular","Cascadia Mono",Consolas,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14171B;--paper:#1B1F24;--ink:#ECE8DF;--muted:#A3A8AE;--line:#2D333A;--grid:rgba(236,232,223,.04);
+  --c1:#F0776C;--c2:#B992E6;--c3:#4CC59D;--c4:#78A8EC;--c5:#F0A548;
+  --soft1:#3A1C1A;--soft2:#2C2140;--soft3:#14332A;--soft4:#18263B;--soft5:#3A2A14;--code:#0E1114;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14171B;--paper:#1B1F24;--ink:#ECE8DF;--muted:#A3A8AE;--line:#2D333A;--grid:rgba(236,232,223,.04);
+  --c1:#F0776C;--c2:#B992E6;--c3:#4CC59D;--c4:#78A8EC;--c5:#F0A548;
+  --soft1:#3A1C1A;--soft2:#2C2140;--soft3:#14332A;--soft4:#18263B;--soft5:#3A2A14;--code:#0E1114;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.8;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);font-weight:900;line-height:1.25;margin:0;text-wrap:balance}
+h2{font-size:clamp(26px,3.4vw,36px)}
+h3{font-size:19px}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--c4);outline-offset:2px}
+.mono{font-family:var(--f-mono)}
+.muted{color:var(--muted)}
+.eyebrow{font-size:13px;letter-spacing:.16em;color:var(--muted);font-weight:700}
+
+/* 顶栏 */
+.bar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));padding-top:env(safe-area-inset-top,0px)}
+.bar .wrap{display:flex;align-items:center;gap:14px;min-height:54px;flex-wrap:wrap;padding-block:6px}
+.brand{font-family:var(--f-display);font-weight:900;text-decoration:none;white-space:nowrap}
+.bar nav{display:flex;gap:2px;flex:1;min-width:0;flex-wrap:wrap}
+.bar nav a{text-decoration:none;font-size:14px;padding:3px 10px;border-radius:99px;color:var(--muted);white-space:nowrap}
+.bar nav a:hover,.bar nav a.on{background:var(--paper);color:var(--ink)}
+.bar nav a b{font-family:var(--f-mono);font-weight:700;margin-right:4px}
+.btn{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 14px;border-radius:99px;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--ink)}
+.btn.dark{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+@media (max-width:760px){.bar nav{order:3;flex-basis:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-6px}.bar nav::-webkit-scrollbar{display:none}.bar .home{margin-left:auto}}
+
+/* 英雄区 */
+.hero{padding:56px 0 40px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center}
+.hero h1{font-size:clamp(34px,5.4vw,60px);letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--c1);box-shadow:inset 0 -.32em 0 var(--soft1)}
+.hero .lead{margin-top:18px;color:var(--muted);max-width:40em;font-size:17px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.tag{font-size:13px;padding:3px 10px;border:1px solid var(--line);border-radius:99px;background:var(--paper)}
+.pipe{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 18px 40px -28px rgba(0,0,0,.35)}
+.pipe ol{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
+.pipe li{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--bg);border-left:4px solid var(--c);text-decoration:none;cursor:pointer;transition:transform .2s}
+.pipe li:hover{transform:translateX(4px)}
+.pipe li .n{font-family:var(--f-mono);font-weight:800;font-size:22px;color:var(--c)}
+.pipe li b{display:block;font-size:16px}
+.pipe li span{font-size:13px;color:var(--muted);line-height:1.5}
+.pipe li i{font-style:normal;font-size:12px;color:var(--c);font-weight:700;white-space:nowrap}
+.pipe .foot{margin-top:14px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+@media (max-width:900px){.hero{grid-template-columns:1fr;padding-top:32px}}
+
+/* 步骤区 */
+.step{padding:56px 0;border-top:1px solid var(--line);scroll-margin-top:70px}
+.step-head{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:end;margin-bottom:26px}
+.bignum{font-family:var(--f-mono);font-weight:800;font-size:clamp(64px,9vw,104px);line-height:.8;color:var(--c);opacity:.95}
+.step-head .eyebrow{color:var(--c)}
+.step-head p{color:var(--muted);margin-top:8px;max-width:52em}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card h3{margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h3 .dot{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.card ul,.card ol{margin:0;padding-left:1.25em}
+.card li+li{margin-top:6px}
+.card.soft{background:var(--soft);border-color:transparent}
+.why{border-left:4px solid var(--c);padding:12px 16px;background:var(--soft);border-radius:0 12px 12px 0;margin:18px 0}
+.out{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.out span{font-size:14px;padding:5px 12px;border-radius:8px;background:var(--soft);color:var(--ink);border:1px dashed var(--c)}
+.out span::before{content:"产出 ▸ ";color:var(--c);font-weight:700}
+.warn{font-size:14px;color:var(--muted);margin-top:14px;padding-left:14px;border-left:3px solid var(--c5)}
+.warn b{color:var(--ink)}
+
+/* 提示词块 */
+.prompt{position:relative;background:var(--code);color:var(--codeink);border-radius:14px;padding:18px 18px 16px;margin-top:14px}
+.prompt .label{font-size:12px;letter-spacing:.14em;color:#9AA3AD;font-weight:700;margin-bottom:8px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.prompt pre{margin:0;white-space:pre-wrap;word-break:break-word;font-family:var(--f-body);font-size:14.5px;line-height:1.75}
+.prompt pre mark{background:rgba(240,165,72,.22);color:#FFD9A8;padding:0 3px;border-radius:3px}
+.copy{font:inherit;font-size:12px;border:1px solid #3A424B;background:#2A3139;color:#E8E6DF;border-radius:99px;padding:3px 12px;cursor:pointer;letter-spacing:0}
+.copy:hover{background:#38414B}
+.copy.ok{background:#0F7A5C;border-color:#0F7A5C}
+
+/* 需求构建器 */
+.builder{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:18px;margin-top:18px}
+@media (max-width:860px){.builder{grid-template-columns:1fr}}
+.field{display:grid;gap:4px;margin-bottom:10px}
+.field label{font-size:13px;font-weight:700;color:var(--muted)}
+.field input,.field textarea,.field select{font:inherit;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%}
+.field textarea{min-height:64px;resize:vertical}
+
+/* 苏格拉底对话 */
+.chat{display:grid;gap:10px}
+.msg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:14.5px;line-height:1.7}
+.msg.ai{background:var(--bg);border:1px solid var(--line);border-top-left-radius:4px}
+.msg.me{background:var(--soft);justify-self:end;border-top-right-radius:4px}
+.msg small{display:block;font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.1em}
+
+/* 配色 */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:14px}
+.sw{border:2px solid transparent;border-radius:14px;padding:0;overflow:hidden;background:var(--paper);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.sw[aria-pressed="true"]{border-color:var(--ink)}
+.sw .chips{display:flex;height:52px}
+.sw .chips i{flex:1}
+.sw .meta{padding:8px 10px;font-size:13px;line-height:1.5}
+.sw .meta b{display:block;font-size:15px}
+
+/* 原型示意 */
+.mocks{display:grid;grid-template-columns:repeat(2,minmax(0,280px));gap:24px;justify-content:center;margin-top:18px}
+@media (max-width:640px){.mocks{grid-template-columns:minmax(0,280px)}}
+.phone{border-radius:28px;border:8px solid #1B1F24;background:#fff;color:#222;overflow:hidden;box-shadow:0 22px 44px -24px rgba(0,0,0,.55);font-size:12px;line-height:1.5}
+.phone .cap{text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
+.ph-top{background:var(--p1);color:#fff;padding:16px 14px 18px;position:relative}
+.ph-top b{font-size:16px;display:block;font-family:var(--f-display)}
+.ph-top small{opacity:.85}
+.ph-top .badge{position:absolute;right:12px;top:14px;width:30px;height:30px;border-radius:50%;background:var(--p2);display:grid;place-items:center;font-size:15px;color:var(--p1)}
+.ph-body{padding:12px;display:grid;gap:8px;background:var(--p3)}
+.ph-search{background:#fff;border-radius:99px;padding:7px 12px;color:#999;border:1px solid #eee}
+.ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.ph-grid div{background:#fff;border-radius:10px;padding:8px 4px;text-align:center;font-size:11px}
+.ph-grid div i{display:block;width:26px;height:26px;border-radius:8px;margin:0 auto 4px;background:var(--p1);opacity:.85}
+.ph-card{background:#fff;border-radius:10px;padding:8px 10px;border-left:3px solid var(--p2)}
+.ph-card b{font-size:12.5px}
+.ph-bubble{background:#fff;border-radius:10px 10px 10px 2px;padding:8px 10px;max-width:90%}
+.ph-bubble.me{background:var(--p1);color:#fff;border-radius:10px 10px 2px 10px;justify-self:end}
+.ph-input{display:flex;gap:6px;align-items:center;background:#fff;border-radius:99px;padding:6px 6px 6px 12px;color:#999;border:1px solid #eee}
+.ph-input span{margin-left:auto;background:var(--p1);color:#fff;border-radius:99px;padding:3px 10px}
+
+/* 沟通清单 */
+.checks{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.checks label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.checks input{margin-top:6px;accent-color:var(--c)}
+
+/* PRD */
+.prd{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+@media (max-width:860px){.prd{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.prd div{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.6}
+.prd div b{display:block;font-size:15px}
+.prd div em{font-style:normal;font-family:var(--f-mono);color:var(--c);font-size:12px;font-weight:700}
+.api{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+@media (max-width:760px){.api{grid-template-columns:1fr}}
+.api .card code{font-family:var(--f-mono);font-size:13px;background:var(--bg);padding:1px 6px;border-radius:6px;word-break:break-all}
+
+/* 部署 */
+.fork{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-top:8px}
+@media (max-width:860px){.fork{grid-template-columns:1fr}}
+.route{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;position:relative}
+.route .pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:99px;background:var(--soft);color:var(--c);margin-bottom:8px}
+.route ol{margin:12px 0 0;padding-left:1.25em}
+.route ol li+li{margin-top:6px}
+
+/* 总清单 & 全文 */
+.final{padding:56px 0;border-top:1px solid var(--line)}
+.sum{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:18px}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+.sum div{background:var(--paper);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:12px;padding:14px;font-size:14px;line-height:1.65}
+.sum div b{display:block;font-family:var(--f-display);font-size:17px;margin-bottom:4px}
+details.full{margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+details.full summary{cursor:pointer;padding:14px 18px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:10px;list-style:none}
+details.full summary::-webkit-details-marker{display:none}
+details.full .body{padding:0 18px 18px}
+details.full pre{white-space:pre-wrap;font-family:var(--f-body);font-size:14.5px;line-height:1.85;margin:0;max-height:560px;overflow:auto;background:var(--bg);padding:16px;border-radius:10px}
+footer{padding:28px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+footer a{color:var(--ink)}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.pipe li{transition:none}html{scroll-behavior:auto}}
+@media print{.bar,.copy,.btn{display:none}.reveal{opacity:1;transform:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">开放性实验 · 智能体开发</a>
+    <nav aria-label="步骤导航">
+      <a href="#s1"><b>1</b>需求</a><a href="#s2"><b>2</b>前端UI</a><a href="#s3"><b>3</b>沟通</a><a href="#s4"><b>4</b>开发</a><a href="#s5"><b>5</b>部署</a><a href="#all">全文</a>
+    </nav>
+    <a class="btn home" href="../../index.html">← 返回首页</a>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+  <section class="hero">
+    <div class="reveal">
+      <span class="eyebrow">NEXAI 创新工坊 · 开放性实验教程</span>
+      <h1 style="margin-top:12px">五步，把一个真实需求<br>做成<em>能上线</em>的智能体</h1>
+      <p class="lead">这是朱丽叶老师开发智能体时一直在用的流程。核心只有一句话：<b>先问清楚，再画出来，拿给用户看，再写代码，最后上线。</b>每一步都有可直接复制的提示词，本教程以“辅导员工作智能体”为贯穿案例。</p>
+      <div class="tags"><span class="tag">苏格拉底式提问</span><span class="tag">画布 ONE 生图</span><span class="tag">千问录音纪要</span><span class="tag">PRD + 原型图驱动开发</span><span class="tag">DeepSeek / TokenOne</span><span class="tag">WorkBuddy 预览部署</span></div>
+    </div>
+    <div class="pipe reveal" aria-label="五步流程总览">
+      <ol>
+        <li style="--c:var(--c1)" data-go="s1"><span class="n">01</span><span><b>需求</b><span>说清场景，让 AI 反过来问你</span></span><i>需求确认稿</i></li>
+        <li style="--c:var(--c2)" data-go="s2"><span class="n">02</span><span><b>前端 UI</b><span>画布 ONE 推理出界面原型图</span></span><i>2 张原型图</i></li>
+        <li style="--c:var(--c3)" data-go="s3"><span class="n">03</span><span><b>沟通</b><span>拿原型找用户，录音并整理纪要</span></span><i>修订版方案</i></li>
+        <li style="--c:var(--c4)" data-go="s4"><span class="n">04</span><span><b>开发</b><span>PRD + 原型图交给 AI 开发</span></span><i>可运行的平台</i></li>
+        <li style="--c:var(--c5)" data-go="s5"><span class="n">05</span><span><b>部署</b><span>先预览，再申请云主机正式上线</span></span><i>线上网址</i></li>
+      </ol>
+      <div class="foot"><span>贯穿案例：高校辅导员工作智能体</span><span class="mono">需求 → 原型 → 反馈 → 开发 → 上线</span></div>
+    </div>
+  </section>
+
+  <!-- ===== 第一步 ===== -->
+  <section class="step" id="s1" style="--c:var(--c1);--soft:var(--soft1)">
+    <div class="step-head reveal">
+      <div class="bignum">01</div>
+      <div><span class="eyebrow">STEP 1 · 需求</span><h2>说清楚场景，再让 AI 反过来问你</h2>
+      <p>不要一上来就让 AI“帮我做个智能体”。信息不够，AI 只能凭空猜，做出来的东西往往不是用户要的。先把场景讲明白，再让 AI 用苏格拉底式提问一轮轮追问，直到它掌握足够的信息，才开始出方案。</p></div>
+    </div>
+    <div class="grid2 reveal">
+      <div class="card">
+        <h3><span class="dot"></span>开口前先想清楚四件事</h3>
+        <ol>
+          <li><b>为谁做：</b>使用者是谁？（例如：高校辅导员）</li>
+          <li><b>在什么行业 / 场景：</b>他在什么环节、什么时间用？（例如：学生日常管理、谈心谈话、评奖评优）</li>
+          <li><b>解决什么问题：</b>现在哪里费时、易出错、记不住？</li>
+          <li><b>做到什么程度算成功：</b>例如“写一份谈心记录从 30 分钟缩短到 5 分钟”。</li>
+        </ol>
+      </div>
+      <div class="card soft">
+        <h3><span class="dot"></span>什么是苏格拉底式提问？</h3>
+        <p>不直接给答案，而是通过一连串追问，帮你把模糊的想法想清楚。对开发者来说，它有三个好处：</p>
+        <ul style="margin-top:8px">
+          <li>逼出你没想到的细节：数据从哪来、谁来维护、出错怎么办；</li>
+          <li>AI 的每个问题都是一次“需求访谈”，答完就是一份需求记录；</li>
+          <li>信息足够后再出方案，返工最少。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="builder reveal">
+      <div class="card">
+        <h3><span class="dot"></span>填一填，生成你的开场提示词</h3>
+        <div class="field"><label for="f-who">使用者是谁</label><input id="f-who" value="高校辅导员"></div>
+        <div class="field"><label for="f-ind">行业 / 场景</label><input id="f-ind" value="高校学生工作：日常管理、谈心谈话、评奖评优、心理关怀"></div>
+        <div class="field"><label for="f-pain">现在的痛点</label><textarea id="f-pain">一名辅导员要带两三百名学生，谈心记录、学业预警、政策答疑、各类材料撰写占用大量时间，信息分散在表格和聊天记录里，容易遗漏。</textarea></div>
+        <div class="field"><label for="f-goal">希望智能体帮他做什么</label><textarea id="f-goal">快速整理谈心谈话记录、按学生汇总成长档案、回答学生常见政策问题、辅助撰写工作总结和通知。</textarea></div>
+      </div>
+      <div>
+        <div class="prompt">
+          <div class="label"><span>开场提示词（自动生成）</span><button class="copy" data-copy="#p1">复制</button></div>
+          <pre id="p1"></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid2 reveal" style="margin-top:18px">
+      <div class="card">
+        <h3><span class="dot"></span>对话会是这个样子</h3>
+        <div class="chat">
+          <div class="msg ai"><small>AI</small>辅导员整理谈心记录时，原始信息是什么形式？手写笔记、录音，还是聊完凭记忆补？</div>
+          <div class="msg me"><small>我</small>多数是聊完凭记忆写，有时用手机录音。</div>
+          <div class="msg ai"><small>AI</small>这些记录涉及学生隐私。谁可以看？需要只在校内网使用吗？</div>
+          <div class="msg me"><small>我</small>只有本人和学院学工负责人能看，最好部署在学校服务器上。</div>
+          <div class="msg ai"><small>AI</small>明白了。我先复述一下目前的理解，请你确认……</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3><span class="dot"></span>AI 通常会追问这些，提前想好答案</h3>
+        <ul>
+          <li>一天用几次？在电脑上用还是手机上用？</li>
+          <li>需要哪些数据？谁录入、谁维护、多久更新？</li>
+          <li>有没有必须遵守的规范、模板或保密要求？</li>
+          <li>哪些功能必须有，哪些可以第二期再做？</li>
+          <li>AI 回答错了怎么办？需要人工审核吗？</li>
+        </ul>
+        <p class="warn"><b>小技巧：</b>回答不出来的问题，就如实说“不确定”，让 AI 给出几个选项供你选。</p>
+      </div>
+    </div>
+    <div class="out reveal"><span>需求确认稿（AI 复述、你确认的版本）</span><span>初版开发方案（功能清单 + 页面结构）</span></div>
+  </section>
+
+  <!-- ===== 第二步 ===== -->
+  <section class="step" id="s2" style="--c:var(--c2);--soft:var(--soft2)">
+    <div class="step-head reveal">
+      <div class="bignum">02</div>
+      <div><span class="eyebrow">STEP 2 · 前端 UI</span><h2>用画布 ONE，把方案“画”成界面</h2>
+      <p>把第一步的开发方案交给 <a href="https://creative.agentone.work/studio" target="_blank" rel="noopener">画布 ONE</a>，选用其中最强的生图模型。它会先根据方案推理“这个软件应该有哪些页面、每页放什么”，再生成前端界面图。这一步只做前端外观，不涉及后台。</p></div>
+    </div>
+    <div class="grid2 reveal">
+      <div class="card">
+        <h3><span class="dot"></span>至少生成两张图</h3>
+        <ol>
+          <li><b>外观（首页）：</b>用户打开后第一眼看到的样子——标题、功能入口、主要信息。</li>
+          <li><b>点进去（功能页）：</b>点开核心功能后的样子——例如对话页、表单页、详情页。</li>
+        </ol>
+        <p class="warn"><b>为什么是两张：</b>一张定风格，一张定交互。这两张图会在第三步拿给用户看，在第四步交给 AI 当作开发依据。</p>
+      </div>
+      <div class="card soft">
+        <h3><span class="dot"></span>主色调跟着行业走</h3>
+        <p>颜色能让用户一眼认出“这是给我们行业做的”。辅导员从事学生思想政治工作，所以示例用了<b>红色思政</b>元素。你也可以从下面选一个，或者直接对 AI 说：“请根据行业特点帮我定主色调。”</p>
+      </div>
+    </div>
+    <div class="swatches reveal" id="swatches" role="group" aria-label="行业配色"></div>
+
+    <div class="mocks reveal" id="mocks" aria-label="原型示意">
+      <div>
+        <div class="phone">
+          <div class="ph-top"><small id="m-sub">学生工作 · 智慧助手</small><b id="m-title">辅导员工作智能体</b><div class="badge">★</div></div>
+          <div class="ph-body">
+            <div class="ph-search">问问政策、找学生、写材料…</div>
+            <div class="ph-grid"><div><i></i>谈心记录</div><div><i></i>学生档案</div><div><i></i>政策问答</div><div><i></i>学业预警</div><div><i></i>评奖评优</div><div><i></i>材料撰写</div></div>
+            <div class="ph-card"><b>今日待办</b><br>3 名学生待回访 · 1 份通知待发布</div>
+            <div class="ph-card"><b>学习园地</b><br>本周主题教育学习材料已更新</div>
+          </div>
+        </div>
+        <p class="cap">图① 外观：首页（示意）</p>
+      </div>
+      <div>
+        <div class="phone">
+          <div class="ph-top"><small>谈心记录</small><b>智能整理</b><div class="badge">✎</div></div>
+          <div class="ph-body">
+            <div class="ph-bubble me">刚和小王聊完，他最近缺课较多，说是熬夜打游戏，家里也有些矛盾……</div>
+            <div class="ph-bubble">已整理为谈心记录：<br>· 主要问题：作息紊乱、缺课<br>· 原因分析：游戏依赖、家庭沟通<br>· 跟进建议：两周后回访，联系任课老师</div>
+            <div class="ph-card"><b>保存到学生档案</b><br>仅本人及学院学工负责人可见</div>
+            <div class="ph-input">继续补充…<span>发送</span></div>
+          </div>
+        </div>
+        <p class="cap">图② 点进去：功能页（示意）</p>
+      </div>
+    </div>
+
+    <div class="prompt reveal">
+      <div class="label"><span>画布 ONE 提示词（生成两张原型图）</span><button class="copy" data-copy="#p2">复制</button></div>
+      <pre id="p2"></pre>
+    </div>
+    <div class="out reveal"><span>原型图① 外观（首页）</span><span>原型图② 点进去（功能页）</span></div>
+  </section>
+
+  <!-- ===== 第三步 ===== -->
+  <section class="step" id="s3" style="--c:var(--c3);--soft:var(--soft3)">
+    <div class="step-head reveal">
+      <div class="bignum">03</div>
+      <div><span class="eyebrow">STEP 3 · 沟通</span><h2>拿着原型去找用户，把想法“录”下来</h2>
+      <p>带着第一步的开发方案和第二步的原型图，当面找辅导员沟通，并全程录音。</p></div>
+    </div>
+    <div class="why reveal"><b>为什么一定要做这一步？</b>用户在没看到东西的时候，往往说不出想法；看到东西，才会做选择、提意见。原型图就是让他“说出来”的工具。</div>
+    <div class="grid3 reveal">
+      <div class="card">
+        <h3><span class="dot"></span>1 · 展示</h3>
+        <p>先讲 1 分钟“这是为谁、解决什么问题”，再逐张展示原型图，让对方想象自己在用。</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot"></span>2 · 录音</h3>
+        <p>征得对方同意后，用千问 App 全程录音。沟通结束后用“录音纪要”自动生成文字稿和要点。</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot"></span>3 · 整理</h3>
+        <p>把录音纪要、你的会议笔记和原方案一起交给 AI，生成文字版的修订方案。</p>
+      </div>
+    </div>
+    <div class="grid2 reveal" style="margin-top:18px">
+      <div class="card">
+        <h3><span class="dot"></span>现场可以这样问（勾选已问过的）</h3>
+        <ul class="checks" id="ask"></ul>
+      </div>
+      <div>
+        <div class="prompt" style="margin-top:0">
+          <div class="label"><span>整理纪要和修订方案的提示词</span><button class="copy" data-copy="#p3">复制</button></div>
+          <pre id="p3"></pre>
+        </div>
+        <p class="warn"><b>注意：</b>录音前必须征得对方同意；沟通时用虚构或脱敏的示例，不要出现真实学生的姓名、学号、成绩和心理状况等隐私信息。</p>
+      </div>
+    </div>
+    <div class="out reveal"><span>录音纪要 + 会议纪要</span><span>文字版修订方案</span></div>
+  </section>
+
+  <!-- ===== 第四步 ===== -->
+  <section class="step" id="s4" style="--c:var(--c4);--soft:var(--soft4)">
+    <div class="step-head reveal">
+      <div class="bignum">04</div>
+      <div><span class="eyebrow">STEP 4 · 开发</span><h2>先写 PRD，再把 PRD 和原型图一起交给 AI</h2>
+      <p>PRD（产品需求文档）是 AI 开发的“施工图”。先让 AI 根据修订方案生成 PRD，你检查确认后，再把 PRD 和第二步的两张原型图一起发给 Claude、Codex 等开发工具，让它据此开发整个平台。</p></div>
+    </div>
+    <h3 class="reveal">一份合格的 PRD 至少包含这 9 部分</h3>
+    <div class="prd reveal">
+      <div><em>01</em><b>背景与目标</b>为谁、解决什么问题、成功标准</div>
+      <div><em>02</em><b>用户角色与权限</b>辅导员、学院负责人、管理员分别能做什么</div>
+      <div><em>03</em><b>功能清单与优先级</b>P0 必须有 / P1 应该有 / P2 以后再说</div>
+      <div><em>04</em><b>页面与交互</b>每个页面的元素、操作流程，对应原型图</div>
+      <div><em>05</em><b>数据设计</b>需要存哪些数据、字段、谁录入</div>
+      <div><em>06</em><b>AI 能力设计</b>哪些功能调用大模型、提示词、知识库</div>
+      <div><em>07</em><b>管理员后台</b>账号、API Key 配置、内容管理</div>
+      <div><em>08</em><b>非功能要求</b>手机适配、隐私安全、响应速度</div>
+      <div><em>09</em><b>验收标准</b>逐条列出“怎样算做完了”</div>
+    </div>
+    <div class="grid2 reveal" style="margin-top:18px">
+      <div class="prompt" style="margin-top:0">
+        <div class="label"><span>① 生成 PRD</span><button class="copy" data-copy="#p4a">复制</button></div>
+        <pre id="p4a"></pre>
+      </div>
+      <div class="prompt" style="margin-top:0">
+        <div class="label"><span>② 开发平台（附上 PRD 和两张原型图）</span><button class="copy" data-copy="#p4b">复制</button></div>
+        <pre id="p4b"></pre>
+      </div>
+    </div>
+    <h3 class="reveal" style="margin-top:28px">两种大模型接入方式，在管理员后台二选一</h3>
+    <div class="api reveal">
+      <div class="card">
+        <h3><span class="dot"></span>DeepSeek 官方 API</h3>
+        <p>在 DeepSeek 开放平台创建 API Key。</p>
+        <ul style="margin-top:8px">
+          <li>接口地址：<code>https://api.deepseek.com</code></li>
+          <li>常用模型：<code>deepseek-chat</code></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="dot"></span>TokenOne 中转站</h3>
+        <p>中转站会给出一段连接信息，格式如下（Key 已隐去）：</p>
+        <p style="margin-top:8px"><code>{"_type":"newapi_channel_conn","key":"sk-********","url":"https://token.agentone.work"}</code></p>
+        <p class="muted" style="margin-top:8px;font-size:14px">按 OpenAI 兼容方式调用，接口地址一般为 <code>https://token.agentone.work/v1</code>。</p>
+      </div>
+    </div>
+    <p class="warn reveal"><b>API Key 安全：</b>真实的 Key 不要写进代码、提示词或截图，也不要上传到 GitHub。让 AI 把 Key 做成管理员后台的配置项，部署后由管理员在后台填写，页面上只显示打码后的值。</p>
+    <div class="out reveal"><span>PRD 文档</span><span>可运行的智能体平台（含管理员后台）</span></div>
+  </section>
+
+  <!-- ===== 第五步 ===== -->
+  <section class="step" id="s5" style="--c:var(--c5);--soft:var(--soft5)">
+    <div class="step-head reveal">
+      <div class="bignum">05</div>
+      <div><span class="eyebrow">STEP 5 · 部署</span><h2>先预览看效果，再正式上线</h2>
+      <p>根据用途选择不同的部署路径。</p></div>
+    </div>
+    <div class="fork reveal">
+      <div class="route">
+        <span class="pill">只是预览、看效果</span>
+        <h3>WorkBuddy 一键上传</h3>
+        <ol>
+          <li>让 AI 把项目打包成部署包（zip），并写明启动方式；</li>
+          <li>在 WorkBuddy 中上传部署包；</li>
+          <li>获得预览网址，发给用户试用、收集反馈；</li>
+          <li>根据反馈回到第三、四步迭代。</li>
+        </ol>
+        <p class="warn"><b>适合：</b>课堂展示、比赛演示、给用户看效果。不要在预览环境里录入真实的学生数据。</p>
+      </div>
+      <div class="route">
+        <span class="pill">要真正投入使用</span>
+        <h3>申请学校云主机</h3>
+        <ol>
+          <li>由使用方（辅导员所在学院）向学校网信处提出申请；</li>
+          <li>说明系统用途、访问范围、涉及的数据类型；</li>
+          <li>网信处开通云主机后，按部署包说明安装上线；</li>
+          <li>在管理员后台配置 API Key，完成验收后正式使用。</li>
+        </ol>
+        <p class="warn"><b>适合：</b>长期使用、涉及真实数据的场景。系统由学校统一管理，数据安全更有保障。</p>
+      </div>
+    </div>
+    <div class="prompt reveal">
+      <div class="label"><span>生成部署包的提示词</span><button class="copy" data-copy="#p5">复制</button></div>
+      <pre id="p5"></pre>
+    </div>
+    <div class="out reveal"><span>预览网址</span><span>正式上线的系统</span></div>
+  </section>
+
+  <!-- ===== 总结 & 全文 ===== -->
+  <section class="final" id="all">
+    <span class="eyebrow">ONE PAGE · 一页带走</span>
+    <h2 style="margin-top:8px">五步速记</h2>
+    <div class="sum">
+      <div style="--c:var(--c1)"><b>1 需求</b>说清为谁、什么场景、解决什么问题；让 AI 苏格拉底式追问，信息够了再出方案。</div>
+      <div style="--c:var(--c2)"><b>2 前端 UI</b>画布 ONE 最强生图模型推理界面；至少“外观 + 点进去”两张；主色调跟行业。</div>
+      <div style="--c:var(--c3)"><b>3 沟通</b>拿方案和原型找用户；征得同意后录音；整理纪要，形成修订方案。</div>
+      <div style="--c:var(--c4)"><b>4 开发</b>先生成 PRD；PRD + 两张原型图交给 AI 开发；后台可配置 DeepSeek / TokenOne。</div>
+      <div style="--c:var(--c5)"><b>5 部署</b>预览用 WorkBuddy 上传部署包；正式使用由使用方向网信处申请云主机。</div>
+    </div>
+    <details class="full">
+      <summary><span>教程全文（可复制发给同学）</span><button class="copy" data-copy="#fulltext" type="button" style="background:var(--ink);color:var(--bg);border-color:var(--ink)">复制全文</button></summary>
+      <div class="body"><pre id="fulltext"></pre></div>
+    </details>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>开放性实验《智能体开发》· 宝鸡文理学院 朱丽叶 · NexAI 创新工坊</p>
+    <p style="margin-top:6px">工具链接：<a href="https://creative.agentone.work/studio" target="_blank" rel="noopener">画布 ONE</a> · <a href="https://platform.deepseek.com" target="_blank" rel="noopener">DeepSeek 开放平台</a> · <a href="https://token.agentone.work" target="_blank" rel="noopener">TokenOne</a> · <a href="../../index.html">NexAI 首页</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+  const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+  /* ---------- 第一步：开场提示词 ---------- */
+  const F=['who','ind','pain','goal'];
+  F.forEach(k=>{const v=store.get('al-'+k);if(v)$('#f-'+k).value=v});
+  function p1text(){
+    const v=k=>$('#f-'+k).value.trim()||'【待填写】';
+    return `我想开发一个智能体，先说明背景：
+· 使用者：${v('who')}
+· 行业 / 场景：${v('ind')}
+· 现在的痛点：${v('pain')}
+· 希望智能体帮他：${v('goal')}
+
+请你先不要给方案，而是用苏格拉底式提问和我多轮对话：
+1. 每次只问 1–3 个问题，问题要具体，必要时给我几个选项；
+2. 逐步弄清：使用者与使用场景、核心功能与优先级、数据从哪来、使用频率与设备、隐私与安全要求、成功标准；
+3. 当你认为信息足够时，先用条目复述你的理解，请我确认；
+4. 我确认后，再输出开发方案：功能清单（分必须有 / 以后再做）、页面结构、需要的 AI 能力、风险与边界。`;
+  }
+  function renderP1(){$('#p1').textContent=p1text()}
+  F.forEach(k=>$('#f-'+k).addEventListener('input',e=>{store.set('al-'+k,e.target.value);renderP1();renderFull()}));
+  renderP1();
+
+  /* ---------- 第二步：配色 ---------- */
+  const PAL=[
+    {k:'red',n:'红色思政',f:'党建、思政、学工、红色文化',c:['#B3261E','#F2C14E','#FFF5F2'],w:'中国红为主色、金黄色点缀，可加入党徽、红旗、书卷等元素，庄重而温暖'},
+    {k:'green',n:'生态绿',f:'农业、环保、乡村振兴、食品',c:['#2E7D32','#A5D6A7','#F3FAF2'],w:'生态绿为主色、浅绿与米白辅助，可加入田野、叶片、果实等元素，清新自然'},
+    {k:'blue',n:'科技蓝',f:'信息技术、互联网、人工智能、教育科技',c:['#1F5FAE','#5EC8F2','#F2F7FD'],w:'科技蓝为主色、青色点缀，可加入数据线条、网格、光点等元素，简洁现代'},
+    {k:'gray',n:'工业灰',f:'制造、冶金、机械、钛材等工业场景',c:['#4A5560','#F28C28','#F4F5F6'],w:'工业灰为主色、安全橙点缀，可加入设备、齿轮、仪表盘等元素，稳重专业'},
+    {k:'auto',n:'交给 AI',f:'实在想不到时',c:['#7A3FB5','#C9A7EB','#F7F2FC'],w:'请根据行业特点帮我确定主色调和视觉元素，并说明理由'}
+  ];
+  let pal=store.get('al-pal')||'red';
+  function renderSw(){
+    $('#swatches').innerHTML=PAL.map(p=>`<button class="sw" data-k="${p.k}" aria-pressed="${p.k===pal}"><span class="chips">${p.c.map(x=>`<i style="background:${x}"></i>`).join('')}</span><span class="meta"><b>${p.n}</b>${p.f}</span></button>`).join('');
+    const p=PAL.find(x=>x.k===pal);
+    const m=$('#mocks');m.style.setProperty('--p1',p.c[0]);m.style.setProperty('--p2',p.c[1]);m.style.setProperty('--p3',p.c[2]);
+    renderP2();renderFull();
+  }
+  $('#swatches').addEventListener('click',e=>{const b=e.target.closest('.sw');if(!b)return;pal=b.dataset.k;store.set('al-pal',pal);renderSw()});
+  function p2text(){
+    const p=PAL.find(x=>x.k===pal);
+    const who=$('#f-who').value.trim()||'【使用者】';
+    return `下面是我要开发的软件的开发方案：【粘贴第一步的开发方案】
+
+请你先根据方案推理：这个软件面向${who}，应该有哪些页面、首页放哪些功能入口、核心功能页如何交互。然后生成两张手机端前端界面图：
+图1「外观」：用户打开后看到的首页，包含标题、功能入口、今日待办等主要信息；
+图2「点进去」：点开核心功能后的页面，例如对话或表单页，体现完整的操作过程。
+
+视觉要求：${p.w}。
+界面文字使用简体中文，排版清晰，像真实可用的 App 截图；两张图风格保持一致。`;
+  }
+  function renderP2(){$('#p2').textContent=p2text()}
+
+  /* ---------- 第三步 ---------- */
+  const ASK=['看到这两张图，第一感觉是什么？像不像你会用的东西？','你平时做这件事的完整流程是怎样的？哪一步最费时间？','图里哪个功能你最想先用？哪个其实用不上？','还缺什么功能？有没有必须遵守的格式、模板或规定？','数据由谁录入、谁能看？有没有保密要求？','如果只能先上线三个功能，你选哪三个？'];
+  let asked={};try{asked=JSON.parse(store.get('al-ask')||'{}')}catch(e){}
+  $('#ask').innerHTML=ASK.map((q,i)=>`<li><label><input type="checkbox" data-i="${i}" ${asked[i]?'checked':''}><span>${esc(q)}</span></label></li>`).join('');
+  $('#ask').addEventListener('change',e=>{asked[e.target.dataset.i]=e.target.checked;store.set('al-ask',JSON.stringify(asked))});
+  const P3=`附件是我和${'【使用者】'}沟通的录音纪要（千问导出）、我的会议笔记，以及原来的开发方案和两张原型图。
+请你：
+1. 整理一份会议纪要：沟通时间、参与人、用户确认的内容、新增需求、修改意见、暂不做的内容、待确认问题；
+2. 对照原方案，列出“保留 / 修改 / 新增 / 删除”的功能清单，并说明理由；
+3. 输出一份文字版修订方案，作为下一步写 PRD 的依据。
+注意：只依据纪要内容整理，没提到的不要自行补充，有歧义的地方单独列出来。`;
+  function renderP3(){$('#p3').textContent=P3.replace('【使用者】',$('#f-who').value.trim()||'【使用者】')}
+  $('#f-who').addEventListener('input',renderP3);renderP3();
+
+  /* ---------- 第四步 ---------- */
+  const P4A=`请根据附件中的修订方案，生成一份完整的 PRD（产品需求文档），包含：
+1. 背景与目标（含可衡量的成功标准）；
+2. 用户角色与权限；
+3. 功能清单与优先级（P0 / P1 / P2）；
+4. 页面与交互说明（与附件两张原型图对应）；
+5. 数据设计（数据表、字段、来源）；
+6. AI 能力设计（哪些功能调用大模型、提示词、知识库）；
+7. 管理员后台；
+8. 非功能要求（手机适配、隐私安全、性能）；
+9. 验收标准（逐条可检查）。
+不确定的地方请标注“待确认”，不要编造。`;
+  const P4B=`请根据 PRD 文件和附件的两张图，帮我制作整个智能体：
+1. 前端界面严格参考两张原型图的布局和配色，手机和电脑都能正常使用；
+2. 实现 PRD 中 P0 级的全部功能，P1 级功能尽量实现；
+3. 提供管理员后台：管理员登录、修改密码，并允许我配置 API Key；
+4. 大模型接入支持两种方式，可在后台切换：
+   · DeepSeek 官网 API：接口地址 https://api.deepseek.com，模型 deepseek-chat；
+   · TokenOne.work 中转站：可粘贴连接信息，参考格式为 {"_type":"newapi_channel_conn","key":"sk-********","url":"https://token.agentone.work"}，按 OpenAI 兼容接口调用；
+5. API Key 只保存在服务器端，页面只显示打码后的值，不要写进代码；
+6. 完成后告诉我如何本地运行、如何测试，并对照 PRD 的验收标准逐条自查。`;
+  $('#p4a').textContent=P4A;$('#p4b').textContent=P4B;
+
+  /* ---------- 第五步 ---------- */
+  const P5=`请把这个项目整理成部署包：
+1. 打包成一个 zip，包含全部源代码和依赖说明，不包含 API Key 和测试数据；
+2. 写一份《部署说明》：运行环境、安装步骤、启动命令、端口、数据存放位置、首次登录管理员的方法；
+3. 分别说明两种部署方式：
+   · 预览：通过 WorkBuddy 上传后获得网址；
+   · 正式：在学校网信处开通的云主机上部署（列出需要向网信处申请的配置：CPU、内存、硬盘、操作系统、开放端口、域名）。`;
+  $('#p5').textContent=P5;
+
+  /* ---------- 全文 ---------- */
+  function renderFull(){
+    $('#fulltext').textContent=
+`开放性实验《智能体开发》—— 五步开发流程
+
+一、需求：说清楚场景，再让 AI 反过来问你
+开口前先想清楚四件事：为谁做（使用者是谁）、在什么行业和场景、解决什么问题、做到什么程度算成功。
+把这些告诉 AI 后，请它采用苏格拉底式提问，与你进行多轮对话：每次只问 1–3 个问题，逐步弄清功能、数据、隐私和成功标准。等 AI 掌握足够多的信息、复述并经你确认后，再让它动手生成开发方案。
+开场提示词：
+${p1text()}
+
+二、前端 UI：用画布 ONE 把方案“画”成界面
+把开发方案交给画布 ONE（https://creative.agentone.work/studio），选用其中最强的生图模型，让它通过逻辑推理得出软件需要的前端界面。这一步只做前端，至少生成两张图：外观（首页）和点进去之后的功能页。
+主色调跟着行业走：辅导员从事学生思想政治工作，可用红色思政元素；农业类常用生态绿；科技类常用科技蓝；工业类常用工业灰。实在想不到，就对 AI 说“请根据行业帮我定主色调”。
+画布 ONE 提示词：
+${p2text()}
+
+三、沟通：拿着原型去找用户，把想法“录”下来
+带着开发方案和原型图去和辅导员沟通，征得同意后用千问录音，请他说出还有什么需求和想法。很多时候，用户没看到东西时说不出想法，看到东西才会做选择、提意见，所以要让他说出来。
+沟通结束后，结合你的沟通内容整理会议纪要和录音纪要，生成文字版的修订方案。
+注意：沟通时不要出现真实学生的姓名、学号、成绩和心理状况等隐私信息。
+
+四、开发：先写 PRD，再把 PRD 和原型图一起交给 AI
+先让 AI 根据修订方案生成一份 PRD（产品需求文档），检查确认后，把 PRD 和两张原型图一起发给 AI 开发工具，让它据此开发平台。
+开发提示词：
+${P4B}
+API Key 安全：真实的 Key 不要写进代码、提示词或截图，部署后在管理员后台填写。
+
+五、部署：先预览看效果，再正式上线
+· 仅预览看效果：让 AI 生成部署包，通过 WorkBuddy 上传，获得预览网址；
+· 真正投入使用：由辅导员（使用方）向学校网信处申请开通云主机，按部署说明安装上线，在后台配置 API Key 后正式使用。
+
+—— 宝鸡文理学院 朱丽叶 · NexAI 创新工坊`;
+  }
+  renderSw();renderFull();
+
+  /* ---------- 复制 ---------- */
+  document.addEventListener('click',async e=>{
+    const b=e.target.closest('.copy');if(!b)return;e.preventDefault();e.stopPropagation();
+    const t=$(b.dataset.copy).textContent;
+    try{await navigator.clipboard.writeText(t)}catch(err){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(_){}ta.remove()}
+    const o=b.textContent;b.textContent='已复制';b.classList.add('ok');setTimeout(()=>{b.textContent=o;b.classList.remove('ok')},1400);
+  });
+
+  /* ---------- 导航 ---------- */
+  $$('.pipe li').forEach(li=>li.addEventListener('click',()=>document.getElementById(li.dataset.go).scrollIntoView({behavior:'smooth'})));
+  const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
+  $$('.reveal').forEach(el=>io.observe(el));
+  const links=$$('.bar nav a');
+  const so=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+x.target.id))}}),{rootMargin:'-45% 0px -50% 0px'});
+  $$('section[id]').forEach(s=>so.observe(s));
+})();
+</script>
+</body>
+</html>
